@@ -1,0 +1,7 @@
+# groups.yaml
+
+garage_doors:
+  name: Garage Doors
+  entities:
+    - cover.garage_4a
+    - cover.garage_4c

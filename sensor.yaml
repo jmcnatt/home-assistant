@@ -1,0 +1,366 @@
+# sensor.yaml
+
+- platform: badnest
+
+- platform: google_travel_time
+  api_key: !secret google_cloud_api_key
+  name: commute_morning_jimmy
+  options:
+    mode: driving
+  origin: zone.home
+  destination: zone.work_1
+  scan_interval: 86400
+
+- platform: google_travel_time
+  api_key: !secret google_cloud_api_key
+  name: commute_morning_dana
+  options:
+    mode: driving
+  origin: zone.home
+  destination: zone.work_2
+  scan_interval: 86400
+
+- platform: template
+  sensors:
+    kitchen_thermostat_humidity:
+      value_template: '{{ states.climate.kitchen_thermostat.attributes.current_humidity|int }}'
+      friendly_name: 'Kitchen Thermostat Current Humidity'
+      unit_of_measurement: '%'
+
+- platform: plex_recently_added
+  name: 'plex_recently_added_movies'
+  token: !secret plex_token
+  host: !secret plex_host
+  port: !secret plex_port
+  ssl: false
+  section_types:
+    - movie
+  max: 5
+
+- platform: plex_recently_added
+  name: 'plex_recently_added_shows'
+  token: !secret plex_token
+  host: !secret plex_host
+  port: !secret plex_port
+  ssl: false
+  section_types:
+    - show
+  max: 5
+
+#######################################################################################
+# Pollen Sensors
+#######################################################################################
+- platform: rest
+  name: 'pollen_fremont'
+  resource: !secret pollen_fremont_url_pollen
+  scan_interval: 21600
+  device_class: timestamp
+  value_template: "{{ value_json.ForecastDate }}"
+  json_attributes:
+    - Type
+    - ForecastDate
+    - Location
+  headers:
+    Referer: 'https://www.pollen.com'
+    User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
+- platform: template
+  sensors:
+    pollen_fremont_index:
+      friendly_name: 'Fremont Pollen Index'
+      unique_id: pollen_fremont_index
+      value_template: "{{ state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Index'] }}"
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_level:
+      friendly_name: 'Fremont Pollen Level'
+      unique_id: pollen_fremont_level
+      value_template: >-
+        {%- if states('sensor.pollen_fremont_index')|float <= 2.4 %}
+          Low
+        {%- elif states('sensor.pollen_fremont_index')|float <= 4.8 %}
+          Medium Low
+        {%- elif states('sensor.pollen_fremont_index')|float <= 7.2 %}
+          Medium
+        {%- elif states('sensor.pollen_fremont_index')|float <= 9.6 %}
+          Medium High
+        {%- elif states('sensor.pollen_fremont_index')|float <= 12.0 %}
+          High
+        {% else %}
+          Unknown
+        {%- endif %}
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_index_tomorrow:
+      friendly_name: 'Fremont Pollen Level Tomorrow'
+      unique_id: pollen_fremont_index_tomrrow
+      value_template: "{{ state_attr('sensor.pollen_fremont', 'Location')['periods'][2]['Index'] }}"
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_level_tomorrow:
+      friendly_name: 'Fremont Pollen Level Tomorrow'
+      unique_id: pollen_fremont_level_tomrrow
+      value_template: >-
+        {%- if states('sensor.pollen_fremont_index_tomorrow')|float <= 2.4 %}
+          Low
+        {%- elif states('sensor.pollen_fremont_index_tomorrow')|float <= 4.8 %}
+          Medium Low
+        {%- elif states('sensor.pollen_fremont_index_tomorrow')|float <= 7.2 %}
+          Medium
+        {%- elif states('sensor.pollen_fremont_index_tomorrow')|float <= 9.6 %}
+          Medium High
+        {%- elif states('sensor.pollen_fremont_index_tomorrow')|float <= 12.0 %}
+          High
+        {% else %}
+          Unknown
+        {%- endif %}
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_top_allergen_1:
+      friendly_name: 'Fremont Top Allergen 1'
+      unique_id: pollen_fremont_top_allergen_1
+      value_template: >-
+        {% if state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][0] %}
+          {{ state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][0]['PlantType'] }}
+        {% else %}
+          Unknown
+        {% endif %}
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_top_allergen_2:
+      friendly_name: 'Fremont Top Allergen 2'
+      unique_id: pollen_fremont_top_allergen_2
+      value_template: >-
+        {% if state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][1] %}
+          {{ state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][1]['PlantType'] }}
+        {% else %}
+          Unknown
+        {% endif %}
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+    pollen_fremont_top_allergen_3:
+      friendly_name: 'Fremont Top Allergen 3'
+      unique_id: pollen_fremont_top_allergen_3
+      value_template: >-
+        {% if state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][2] %}
+          {{ state_attr('sensor.pollen_fremont', 'Location')['periods'][1]['Triggers'][2]['PlantType'] }}
+        {% else %}
+          Unknown
+        {% endif %}
+      availability_template: "{{ states('sensor.pollen_fremont') != unknown }}"
+- platform: rest
+  name: pollen_fremont_trend
+  resource: !secret pollen_fremont_url_outlook
+  value_template: "{{ value_json.Trend }}"
+  scan_interval: 21600
+  json_attributes:
+    - Trend
+    - Outlook
+    - Season
+  headers:
+    Referer: 'https://www.pollen.com'
+    User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
+- platform: template
+  sensors:
+    pollen_fremont_outlook:
+      friendly_name: 'Fremont Pollen Outlook'
+      unique_id: pollen_fremont_outlook
+      value_template: "{{ state_attr('sensor.pollen_fremont_trend', 'Outlook') }}"
+      availability_template: "{{ states('sensor.pollen_fremont_trend') != unknown }}"
+    pollen_fremont_season:
+      friendly_name: 'Fremont Pollen Season'
+      unique_id: pollen_fremont_season
+      value_template: "{{ state_attr('sensor.pollen_fremont_trend', 'Season') }}"
+      availability_template: "{{ states('sensor.pollen_fremont_trend') != unknown }}"
+- platform: rest
+  name: 'pollen_fremont_cold_percentage'
+  resource: !secret pollen_fremont_url_cold
+  value_template: "{{value_json.Location.periods[1].Index}}"
+  scan_interval: 21600
+  unit_of_measurement: "%"
+  headers:
+    Referer: 'https://www.pollen.com'
+    User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
+- platform: template
+  sensors:
+    pollen_fremont_cold_risk:
+      friendly_name: 'Fremont Cold & Flu Risk'
+      unique_id: pollen_fremont_cold_risk
+      value_template: >-
+        {%- if states('sensor.pollen_fremont_cold_percentage')|float <= 2.4 %}
+            Low
+        {%- elif states('sensor.pollen_fremont_cold_percentage')|float <= 4.8 %}
+            Medium Low
+        {%- elif states('sensor.pollen_fremont_cold_percentage')|float <= 7.2 %}
+            Medium
+        {%- elif states('sensor.pollen_fremont_cold_percentage')|float <= 9.6 %}
+            Medium High
+        {%- elif states('sensor.pollen_fremont_cold_percentage')|float <= 12.0 %}
+            High
+        {% else %}
+            Unknown
+        {%- endif %}
+      availability_template: "{{ states('sensor.pollen_fremont_cold_percentage') != unknown }}"
+
+#######################################################################################
+# PurpleAir Sensors
+#######################################################################################
+# https://community.home-assistant.io/t/purpleair-air-quality-sensor/146588
+# Reasonable sensors pulled from https://www.purpleair.com/map
+- platform: rest
+  name: 'purpleair_fremont'
+  # Substitute in the URL of the sensor you care about. To find the URL, go
+  # to purpleair.com/map, find your sensor, click on it, click on "Get This
+  # Widget" then click on "JSON".
+  resource: !secret purpleair_fremont_url
+  scan_interval: 300
+  # Set the sensor value to the last update time of the device.
+  device_class: timestamp
+  value_template: "{{ value_json.mapVersion }}"
+  # The value of the sensor can't be longer than 255 characters, but the
+  # attributes can. Store away all the data for use by the templates below.
+  json_attributes:
+    - mapVersion
+    - results
+- platform: template
+  sensors:
+    purpleair_fremont_aqi:
+      friendly_name: 'PurpleAir Fremont AQI'
+      unique_id: purpleair_fremont_aqi
+      # Set this sensor to be the AQI value. Code translated from JavaScript found at:
+      # https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU/edit#
+      value_template: >
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {% macro calcAQI(Cp, Ih, Il, BPh, BPl) -%}
+            {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il)|round }}
+          {%- endmacro %}
+          {% set pm25 = state_attr('sensor.purpleair_fremont', 'results')[0]['PM2_5Value']|float %}
+          {% if pm25 > 1000 %}
+            invalid
+          {% elif pm25 > 350.5 %}
+            {{ calcAQI(pm25, 500.0, 401.0, 500.0, 350.5) }}
+          {% elif pm25 > 250.5 %}
+            {{ calcAQI(pm25, 400.0, 301.0, 350.4, 250.5) }}
+          {% elif pm25 > 150.5 %}
+            {{ calcAQI(pm25, 300.0, 201.0, 250.4, 150.5) }}
+          {% elif pm25 > 55.5 %}
+            {{ calcAQI(pm25, 200.0, 151.0, 150.4, 55.5) }}
+          {% elif pm25 > 35.5 %}
+            {{ calcAQI(pm25, 150.0, 101.0, 55.4, 35.5) }}
+          {% elif pm25 > 12.1 %}
+            {{ calcAQI(pm25, 100.0, 51.0, 35.4, 12.1) }}
+          {% elif pm25 >= 0.0 %}
+            {{ calcAQI(pm25, 50.0, 0.0, 12.0, 0.0) }}
+          {% else %}
+            invalid
+          {% endif %}
+        {% else %}
+          invalid
+        {% endif %}
+      unit_of_measurement: "AQI"
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+    purpleair_fremont_description:
+      friendly_name: 'PurpleAir Fremont AQI Description'
+      unique_id: purpleair_fremont_description
+      value_template: >
+        {% set aqi = states('sensor.purpleair_fremont_aqi')|float %}
+        {% if aqi >= 401.0 %}
+          Very Hazardous
+        {% elif aqi >= 301.0 %}
+          Hazardous
+        {% elif aqi >= 201.0 %}
+          Very Unhealthy
+        {% elif aqi >= 151.0 %}
+          Unhealthy
+        {% elif aqi >= 101.0 %}
+          Unhealthy for Sensitive Groups
+        {% elif aqi >= 51.0 %}
+          Moderate
+        {% elif aqi >= 0.0 %}
+          Good
+        {% else %}
+          undefined
+        {% endif %}
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+    purpleair_fremont_pm25:
+      friendly_name: 'PurpleAir Fremont PM 2.5'
+      unique_id: purpleair_fremont_pm25
+      value_template: >-
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['PM2_5Value'] }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "μg/m3"
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+    purpleair_fremont_temperature:
+      friendly_name: 'PurpleAir Fremont Temperature'
+      unique_id: purpleair_fremont_temperature
+      # Why "- 8"?
+      # https://www2.purpleair.com/community/faq#!hc-primary-and-secondary-data-header
+      value_template: >-
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['temp_f'] | float - 8 }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "°F"
+      device_class: temperature
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+    purpleair_fremont_humidity:
+      friendly_name: 'PurpleAir Fremont Humidity'
+      unique_id: purpleair_fremont_humidity
+      value_template: >-
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['humidity'] }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "%"
+      device_class: humidity
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+    purpleair_fremont_pressure:
+      friendly_name: 'PurpleAir Fremont Pressure'
+      unique_id: purpleair_fremont_pressure
+      value_template: >-
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['pressure'] }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "mb"
+      device_class: pressure
+      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+
+#######################################################################################
+# OpenGarage Sensors
+#######################################################################################
+- platform: template
+  sensors:
+    garage_4c_status:
+      friendly_name: 'Garage 4c Door Status'
+      value_template: '{% if states.cover.garage_4c %}
+          {% if states.cover.garage_4c.attributes["door_state"] == "open" %}
+            Open
+          {% elif states.cover.garage_4c.attributes["door_state"] == "closed" %}
+            Closed
+          {% elif states.cover.garage_4c.attributes["door_state"] == "opening" %}
+            Opening
+          {% elif states.cover.garage_4c.attributes["door_state"] == "closing" %}
+            Closing
+          {% else %}
+            Unknown
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+    garage_4a_status:
+      friendly_name: 'Garage 4a Door Status'
+      value_template: '{% if states.cover.garage_4a %}
+          {% if states.cover.garage_4a.attributes["door_state"] == "open" %}
+            Open
+          {% elif states.cover.garage_4a.attributes["door_state"] == "closed" %}
+            Closed
+          {% elif states.cover.garage_4a.attributes["door_state"] == "opening" %}
+            Opening
+          {% elif states.cover.garage_4a.attributes["door_state"] == "closing" %}
+            Closing
+          {% else %}
+            Unknown
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'

@@ -1,0 +1,112 @@
+#######################################################################################
+# Core Config (non-default)
+# https://www.home-assistant.io/integrations/default_config/
+#######################################################################################
+automation: !include automations.yaml
+cloud:
+config:
+frontend:
+group: !include groups.yaml
+history: !include history.yaml
+image:
+input_boolean:
+input_datetime:
+input_number:
+input_select:
+input_text:
+lovelace:
+  mode: storage
+media_source:
+mobile_app:
+person:
+scene: !include scenes.yaml
+script: !include scripts.yaml
+ssdp:
+sun:
+system_health:
+tag:
+updater:
+zeroconf:
+zone:
+
+#######################################################################################
+# Home Assistant Core Integration
+#######################################################################################
+homeassistant:
+  name: !secret home_name
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  unit_system: imperial
+  time_zone: !secret home_timezone
+  customize_glob:
+    "sensor.pollen_*":
+      icon: mdi:flower
+
+# Integrations
+badnest:
+  issue_token: !secret nest_issue_token
+  cookie: !secret nest_cookie
+  region: us
+
+binary_sensor: !include binary_sensor.yaml
+
+camera:
+  - platform: foscam
+    name: ipc-01
+    ip: !secret ipc_01_ip
+    port: 88
+    username: !secret foscam_username
+    password: !secret foscam_password
+    rtsp_port: 88
+  - platform: foscam
+    name: ipc-02
+    ip: !secret ipc_02_ip
+    port: 88
+    username: !secret foscam_username
+    password: !secret foscam_password
+    rtsp_port: 88
+  - platform: foscam
+    name: ipc-03
+    ip: !secret ipc_03_ip
+    username: !secret foscam_username
+    password: !secret foscam_password
+    rtsp_port: 88
+climate:
+  - platform: badnest
+    scan_interval: 10
+
+cover:
+  platform: opengarage
+  covers:
+    garage_4c:
+      host: !secret opengarage_og_02_ip
+      device_key: !secret opengarage_device_key
+      name: garage_4c
+    garage_4a:
+      host: !secret opengarage_og_01_ip
+      device_key: !secret opengarage_device_key
+      name: garage_4a
+
+# notify
+notify:
+  - name: all_mobile_devices
+    platform: group
+    services:
+      - service: mobile_app_five_mega_pixel
+      - service: mobile_app_chirp
+
+# sensor
+sensor: !include sensor.yaml
+
+# tplink
+tplink:
+  discovery: false
+  switch:
+    - host: !secret pwr_02_ip
+  strip:
+    - host: !secret pwr_01_ip
+    - host: !secret pwr_03_ip
+
+# Text to speech
+tts:
+  - platform: google_translate

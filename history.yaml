@@ -1,0 +1,22 @@
+# history.yaml
+
+use_include_order: true
+include:
+  domains:
+    - switch
+    - light
+    - media_player
+    - weather
+    - cover
+  entities:
+    - sensor.bedroom_temperature
+    - sensor.fremont_condition
+    - sensor.fremont_cloud_coverage
+    - sensor.fremont_humidity
+    - sensor.fremont_rain
+    - sensor.fremont_snow
+    - sensor.fremont_temperature
+    - sensor.fremont_wind_speed
+    - sensor.living_room_temperature
+    - sensor.kitchen_thermostat
+    - sensor.kitchen_thermostat_humidity

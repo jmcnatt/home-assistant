@@ -1,0 +1,69 @@
+# binary_sensor.yaml
+
+#######################################################################################
+# PurpleAir Sensors
+#######################################################################################
+- platform: template
+  sensors:
+    # Add a connectivity sensor for purpleair. Why isn't the above rest sensor
+    # a binary_sensor? Turns out binary_sensor rest devices can't have a
+    # json_attributes section.
+    purpleair_fremont_available:
+      friendly_name: 'PurpleAir Fremont Available'
+      unique_id: purpleair_fremont_available
+      device_class: connectivity
+      value_template: >-
+        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+          {% set stats = state_attr('sensor.purpleair_fremont', 'results')[0]['Stats']|from_json %}
+          {% set minutes = stats['timeSinceModified']|int / 1000 /60 %}
+          {% if minutes < 5 %}
+            true
+          {% else %}
+            unavailable
+          {% endif %}
+        {% else %}
+          unavailable
+        {% endif %}
+      availability_template: "{{ states('sensor.purpleair_fremont') != unknown }}"
+
+#######################################################################################
+# OpenGarage Sensors
+#######################################################################################
+- platform: template
+  sensors:
+    garage_4a_occupied:
+      friendly_name: "Car in Garage 4a"
+      value_template: "{{ state_attr('cover.garage_4a', 'distance_sensor') < 180 }}"
+      availability_template: >-
+        {% if is_state('cover.garage_4a','closed') %}
+          true
+        {% else %}
+          unavailable
+        {% endif %}
+      icon_template: >-
+        {% if is_state('binary_sensor.garage_4a_occupied','on') %}
+          mdi:car
+        {% else %}
+          mdi:car-arrow-right
+        {% endif %}
+      unique_id: binary_sensor.garage_4a_occupied
+      delay_on: 5
+      delay_off: 5
+    garage_4c_occupied:
+      friendly_name: "Car in Garage 4c"
+      value_template: "{{ state_attr('cover.garage_4c', 'distance_sensor') < 180 }}"
+      availability_template: >-
+        {% if is_state('cover.garage_4c','closed') %}
+          true
+        {% else %}
+          unavailable
+        {% endif %}
+      icon_template: >-
+        {% if is_state('binary_sensor.garage_4c_occupied','on') %}
+          mdi:car
+        {% else %}
+          mdi:car-arrow-right
+        {% endif %}
+      unique_id: binary_sensor.garage_4c_occupied
+      delay_on: 5
+      delay_off: 5

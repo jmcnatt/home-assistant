@@ -1,0 +1,22 @@
+# Whitelist files
+!*.yaml
+!.gitignore
+!.*.md
+
+# Ignore directories
+.storage
+.cloud
+.google.token
+custom_components/hacs
+__pycache__
+www
+
+# Ensure sensitive YAML files are ignored
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+home-assistant.log
+*.august.conf
+
+# Ignore home assistant db
+*.db

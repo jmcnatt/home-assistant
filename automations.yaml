@@ -1,0 +1,89 @@
+# automationes.yaml
+
+# notifcations
+- alias: notify_on_garage_4a_state_change
+  trigger:
+    platform: template
+    value_template: "{{ states('sensor.garage_4a_status') in ['Open', 'Closed'] }}"
+  action:
+    service: notify.all_mobile_devices
+    data:
+      title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
+      message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
+
+- alias: notify_on_garage_4c_state_change
+  trigger:
+    platform: template
+    value_template: "{{ states('sensor.garage_4c_status') in ['Open', 'Closed'] }}"
+  action:
+    service: notify.all_mobile_devices
+    data:
+      title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
+      message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
+
+# commutes
+- alias: "Commute - Update Jimmy's morning commute sensor"
+  id: update_jimmy_morning_commute_sensor
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '08:00:00'
+      before: '12:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.commute_morning_jimmy
+
+- alias: "Commute - Update Dana's morning commute sensor"
+  id: update_dana_morning_commute_sensor
+  initial_state: 'on'
+  trigger:
+    - platform: time_pattern
+      minutes: '/2'
+  condition:
+    - condition: time
+      after: '07:00:00'
+      before: '11:00:00'
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.commute_morning_dana
+
+# lights
+- alias: 'Turn on balcony lights at sunset'
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    condition: state
+    entity_id: switch.pwr_02
+    state: 'off'
+  action:
+    service: switch.turn_on
+    entity_id: switch.pwr_02
+- alias: 'Turn off balcony lights at 11:00pm'
+  trigger:
+    - platform: time
+      at: '23:00:00'
+  condition:
+    condition: state
+    entity_id: switch.pwr_02
+    state: 'on'
+  action:
+    service: switch.turn_off
+    entity_id: switch.pwr_02
