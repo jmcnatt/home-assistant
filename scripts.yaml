@@ -1,0 +1,66 @@
+# scripts.yaml
+
+livingroom_tv_power_toggle:
+  alias: livingroom_tv_power_toggle
+  description: 'Toggles the TV and soundbar power'
+  icon: 'mdi:power'
+  mode: single
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_tv
+      entity_id: remote.brd_01_remote
+    - delay:
+        milliseconds: 500
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_soundbar
+      entity_id: remote.brd_01_remote
+
+livingroom_media_on:
+  alias: livingroom_media_on
+  description: 'Turns on the livingroom media center set at the specified input source'
+  icon: 'mdi:power'
+  fields:
+    source:
+      description: 'The input source'
+      example: 'xbox_livingroom'
+  mode: single
+  sequence:
+    - service: script.livingroom_tv_power_toggle
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_hdmi_switch
+      entity_id: remote.brd_01_remote
+      
+
+# broadlink
+broadlink_learn:
+  alias: broadlink_learn
+  sequence:
+    - service: remote.learn_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: auto_power
+        device: livingroom_soundbar
+      entity_id: remote.brd_01_remote
+  mode: single
+  icon: 'mdi:remote'
+
+broadlink_send:
+  alias: broadlink_send
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_soundbar
+      entity_id: remote.brd_01_remote
+  mode: single
+  icon: 'mdi:remote'
