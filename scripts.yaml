@@ -33,7 +33,7 @@ livingroom_xbox:
   mode: single
   sequence:
     - service: remote.toggle
-      service_data:
+      data:
         entity_id: remote.xboxone_remote
     - service: script.livingroom_tv
     - service: remote.send_command
