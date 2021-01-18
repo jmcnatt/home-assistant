@@ -34,7 +34,7 @@ livingroom_xbox:
   sequence:
     - service: remote.toggle
       data:
-        entity_id: remote.xboxone_remote
+        entity_id: remote.xbox_livingroom_remote
     - service: script.livingroom_tv
     - service: remote.send_command
       data:
