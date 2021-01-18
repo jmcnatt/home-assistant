@@ -6,7 +6,7 @@ automation: !include automations.yaml
 cloud:
   google_actions:
     entity_config:
-      script.livingroom_media_on:
+      script.livingroom_tv_power_toggle:
         name: 'Toggle Living Room Media'
         aliases:
           - 'Turn on the living room tv'
