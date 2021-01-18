@@ -4,6 +4,13 @@
 #######################################################################################
 automation: !include automations.yaml
 cloud:
+  google_actions:
+    entity_config:
+      script.livingroom_media_on:
+        name: 'Toggle Living Room Media'
+        aliases:
+          - 'Turn on the living room tv'
+          - 'Turn off the living room tv'
 config:
 frontend:
 group: !include groups.yaml
