@@ -62,27 +62,6 @@ badnest:
 
 binary_sensor: !include binary_sensor.yaml
 
-camera:
-  - platform: foscam
-    name: ipc-01
-    ip: !secret ipc_01_ip
-    port: 88
-    username: !secret foscam_username
-    password: !secret foscam_password
-    rtsp_port: 88
-  - platform: foscam
-    name: ipc-02
-    ip: !secret ipc_02_ip
-    port: 88
-    username: !secret foscam_username
-    password: !secret foscam_password
-    rtsp_port: 88
-  - platform: foscam
-    name: ipc-03
-    ip: !secret ipc_03_ip
-    username: !secret foscam_username
-    password: !secret foscam_password
-    rtsp_port: 88
 climate:
   - platform: badnest
     scan_interval: 10
