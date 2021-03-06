@@ -27,26 +27,6 @@
       friendly_name: 'Kitchen Thermostat Current Humidity'
       unit_of_measurement: '%'
 
-- platform: plex_recently_added
-  name: 'plex_recently_added_movies'
-  token: !secret plex_token
-  host: !secret plex_host
-  port: !secret plex_port
-  ssl: false
-  section_types:
-    - movie
-  max: 5
-
-- platform: plex_recently_added
-  name: 'plex_recently_added_shows'
-  token: !secret plex_token
-  host: !secret plex_host
-  port: !secret plex_port
-  ssl: false
-  section_types:
-    - show
-  max: 5
-
 #######################################################################################
 # Pollen Sensors
 #######################################################################################
