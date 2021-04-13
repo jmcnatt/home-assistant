@@ -2,24 +2,6 @@
 
 - platform: badnest
 
-- platform: google_travel_time
-  api_key: !secret google_cloud_api_key
-  name: commute_morning_jimmy
-  options:
-    mode: driving
-  origin: zone.home
-  destination: zone.work_1
-  scan_interval: 86400
-
-- platform: google_travel_time
-  api_key: !secret google_cloud_api_key
-  name: commute_morning_dana
-  options:
-    mode: driving
-  origin: zone.home
-  destination: zone.work_2
-  scan_interval: 86400
-
 - platform: template
   sensors:
     kitchen_thermostat_humidity:
@@ -325,7 +307,7 @@
             Unknown
           {% endif %}
           {% else %}
-          n/a
+            n/a
           {% endif %}'
     garage_4a_status:
       friendly_name: 'Garage 4a Door Status'
