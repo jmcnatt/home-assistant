@@ -21,49 +21,6 @@
       title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
       message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
 
-# commutes
-- alias: "Commute - Update Jimmy's morning commute sensor"
-  id: update_jimmy_morning_commute_sensor
-  initial_state: 'on'
-  trigger:
-    - platform: time_pattern
-      minutes: '/2'
-  condition:
-    - condition: time
-      after: '08:00:00'
-      before: '12:00:00'
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-  action:
-    - service: homeassistant.update_entity
-      entity_id: sensor.commute_morning_jimmy
-
-- alias: "Commute - Update Dana's morning commute sensor"
-  id: update_dana_morning_commute_sensor
-  initial_state: 'on'
-  trigger:
-    - platform: time_pattern
-      minutes: '/2'
-  condition:
-    - condition: time
-      after: '07:00:00'
-      before: '11:00:00'
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-  action:
-    - service: homeassistant.update_entity
-      entity_id: sensor.commute_morning_dana
-
 # lights
 - alias: 'Turn on balcony lights at sunset'
   trigger:
