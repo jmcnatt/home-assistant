@@ -74,7 +74,7 @@ nest:
   client_id: !secret google_nest_client_id
   client_secret: !secret google_nest_client_secret
   # "Project ID" in the Device Access Console
-  project_id: !secret google_project_id
+  project_id: !secret google_nest_project_id
   # "Subscription name" in Google Cloud Console
   subscriber_id: !secret google_subscriber_id
 
