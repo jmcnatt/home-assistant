@@ -1,14 +1,5 @@
 # sensor.yaml
 
-- platform: badnest
-
-- platform: template
-  sensors:
-    kitchen_thermostat_humidity:
-      value_template: '{{ states.climate.kitchen_thermostat.attributes.current_humidity|int }}'
-      friendly_name: 'Kitchen Thermostat Current Humidity'
-      unit_of_measurement: '%'
-
 #######################################################################################
 # Pollen Sensors
 #######################################################################################
