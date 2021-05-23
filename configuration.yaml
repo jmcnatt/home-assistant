@@ -50,9 +50,6 @@ homeassistant:
   longitude: !secret home_longitude
   unit_system: imperial
   time_zone: !secret home_timezone
-  customize_glob:
-    "sensor.pollen_*":
-      icon: mdi:flower
 
 # Integrations
 binary_sensor: !include binary_sensor.yaml
