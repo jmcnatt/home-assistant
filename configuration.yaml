@@ -54,6 +54,10 @@ homeassistant:
 # Integrations
 binary_sensor: !include binary_sensor.yaml
 
+cellar_tracker:
+  username: !secret cellar_tracker_username
+  password: !secret cellar_tracker_password
+
 cover:
   platform: opengarage
   covers:
