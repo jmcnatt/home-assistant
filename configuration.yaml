@@ -87,6 +87,9 @@ notify:
     services:
       - service: mobile_app_five_mega_pixel
       - service: mobile_app_chirp
+  - name: discord
+    platform: discord
+    token: !secret discord_token
 
 # sensor
 sensor: !include sensor.yaml
