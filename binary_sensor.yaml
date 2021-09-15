@@ -1,6 +1,20 @@
 # binary_sensor.yaml
 
 #######################################################################################
+# Network sensors
+#######################################################################################
+- platform: ping
+  host: !secret network_gw_wan_ip
+  name: 'pfsense_wan_available'
+  count: 4
+  scan_interval: 30
+- platform:  ping
+  host: !secret network_gw_wan_gw
+  name: 'pfsense_wan_gw_available'
+  count: 4
+  scan_internval: 30
+
+#######################################################################################
 # PurpleAir Sensors
 #######################################################################################
 - platform: template
