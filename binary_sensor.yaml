@@ -31,39 +31,21 @@
 #######################################################################################
 - platform: template
   sensors:
-    garage_4a_occupied:
-      friendly_name: "Car in Garage 4a"
-      value_template: "{{ state_attr('cover.garage_4a', 'distance_sensor') < 180 }}"
+    garage_door_occupied:
+      friendly_name: "Car in Garage"
+      value_template: "{{ state_attr('cover.garage_door', 'distance_sensor') < 180 }}"
       availability_template: >-
-        {% if is_state('cover.garage_4a','closed') %}
+        {% if is_state('cover.garage_door','closed') %}
           true
         {% else %}
           unavailable
         {% endif %}
       icon_template: >-
-        {% if is_state('binary_sensor.garage_4a_occupied','on') %}
+        {% if is_state('binary_sensor.garage_door_occupied','on') %}
           mdi:car
         {% else %}
           mdi:car-arrow-right
         {% endif %}
-      unique_id: binary_sensor.garage_4a_occupied
-      delay_on: 5
-      delay_off: 5
-    garage_4c_occupied:
-      friendly_name: "Car in Garage 4c"
-      value_template: "{{ state_attr('cover.garage_4c', 'distance_sensor') < 180 }}"
-      availability_template: >-
-        {% if is_state('cover.garage_4c','closed') %}
-          true
-        {% else %}
-          unavailable
-        {% endif %}
-      icon_template: >-
-        {% if is_state('binary_sensor.garage_4c_occupied','on') %}
-          mdi:car
-        {% else %}
-          mdi:car-arrow-right
-        {% endif %}
-      unique_id: binary_sensor.garage_4c_occupied
+      unique_id: binary_sensor.garage_door_occupied
       delay_on: 5
       delay_off: 5
