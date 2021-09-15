@@ -58,14 +58,10 @@ binary_sensor: !include binary_sensor.yaml
 cover:
   platform: opengarage
   covers:
-    garage_4c:
-      host: !secret opengarage_og_02_ip
-      device_key: !secret opengarage_device_key
-      name: garage_4c
-    garage_4a:
+    garage_door:
       host: !secret opengarage_og_01_ip
       device_key: !secret opengarage_device_key
-      name: garage_4a
+      name: garage_door
 
 # nest
 nest:
@@ -89,15 +85,6 @@ notify:
 
 # sensor
 sensor: !include sensor.yaml
-
-# tplink
-tplink:
-  discovery: false
-  switch:
-    - host: !secret pwr_02_ip
-  strip:
-    - host: !secret pwr_01_ip
-    - host: !secret pwr_03_ip
 
 # Text to speech
 tts:
