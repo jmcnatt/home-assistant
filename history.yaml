@@ -5,9 +5,9 @@ include:
   domains:
     - switch
     - light
-    - media_player
     - weather
     - cover
+    - climate
   entities:
     - sensor.bedroom_temperature
     - sensor.fremont_condition
@@ -17,6 +17,3 @@ include:
     - sensor.fremont_snow
     - sensor.fremont_temperature
     - sensor.fremont_wind_speed
-    - sensor.living_room_temperature
-    - sensor.kitchen_thermostat
-    - sensor.kitchen_thermostat_humidity
