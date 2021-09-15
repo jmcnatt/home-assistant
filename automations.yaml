@@ -1,47 +1,59 @@
 # automationes.yaml
 
 # notifcations
-- alias: notify_on_garage_4a_state_change
+- alias: notify_on_garage_door_state_change
   trigger:
     platform: template
-    value_template: "{{ states('sensor.garage_4a_status') in ['Open', 'Closed'] }}"
+    value_template: "{{ states('sensor.garage_door_status') in ['Open', 'Closed'] }}"
   action:
-    service: notify.all_mobile_devices
+    service: notify.discord
     data:
       title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
       message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
 
-- alias: notify_on_garage_4c_state_change
-  trigger:
-    platform: template
-    value_template: "{{ states('sensor.garage_4c_status') in ['Open', 'Closed'] }}"
-  action:
-    service: notify.all_mobile_devices
-    data:
-      title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
-      message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
+- alias: Low battery level detection & notification for all battery sensors
+  description: 'Detect low battery levels and send a notification to discord'
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      exclude:
+        entity_id:
+          - sensor.chirp_battery_level
+          - sensor.chirp_battery_state
+          - sensor.five_mega_pixel_battery_level
+      actions:
+        - service: notify.discord
+          data:
+            title: Low Battery Warning
+            message: '{{sensors}} battery is low'
+      day: 1
 
 # lights
-- alias: 'Turn on balcony lights at sunset'
+- alias: Turn off front entry light at 1:00am
+  trigger:
+    - platform: time
+      at: '01:00:00'
+  condition:
+    - condition: state
+      entity_id: light.shelly_outf_01
+      state: 'on'
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.shelly_outf_01
+  mode: single
+
+- alias: Turn on front entry light at sunset
   trigger:
     - platform: sun
       event: sunset
-      offset: '-01:30:00'
+      offset: '-01:00:00'
   condition:
-    condition: state
-    entity_id: switch.pwr_02
-    state: 'off'
+    - condition: state
+      entity_id: light.shelly_outf_01
+      state: 'off'
   action:
-    service: switch.turn_on
-    entity_id: switch.pwr_02
-- alias: 'Turn off balcony lights at 11:00pm'
-  trigger:
-    - platform: time
-      at: '23:00:00'
-  condition:
-    condition: state
-    entity_id: switch.pwr_02
-    state: 'on'
-  action:
-    service: switch.turn_off
-    entity_id: switch.pwr_02
+    - service: light.turn_on
+      target:
+        entity_id: light.shelly_outf_01
+  mode: single
