@@ -135,37 +135,20 @@
 #######################################################################################
 - platform: template
   sensors:
-    garage_4c_status:
-      friendly_name: 'Garage 4c Door Status'
-      value_template: '{% if states.cover.garage_4c %}
-          {% if states.cover.garage_4c.attributes["door_state"] == "open" %}
+    garage_door_status:
+      friendly_name: 'Garage Door Status'
+      value_template: '{% if states.cover.garage_door %}
+          {% if states.cover.garage_door.attributes["door_state"] == "open" %}
             Open
-          {% elif states.cover.garage_4c.attributes["door_state"] == "closed" %}
+          {% elif states.cover.garage_door.attributes["door_state"] == "closed" %}
             Closed
-          {% elif states.cover.garage_4c.attributes["door_state"] == "opening" %}
+          {% elif states.cover.garage_door.attributes["door_state"] == "opening" %}
             Opening
-          {% elif states.cover.garage_4c.attributes["door_state"] == "closing" %}
+          {% elif states.cover.garage_door.attributes["door_state"] == "closing" %}
             Closing
           {% else %}
             Unknown
           {% endif %}
           {% else %}
             n/a
-          {% endif %}'
-    garage_4a_status:
-      friendly_name: 'Garage 4a Door Status'
-      value_template: '{% if states.cover.garage_4a %}
-          {% if states.cover.garage_4a.attributes["door_state"] == "open" %}
-            Open
-          {% elif states.cover.garage_4a.attributes["door_state"] == "closed" %}
-            Closed
-          {% elif states.cover.garage_4a.attributes["door_state"] == "opening" %}
-            Opening
-          {% elif states.cover.garage_4a.attributes["door_state"] == "closing" %}
-            Closing
-          {% else %}
-            Unknown
-          {% endif %}
-          {% else %}
-          n/a
           {% endif %}'
