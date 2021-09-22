@@ -55,6 +55,7 @@ homeassistant:
 # Integrations
 binary_sensor: !include binary_sensor.yaml
 
+# cover
 cover:
   platform: opengarage
   covers:
