@@ -46,6 +46,7 @@ livingroom_xbox_netflix:
         media_content_type: app
         target:
           entity_id: media_player.xbox_livingroom
+        entity_id: media_player.xbox_livingroom
 
 livingroom_xbox_netflix_off:
   mode: restart
