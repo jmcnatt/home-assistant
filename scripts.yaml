@@ -47,7 +47,7 @@ livingroom_xbox_netflix:
         target:
           entity_id: media_player.xbox_livingroom
 
-livingroom_xbox_netflix:
+livingroom_xbox_netflix_off:
   mode: restart
   icon: mdi:netflix
   description: Turn off the living room TV and xbox
