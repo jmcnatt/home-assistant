@@ -26,23 +26,38 @@ livingroom_tv:
         command: power
         device: livingroom_hdmi_switch
 
-livingroom_xbox:
-  alias: 'living room xbox'
-  description: 'Turns on the livingroom xbox'
-  icon: 'mdi:power'
-  mode: single
+livingroom_xbox_netflix:
+  description: Turn on the living roomt TV and start Netflix on the Xbox
+  mode: restart
+  icon: mdi:netflix
   sequence:
-    - service: remote.toggle
-      data:
-        entity_id: remote.xbox_livingroom_remote
     - service: script.livingroom_tv
+    - delay:
+        milliseconds: 1000
     - service: remote.send_command
       data:
         entity_id: remote.brd_01_remote
-        command: input_2
         device: livingroom_hdmi_switch
+        command: input_2
       entity_id: remote.brd_01_remote
-      
+    - service: media_player.play_media
+      data:
+        media_content_id: 9WZDNCRFJ3TJ
+        media_content_type: app
+        target:
+          entity_id: media_player.xbox_livingroom
+
+livingroom_xbox_netflix:
+  mode: restart
+  icon: mdi:netflix
+  description: Turn off the living room TV and xbox
+  sequence:
+    - service: script.livingroom_tv
+    - delay:
+        milliseconds: 1000
+    - service: remote.toggle
+      data:
+        entity_id: remote.xbox_livingroom_remote
 
 # broadlink
 broadlink_learn:
