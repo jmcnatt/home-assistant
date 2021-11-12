@@ -47,7 +47,7 @@
   sensors:
     garage_door_occupied:
       friendly_name: "Car in Garage"
-      value_template: "{{ state_attr('cover.garage_door', 'distance_sensor') < 180 }}"
+      value_template: "{{ states('sensor.og_01_dist') < 180 }}"
       availability_template: >-
         {% if is_state('cover.garage_door','closed') %}
           true
