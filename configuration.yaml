@@ -58,7 +58,15 @@ binary_sensor: !include binary_sensor.yaml
 
 # camera
 camera:
-  
+  - platform: ffmpeg
+    input: !secret nvr_cam_01_input
+    name: Front Yard
+  - platform: ffmpeg
+    input: !secret nvr_cam_02_input
+    name: Front Door
+  - platform: ffmpeg
+    input: !secret nvr_cam_03_input
+    name: garage
 
 # cover
 cover:
