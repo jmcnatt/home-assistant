@@ -35,6 +35,7 @@ person:
 scene: !include scenes.yaml
 script: !include scripts.yaml
 ssdp:
+stream:
 sun:
 system_health:
 tag:
@@ -54,6 +55,10 @@ homeassistant:
 
 # Integrations
 binary_sensor: !include binary_sensor.yaml
+
+# camera
+camera:
+  
 
 # cover
 cover:
