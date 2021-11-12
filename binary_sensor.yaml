@@ -39,27 +39,3 @@
           unavailable
         {% endif %}
       availability_template: "{{ states('sensor.purpleair_fremont') != unknown }}"
-
-#######################################################################################
-# OpenGarage Sensors
-#######################################################################################
-- platform: template
-  sensors:
-    garage_door_occupied:
-      friendly_name: "Car in Garage"
-      value_template: "{{ state_attr('cover.garage_door', 'distance_sensor') < 180 }}"
-      availability_template: >-
-        {% if is_state('cover.garage_door','closed') %}
-          true
-        {% else %}
-          unavailable
-        {% endif %}
-      icon_template: >-
-        {% if is_state('binary_sensor.garage_door_occupied','on') %}
-          mdi:car
-        {% else %}
-          mdi:car-arrow-right
-        {% endif %}
-      unique_id: binary_sensor.garage_door_occupied
-      delay_on: 5
-      delay_off: 5
