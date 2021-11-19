@@ -90,6 +90,9 @@ light:
     platform: group
     entities:
       - light.lfx_office_01
+      - light.lfx_office_02
+      - light.lfx_office_03
+      - light.lfx_office_04
 
 # nest
 nest:
