@@ -10,6 +10,8 @@
     data:
       title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
       message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
+      target:
+        - '865449623518969866'
 
 - alias: Low battery level detection & notification for all battery sensors
   description: 'Detect low battery levels and send a notification to discord'
@@ -26,6 +28,8 @@
           data:
             title: Low Battery Warning
             message: '{{sensors}} battery is low'
+            target:
+              - '865449623518969866'
       day: 1
 
 # lights
