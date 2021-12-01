@@ -23,7 +23,7 @@
     # a binary_sensor? Turns out binary_sensor rest devices can't have a
     # json_attributes section.
     purpleair_home_available:
-      friendly_name: 'PurpleAir Fremont Available'
+      friendly_name: 'PurpleAir Home Available'
       unique_id: purpleair_home_available
       device_class: connectivity
       value_template: >-

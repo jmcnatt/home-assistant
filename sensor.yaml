@@ -23,7 +23,7 @@
 - platform: template
   sensors:
     purpleair_home_aqi:
-      friendly_name: 'PurpleAir Fremont AQI'
+      friendly_name: 'PurpleAir Home AQI'
       unique_id: purpleair_home_aqi
       # Set this sensor to be the AQI value. Code translated from JavaScript found at:
       # https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU/edit#
@@ -58,7 +58,7 @@
       unit_of_measurement: "AQI"
       availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
     purpleair_home_description:
-      friendly_name: 'PurpleAir Fremont AQI Description'
+      friendly_name: 'PurpleAir Home AQI Description'
       unique_id: purpleair_home_description
       value_template: >
         {% set aqi = states('sensor.purpleair_home_aqi')|float %}
@@ -81,7 +81,7 @@
         {% endif %}
       availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
     purpleair_home_pm25:
-      friendly_name: 'PurpleAir Fremont PM 2.5'
+      friendly_name: 'PurpleAir Home PM 2.5'
       unique_id: purpleair_home_pm25
       value_template: >-
         {% if state_attr('sensor.purpleair_home', 'results') != None %}
@@ -92,7 +92,7 @@
       unit_of_measurement: "μg/m3"
       availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
     purpleair_home_temperature:
-      friendly_name: 'PurpleAir Fremont Temperature'
+      friendly_name: 'PurpleAir Home Temperature'
       unique_id: purpleair_home_temperature
       # Why "- 8"?
       # https://www2.purpleair.com/community/faq#!hc-primary-and-secondary-data-header
@@ -106,7 +106,7 @@
       device_class: temperature
       availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
     purpleair_home_humidity:
-      friendly_name: 'PurpleAir Fremont Humidity'
+      friendly_name: 'PurpleAir Home Humidity'
       unique_id: purpleair_home_humidity
       value_template: >-
         {% if state_attr('sensor.purpleair_home', 'results') != None %}
@@ -118,7 +118,7 @@
       device_class: humidity
       availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
     purpleair_home_pressure:
-      friendly_name: 'PurpleAir Fremont Pressure'
+      friendly_name: 'PurpleAir Home Pressure'
       unique_id: purpleair_home_pressure
       value_template: >-
         {% if state_attr('sensor.purpleair_home', 'results') != None %}
