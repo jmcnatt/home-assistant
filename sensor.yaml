@@ -6,11 +6,11 @@
 # https://community.home-assistant.io/t/purpleair-air-quality-sensor/146588
 # Reasonable sensors pulled from https://www.purpleair.com/map
 - platform: rest
-  name: 'purpleair_fremont'
+  name: 'purpleair_home'
   # Substitute in the URL of the sensor you care about. To find the URL, go
   # to purpleair.com/map, find your sensor, click on it, click on "Get This
   # Widget" then click on "JSON".
-  resource: !secret purpleair_fremont_url
+  resource: !secret purpleair_home_url
   scan_interval: 300
   # Set the sensor value to the last update time of the device.
   device_class: timestamp
@@ -22,17 +22,17 @@
     - results
 - platform: template
   sensors:
-    purpleair_fremont_aqi:
+    purpleair_home_aqi:
       friendly_name: 'PurpleAir Fremont AQI'
-      unique_id: purpleair_fremont_aqi
+      unique_id: purpleair_home_aqi
       # Set this sensor to be the AQI value. Code translated from JavaScript found at:
       # https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU/edit#
       value_template: >
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
           {% macro calcAQI(Cp, Ih, Il, BPh, BPl) -%}
             {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il)|round }}
           {%- endmacro %}
-          {% set pm25 = state_attr('sensor.purpleair_fremont', 'results')[0]['PM2_5Value']|float %}
+          {% set pm25 = state_attr('sensor.purpleair_home', 'results')[0]['PM2_5Value']|float %}
           {% if pm25 > 1000 %}
             invalid
           {% elif pm25 > 350.5 %}
@@ -56,12 +56,12 @@
           invalid
         {% endif %}
       unit_of_measurement: "AQI"
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
-    purpleair_fremont_description:
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
+    purpleair_home_description:
       friendly_name: 'PurpleAir Fremont AQI Description'
-      unique_id: purpleair_fremont_description
+      unique_id: purpleair_home_description
       value_template: >
-        {% set aqi = states('sensor.purpleair_fremont_aqi')|float %}
+        {% set aqi = states('sensor.purpleair_home_aqi')|float %}
         {% if aqi >= 401.0 %}
           Very Hazardous
         {% elif aqi >= 301.0 %}
@@ -79,53 +79,53 @@
         {% else %}
           undefined
         {% endif %}
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
-    purpleair_fremont_pm25:
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
+    purpleair_home_pm25:
       friendly_name: 'PurpleAir Fremont PM 2.5'
-      unique_id: purpleair_fremont_pm25
+      unique_id: purpleair_home_pm25
       value_template: >-
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
-          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['PM2_5Value'] }}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
+          {{ state_attr('sensor.purpleair_home', 'results')[0]['PM2_5Value'] }}
         {% else %}
           0
         {% endif %}
       unit_of_measurement: "μg/m3"
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
-    purpleair_fremont_temperature:
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
+    purpleair_home_temperature:
       friendly_name: 'PurpleAir Fremont Temperature'
-      unique_id: purpleair_fremont_temperature
+      unique_id: purpleair_home_temperature
       # Why "- 8"?
       # https://www2.purpleair.com/community/faq#!hc-primary-and-secondary-data-header
       value_template: >-
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
-          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['temp_f'] | float - 8 }}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
+          {{ state_attr('sensor.purpleair_home', 'results')[0]['temp_f'] | float - 8 }}
         {% else %}
           0
         {% endif %}
       unit_of_measurement: "°F"
       device_class: temperature
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
-    purpleair_fremont_humidity:
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
+    purpleair_home_humidity:
       friendly_name: 'PurpleAir Fremont Humidity'
-      unique_id: purpleair_fremont_humidity
+      unique_id: purpleair_home_humidity
       value_template: >-
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
-          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['humidity'] }}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
+          {{ state_attr('sensor.purpleair_home', 'results')[0]['humidity'] }}
         {% else %}
           0
         {% endif %}
       unit_of_measurement: "%"
       device_class: humidity
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
-    purpleair_fremont_pressure:
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"
+    purpleair_home_pressure:
       friendly_name: 'PurpleAir Fremont Pressure'
-      unique_id: purpleair_fremont_pressure
+      unique_id: purpleair_home_pressure
       value_template: >-
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
-          {{ state_attr('sensor.purpleair_fremont', 'results')[0]['pressure'] }}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
+          {{ state_attr('sensor.purpleair_home', 'results')[0]['pressure'] }}
         {% else %}
           0
         {% endif %}
       unit_of_measurement: "mb"
       device_class: pressure
-      availability_template: "{{ is_state('binary_sensor.purpleair_fremont_available', 'on') }}"
+      availability_template: "{{ is_state('binary_sensor.purpleair_home_available', 'on') }}"

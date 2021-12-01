@@ -22,13 +22,13 @@
     # Add a connectivity sensor for purpleair. Why isn't the above rest sensor
     # a binary_sensor? Turns out binary_sensor rest devices can't have a
     # json_attributes section.
-    purpleair_fremont_available:
+    purpleair_home_available:
       friendly_name: 'PurpleAir Fremont Available'
-      unique_id: purpleair_fremont_available
+      unique_id: purpleair_home_available
       device_class: connectivity
       value_template: >-
-        {% if state_attr('sensor.purpleair_fremont', 'results') != None %}
-          {% set stats = state_attr('sensor.purpleair_fremont', 'results')[0]['Stats']|from_json %}
+        {% if state_attr('sensor.purpleair_home', 'results') != None %}
+          {% set stats = state_attr('sensor.purpleair_home', 'results')[0]['Stats']|from_json %}
           {% set minutes = stats['timeSinceModified']|int / 1000 /60 %}
           {% if minutes < 5 %}
             true
@@ -38,7 +38,7 @@
         {% else %}
           unavailable
         {% endif %}
-      availability_template: "{{ states('sensor.purpleair_fremont') != unknown }}"
+      availability_template: "{{ states('sensor.purpleair_home') != unknown }}"
 
 #######################################################################################
 # OpenGarage Sensors
