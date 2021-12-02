@@ -20,6 +20,10 @@ config:
 frontend:
 group: !include groups.yaml
 history: !include history.yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
 image:
 input_boolean:
 input_datetime:
