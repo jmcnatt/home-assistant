@@ -1,0 +1,3 @@
+[submodule "modules/purpleair"]
+	path = modules/purpleair
+	url = https://gitlab.com/gibwar/home-assistant-purpleair.git
