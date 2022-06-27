@@ -23,7 +23,8 @@ history: !include history.yaml
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.30.33.0/24
+    - '127.0.0.1'
+    - '172.30.33.0/24'
 image:
 input_boolean:
 input_datetime:
@@ -70,6 +71,11 @@ camera:
   - platform: ffmpeg
     input: !secret nvr_cam_03_input
     name: garage
+
+# cellar_tracker
+cellar_tracker:
+  username: !secret cellar_tracker_username
+  password: !secret cellar_tracker_password
 
 # light
 light:
