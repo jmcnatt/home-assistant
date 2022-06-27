@@ -7,12 +7,12 @@
   host: !secret network_gw_wan_ip
   name: 'pfsense_wan_available'
   count: 4
-  scan_interval: 30
+  scan_interval: 15
 - platform: ping
   host: !secret network_gw_wan_gw
   name: 'pfsense_wan_gw_available'
   count: 4
-  scan_interval: 30
+  scan_interval: 15
 
 #######################################################################################
 # OpenGarage Sensors
