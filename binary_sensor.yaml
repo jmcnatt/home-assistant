@@ -5,17 +5,62 @@
 #######################################################################################
 - platform: ping
   host: !secret network_gw_wan_ip
-  name: 'ping_pfsense_wan_available'
+  name: ping_network_gateway_wan_ip_available
   count: 4
   scan_interval: 15
 - platform: ping
   host: !secret network_gw_wan_gw
-  name: 'ping_pfsense_wan_gw_available'
+  name: ping_network_gateway_wan_gw_available
   count: 4
   scan_interval: 15
 - platform: ping
   host: '8.8.8.8'
-  name: 'ping_internet_available'
+  name: ping_internet_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_gw_lan_ip
+  name: ping_network_gw_lan_ip_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_gw_server_ip
+  name: ping_network_gw_server_ip_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_gw_dmz_ip
+  name: ping_network_gw_dmz_ip_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_plex
+  name: ping_network_service_plex_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_game
+  name: ping_network_service_game_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_ad
+  name: ping_network_service_ad_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_http
+  name: ping_network_service_http_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_puppet
+  name: ping_network_service_puppet_available
+  count: 4
+  scan_interval: 15
+- platform: ping
+  host: !secret network_service_vmh
+  name: ping_network_service_vmh_available
   count: 4
   scan_interval: 15
 
