@@ -5,12 +5,12 @@
 #######################################################################################
 - platform: ping
   host: !secret network_gw_wan_ip
-  name: ping_network_gateway_wan_ip_available
+  name: ping_network_gw_wan_ip_available
   count: 4
   scan_interval: 15
 - platform: ping
   host: !secret network_gw_wan_gw
-  name: ping_network_gateway_wan_gw_available
+  name: ping_network_gw_wan_gw_available
   count: 4
   scan_interval: 15
 - platform: ping
