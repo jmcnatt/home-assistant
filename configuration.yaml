@@ -31,12 +31,14 @@ input_datetime:
 input_number:
 input_select:
 input_text:
+logbook:
 lovelace:
   mode: storage
 media_source:
 mobile_app:
 my:
 person:
+recorder:
 scene: !include scenes.yaml
 script: !include scripts.yaml
 ssdp:
