@@ -39,7 +39,7 @@ media_source:
 mobile_app:
 my:
 person:
-recorder:
+recorder: !include recorder.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
 ssdp:
