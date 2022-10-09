@@ -1,67 +1,203 @@
-# automationes.yaml
-
-# notifcations
 - alias: notify_on_garage_door_state_change
   trigger:
     platform: template
-    value_template: "{{ states('sensor.garage_door_status') in ['Open', 'Closed'] }}"
+    value_template: '{{ states(''sensor.garage_door_status'') in [''Open'', ''Closed'']
+      }}'
   action:
     service: notify.discord
     data:
-      title: "{{ trigger.to_state.name }} {{trigger.to_state.state}}"
-      message: "Home Assistant has detected that {{ trigger.to_state.name }} is now {{trigger.to_state.state}}."
+      title: '{{ trigger.to_state.name }} {{trigger.to_state.state}}'
+      message: Home Assistant has detected that {{ trigger.to_state.name }} is now
+        {{trigger.to_state.state}}.
       target:
-        - '865449623518969866'
-
+      - '865449623518969866'
+  id: 4821fd0d4e994779ace52ef6ed2cb8e5
 - alias: Low battery level detection & notification for all battery sensors
-  description: 'Detect low battery levels and send a notification to discord'
+  description: Detect low battery levels and send a notification to discord
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       exclude:
         entity_id:
-          - sensor.chirp_battery_level
-          - sensor.chirp_battery_state
-          - sensor.five_mega_pixel_battery_level
+        - sensor.chirp_battery_level
+        - sensor.chirp_battery_state
+        - sensor.five_mega_pixel_battery_level
       actions:
-        - service: notify.discord
-          data:
-            title: Low Battery Warning
-            message: '{{sensors}} battery is low'
-            target:
-              - '865449623518969866'
+      - service: notify.discord
+        data:
+          title: Low Battery Warning
+          message: '{{sensors}} battery is low'
+          target:
+          - '865449623518969866'
       day: 1
-
-# lights
-- alias: Turn off front entry light at 1:00am
+  id: ac4a9f97dc8d47afba2ca580ffb80f17
+- id: a05a39420c034545bab0c656348d246c
+  alias: Lights - Turn off front entry light at 1:00am
   trigger:
-    - platform: time
-      at: '01:00:00'
+  - platform: time
+    at: 01:00:00
   condition:
-    - condition: state
-      entity_id: light.shelly_outf_01
-      state: 'on'
+  - condition: state
+    entity_id: light.shelly_outf_01
+    state: 'on'
   action:
-    - service: light.turn_off
-      target:
-        entity_id: light.shelly_outf_01
+  - service: light.turn_off
+    target:
+      entity_id: light.shelly_outf_01
   mode: single
-
-- alias: Turn on front entry light at sunset
+- id: 559d39bce9cb4644950c4ec788493b9f
+  alias: Lights - Turn on front entry light at sunset
   trigger:
-    - platform: sun
-      event: sunset
-      offset: '-01:00:00'
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
   condition:
-    - condition: state
-      entity_id: light.shelly_outf_01
-      state: 'off'
+  - condition: state
+    entity_id: light.shelly_outf_01
+    state: 'off'
   action:
-    - service: light.turn_on
-      target:
-        entity_id: light.shelly_outf_01
+  - service: light.turn_on
+    target:
+      entity_id: light.shelly_outf_01
   mode: single
-
+- id: '1640318228441'
+  alias: Lights - Turn on the Christmas tree and house lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-2'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
+  - service: light.turn_on
+    target:
+      entity_id: light.kitchen_lights
+  mode: single
+- id: '1640318394872'
+  alias: Lights - Turn off christmas tree and house lights
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
+  - service: light.turn_off
+    target:
+      entity_id: light.kitchen_lights
+  mode: single
+- id: '1643675363387'
+  alias: Lights - Turn on lights before sunset if someone is home
+  description: Turns on the kitchen, hallway, office, and dining room lights if someone
+    is home.
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-1:00:00'
+  condition:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 6b0618e1e634c5859a4b98afd121f5a9
+      domain: device_tracker
+      entity_id: device_tracker.five_mega_pixel
+      type: is_home
+    - condition: device
+      device_id: 58cefa4a820dc087519099d8b1c465c3
+      domain: device_tracker
+      entity_id: device_tracker.chirp
+      type: is_home
+  action:
+  - service: light.turn_on
+    target:
+      entity_id:
+      - light.kitchen_lights
+      - light.office_lights
+      - light.shelly_diningroom_01
+      - light.shelly_hallway_01
+  mode: single
+- id: '1646793047500'
+  alias: Lock - Front door lock when no one is home
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 6b0618e1e634c5859a4b98afd121f5a9
+    domain: device_tracker
+    entity_id: device_tracker.five_mega_pixel
+    type: leaves
+    zone: zone.home
+  - platform: device
+    device_id: 58cefa4a820dc087519099d8b1c465c3
+    domain: device_tracker
+    entity_id: device_tracker.chirp
+    type: leaves
+    zone: zone.home
+  condition:
+  - condition: and
+    conditions:
+    - condition: device
+      device_id: 6b0618e1e634c5859a4b98afd121f5a9
+      domain: device_tracker
+      entity_id: device_tracker.five_mega_pixel
+      type: is_not_home
+    - condition: device
+      device_id: 58cefa4a820dc087519099d8b1c465c3
+      domain: device_tracker
+      entity_id: device_tracker.chirp
+      type: is_not_home
+  - condition: state
+    entity_id: lock.front_door
+    state: unlocked
+  action:
+  - service: lock.lock
+    data: {}
+    target:
+      entity_id: lock.front_door
+  - service: notify.discord
+    data:
+      title: Front Door Locked
+      message: Home Assistant has automatically locked the front door.
+      target: '865449623518969866'
+  mode: single
+- id: '1646888893633'
+  alias: Lock - Unlock front door when arriving home
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 6b0618e1e634c5859a4b98afd121f5a9
+    domain: device_tracker
+    entity_id: device_tracker.five_mega_pixel
+    type: enters
+    zone: zone.home
+  - platform: device
+    device_id: 58cefa4a820dc087519099d8b1c465c3
+    domain: device_tracker
+    entity_id: device_tracker.chirp
+    type: enters
+    zone: zone.home
+  condition:
+  - condition: state
+    entity_id: lock.front_door
+    state: locked
+  action:
+  - service: lock.unlock
+    data: {}
+    target:
+      entity_id: lock.front_door
+  - service: notify.discord
+    data:
+      message: 'Welcome home!  Home Assistant has unlocked the front door. :wave:'
+      title: Front Door Unlocked
+      target:
+      - '865449623518969866'
+  mode: single
 - alias: 'Fridge - Set Filter Change Date to Today'
   description: 'Sets the fridge filter change date to today's date'
   trigger:
