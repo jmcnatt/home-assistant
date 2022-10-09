@@ -1,0 +1,10 @@
+# input_datetime.yaml
+
+#######################################################################################
+# Fridge Filter
+#######################################################################################
+fridge_filter_installed_date:
+  name: 'Fridge Filter Installed Date'
+  icon: 'mdi:cup-water'
+  has_date: true
+  has_time: false

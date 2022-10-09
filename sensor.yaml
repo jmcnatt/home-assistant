@@ -1,1 +1,24 @@
 # sensor.yaml
+
+#######################################################################################
+# Fridge Filter Days Remaining
+#######################################################################################
+- platform: template
+  sensors:
+    fridge_filter_days_remaining:
+      friendly_name: 'Fridge Filter Days Remaining'
+      unit_of_measurement: days
+      icon_template: 'mdi:calendar-clock'
+      value_template: >-
+        {%- set installed = as_timestamp(states('input_datetime.fridge_filter_installed_date')) -%}
+        {%- set diff = states('input_number.fridge_filter_lifespan') | int * 86400 -%}
+        {%- set now = as_timestamp(states('sensor.date')) -%}
+        {{ (((installed + diff) - now) / 86400) | round(0) }}
+
+#######################################################################################
+# Time Date
+#######################################################################################
+- platform: time_date
+  display_options:
+      - 'time'
+      - 'date'

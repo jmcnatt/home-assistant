@@ -27,8 +27,9 @@ http:
     - '172.30.33.0/24'
 image:
 input_boolean:
-input_datetime:
-input_number:
+input_button: !include input_button.yaml
+input_datetime: !include input_datetime.yaml
+input_number: !include input_number.yaml
 input_select:
 input_text:
 logbook:

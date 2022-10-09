@@ -61,3 +61,16 @@
       target:
         entity_id: light.shelly_outf_01
   mode: single
+
+- alias: 'Fridge - Set Filter Change Date to Today'
+  description: 'Sets the fridge filter change date to today's date'
+  trigger:
+    - platform: state
+      entity_id: input_button.fridge_set_filter_change_to_today
+  condition: []
+  action:
+    - service: input_datetime.set_datetime
+      data:
+        date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+      entity_id: input_datetime.fridge_filter_installed_date
+  mode: single
