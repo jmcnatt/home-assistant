@@ -198,15 +198,16 @@
       target:
       - '865449623518969866'
   mode: single
-- alias: 'Fridge - Set Filter Change Date to Today'
-  description: 'Sets the fridge filter change date to today's date'
+- id: '1665297130584'
+  alias: Fridge - Set Filter Change Date to Today
+  description: Sets the fridge filter change date to today's date
   trigger:
-    - platform: state
-      entity_id: input_button.fridge_set_filter_change_to_today
+  - platform: state
+    entity_id: input_button.fridge_set_filter_change_to_today
   condition: []
   action:
-    - service: input_datetime.set_datetime
-      data:
-        date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
-      entity_id: input_datetime.fridge_filter_installed_date
+  - service: input_datetime.set_datetime
+    data:
+      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+    entity_id: input_datetime.fridge_filter_installed_date
   mode: single
