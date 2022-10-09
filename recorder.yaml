@@ -10,5 +10,6 @@ exclude:
     - sun.sun
     - sensor.last_boot
     - sensor.date
+    - sensor.time
   event_types:
     - call_service
