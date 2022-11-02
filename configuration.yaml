@@ -117,6 +117,9 @@ notify:
     platform: discord
     token: !secret discord_token
 
+# rest
+rest: !include rest.yaml
+
 # sensor
 sensor: !include sensor.yaml
 
