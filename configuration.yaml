@@ -39,7 +39,18 @@ media_source:
 mobile_app:
 my:
 person:
-recorder: !include recorder.yaml
+recorder:
+  exclude:
+    domains:
+      - automation
+      - updater
+    entities:
+      - sun.sun
+      - sensor.last_boot
+      - sensor.date
+      - sensor.time
+    event_types:
+      - call_service
 scene: !include scenes.yaml
 script: !include scripts.yaml
 ssdp:
