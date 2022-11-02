@@ -1,5 +1,5 @@
 # rest.yaml
-resource: !secret scripts_url_cars
+- resource: !secret scripts_url_cars
   method: GET
   scan_interval: 3600
   sensor:
