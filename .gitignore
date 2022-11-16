@@ -7,6 +7,7 @@
 .storage
 .cloud
 .google.token
+blueprints
 custom_components/hacs
 __pycache__
 www
@@ -20,6 +21,12 @@ home-assistant.log
 
 # Ignore home assistant db
 *.db
+*.db-shm
+*.db-wal
+
+# Ignore log files
+*.log*
 
 # Ignore other files
 .HA_VERSION
+aircast.xml
