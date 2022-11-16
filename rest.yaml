@@ -18,6 +18,7 @@
         - last_maintenance_description
         - last_maintenance_location
         - last_maintenance_mileage
+        - last_registration_date
         - last_reported_date
         - last_reported_event
         - last_reported_mileage
