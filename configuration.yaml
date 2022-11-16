@@ -86,11 +86,6 @@ camera:
     input: !secret nvr_cam_03_input
     name: garage
 
-# cellar_tracker
-cellar_tracker:
-  username: !secret cellar_tracker_username
-  password: !secret cellar_tracker_password
-
 # light
 light:
   - name: Kitchen Lights
@@ -124,9 +119,6 @@ notify:
     services:
       - service: mobile_app_five_mega_pixel
       - service: mobile_app_chirp
-  - name: discord
-    platform: discord
-    token: !secret discord_token
 
 # rest
 rest: !include rest.yaml
