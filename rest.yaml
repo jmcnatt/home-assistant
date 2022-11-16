@@ -9,7 +9,7 @@
       json_attributes:
         - engine
         - last_fuel_cost
-        - last_fuel_date"
+        - last_fuel_date
         - last_fuel_gallons
         - last_fuel_mileage
         - last_fuel_price
@@ -21,9 +21,14 @@
         - last_reported_date
         - last_reported_event
         - last_reported_mileage
+        - last_smog_date
+        - license
         - make
         - model
         - nickname
+        - oil_life
+        - total_cost_per_mile
+        - total_mpg
         - trim
         - vin
         - year
