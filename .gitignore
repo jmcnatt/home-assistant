@@ -8,7 +8,7 @@
 .cloud
 .google.token
 blueprints
-custom_components/hacs
+custom_components
 __pycache__
 www
 
