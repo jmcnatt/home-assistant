@@ -3,11 +3,12 @@
 # https://www.home-assistant.io/docs/configuration/
 #######################################################################################
 homeassistant:
-  name: !secret home_name
+  country: 'US'
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  unit_system: imperial
+  name: !secret home_name
   time_zone: !secret home_timezone
+  unit_system: imperial
 
 #######################################################################################
 # Core Components (non-default)
