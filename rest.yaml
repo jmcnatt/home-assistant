@@ -8,6 +8,8 @@
   method: GET
   scan_interval: 3600
   sensor:
+    - name: 'cars_last_data_refresh'
+      value_template: "{{ value_json.last_data_refresh }}"
     - name: 'Car 1'
       json_attributes_path: "$.car_1"
       value_template: "OK"
@@ -70,6 +72,36 @@
         - year
     - name: 'Car 3'
       json_attributes_path: "$.car_3"
+      value_template: "OK"
+      json_attributes:
+        - engine
+        - last_fuel_cost
+        - last_fuel_date
+        - last_fuel_gallons
+        - last_fuel_mileage
+        - last_fuel_price
+        - last_maintenance_cost
+        - last_maintenance_date
+        - last_maintenance_description
+        - last_maintenance_location
+        - last_maintenance_mileage
+        - last_registration_date
+        - last_reported_date
+        - last_reported_event
+        - last_reported_mileage
+        - last_smog_date
+        - license
+        - make
+        - model
+        - nickname
+        - oil_life
+        - total_cost_per_mile
+        - total_mpg
+        - trim
+        - vin
+        - year
+    - name: 'Car 4'
+      json_attributes_path: "$.car_4"
       value_template: "OK"
       json_attributes:
         - engine
