@@ -47,7 +47,7 @@
       entity_id: light.shelly_outf_01
   mode: single
 - id: '1640318228441'
-  alias: Lights - Turn on the Christmas tree and house lights
+  alias: Away - Turn on the house lights
   description: ''
   trigger:
   - platform: sun
@@ -55,29 +55,39 @@
     offset: '-2'
   condition: []
   action:
-  - type: turn_on
-    device_id: b06814862e17241d06ed1c74e832e919
-    entity_id: switch.pwr_02
-    domain: switch
   - service: light.turn_on
     target:
       entity_id: light.kitchen_lights
+    data: {}
+  - service: light.turn_on
+    data: {}
+    target:
+      device_id: 1188aa2dfb4ef7f84ba3502fd1afc907
+  - service: light.turn_on
+    data: {}
+    target:
+      device_id: e21888cd41c7a8c2d9028dc309a294bf
   mode: single
 - id: '1640318394872'
-  alias: Lights - Turn off christmas tree and house lights
+  alias: Away - Turn off the house lights
   description: ''
   trigger:
   - platform: time
-    at: '23:30:00'
+    at: '23:18:18'
   condition: []
   action:
-  - type: turn_off
-    device_id: b06814862e17241d06ed1c74e832e919
-    entity_id: switch.pwr_02
-    domain: switch
   - service: light.turn_off
     target:
       entity_id: light.kitchen_lights
+    data: {}
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: e21888cd41c7a8c2d9028dc309a294bf
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: 1188aa2dfb4ef7f84ba3502fd1afc907
   mode: single
 - id: '1643675363387'
   alias: Lights - Turn on lights before sunset if someone is home
@@ -90,16 +100,12 @@
   condition:
   - condition: or
     conditions:
-    - condition: device
-      device_id: 6b0618e1e634c5859a4b98afd121f5a9
-      domain: device_tracker
-      entity_id: device_tracker.five_mega_pixel
-      type: is_home
-    - condition: device
-      device_id: 58cefa4a820dc087519099d8b1c465c3
-      domain: device_tracker
-      entity_id: device_tracker.chirp
-      type: is_home
+    - condition: state
+      entity_id: person.jimmy
+      state: home
+    - condition: state
+      entity_id: person.dana
+      state: home
   action:
   - service: light.turn_on
     target:
@@ -329,4 +335,25 @@
           }}"'
         continue_on_timeout: true
         timeout: '5'
+  mode: single
+- id: '1675837801627'
+  alias: Lights - Laundry door turns on garage outer lights
+  description: Turn the garage outer lights on when the laundry room door is opened.
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 11fc614309497d2d39aef21d85275382
+    entity_id: binary_sensor.laundry_room_door_door
+    domain: binary_sensor
+  condition:
+  - condition: device
+    type: is_off
+    device_id: 409bd7fd76bf0e22f7b4e91074e2dd19
+    entity_id: light.garage_outer_lights
+    domain: light
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      device_id: 409bd7fd76bf0e22f7b4e91074e2dd19
   mode: single
