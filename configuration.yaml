@@ -1,24 +1,22 @@
 #######################################################################################
-# Core Config (non-default)
+# Home Assistant Main Configuration
+# https://www.home-assistant.io/docs/configuration/
+#######################################################################################
+homeassistant:
+  name: !secret home_name
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  unit_system: imperial
+  time_zone: !secret home_timezone
+
+#######################################################################################
+# Core Components (non-default)
 # https://www.home-assistant.io/integrations/default_config/
 #######################################################################################
 automation: !include automations.yaml
 cloud:
-  google_actions:
-    entity_config:
-      script.livingroom_tv:
-        name: 'Living Room TV'
-        aliases:
-          - 'Turn on the living room tv'
-          - 'Turn off the living room tv'
-      script.livingroom_xbox:
-        name: 'Living Room Xbox'
-        aliases:
-          - 'Turn on the living room xbox'
-          - 'Turn off the living room xbox'
 config:
 frontend:
-group: !include groups.yaml
 history: !include history.yaml
 http:
   use_x_forwarded_for: true
@@ -51,7 +49,7 @@ recorder:
       - sensor.time
     event_types:
       - call_service
-scene: !include scenes.yaml
+scene:
 script: !include scripts.yaml
 ssdp:
 stream:
@@ -62,19 +60,15 @@ zeroconf:
 zone:
 
 #######################################################################################
-# Home Assistant Core Integration
+# Other Integrations
 #######################################################################################
-homeassistant:
-  name: !secret home_name
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  unit_system: imperial
-  time_zone: !secret home_timezone
 
-# Integrations
+# binary_sensor
+# https://www.home-assistant.io/integrations/binary_sensor/
 binary_sensor: !include binary_sensor.yaml
 
 # camera
+# https://www.home-assistant.io/integrations/camera/
 camera:
   - platform: ffmpeg
     input: !secret nvr_cam_01_input
@@ -87,6 +81,7 @@ camera:
     name: garage
 
 # light
+# https://www.home-assistant.io/integrations/light/
 light:
   - name: Kitchen Lights
     platform: group
@@ -113,6 +108,7 @@ light:
       - light.lfx_office_04
 
 # media_player
+# https://www.home-assistant.io/integrations/media_player/
 media_player:
   - platform: group
     name: All Google Speakers
@@ -124,6 +120,7 @@ media_player:
       - media_player.kitchen_display
 
 # notify
+# https://www.home-assistant.io/integrations/notify/S
 notify:
   - name: all_mobile_devices
     platform: group
@@ -132,11 +129,14 @@ notify:
       - service: mobile_app_chirp
 
 # rest
+# https://www.home-assistant.io/integrations/rest/
 rest: !include rest.yaml
 
 # sensor
+# https://www.home-assistant.io/integrations/sensor/
 sensor: !include sensor.yaml
 
 # Text to speech
+# https://www.home-assistant.io/integrations/tts/
 tts:
   - platform: google_translate

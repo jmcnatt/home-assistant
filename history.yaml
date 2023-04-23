@@ -1,10 +1,26 @@
+#######################################################################################
 # history.yaml
-
-use_include_order: true
-include:
+# https://www.home-assistant.io/integrations/history/
+#######################################################################################
+exclude:
   domains:
-    - switch
-    - light
-    - weather
-    - cover
-    - climate
+    - automation
+    - media_player
+    - updater
+  entity_globs:
+    - sensor.*_activity*
+    - sensor.*_ascended*
+    - sensor.*_average_active_pace*
+    - sensor.*_battery_state*
+    - sensor.*_bssid*
+    - sensor.*_connection_type*
+    - sensor.*_current
+    - sensor.*_current_consumption
+    - sensor.*_descended*
+    - sensor.*_distance*
+    - sensor.*_last_update_trigger*
+    - sensor.*_sim*
+    - sensor.*_ssid*
+    - sensor.*_steps*
+    - sensor.*_storage*
+    - sensor.*_voltage

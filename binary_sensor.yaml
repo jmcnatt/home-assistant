@@ -1,8 +1,10 @@
+#######################################################################################
 # binary_sensor.yaml
+# https://www.home-assistant.io/integrations/binary_sensor/
+#######################################################################################
 
-#######################################################################################
-# Network sensors
-#######################################################################################
+# ping
+# https://www.home-assistant.io/integrations/ping/
 - platform: ping
   host: !secret network_gw_wan_ip
   name: ping_network_gw_wan_ip_available
@@ -64,9 +66,9 @@
   count: 4
   scan_interval: 15
 
-#######################################################################################
+
 # OpenGarage Sensors
-#######################################################################################
+# https://www.home-assistant.io/integrations/opengarage/
 - platform: template
   sensors:
     garage_door_occupied:
