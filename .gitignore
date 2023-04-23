@@ -1,4 +1,4 @@
-# Whitelist files
+# Allowlist files
 !*.yaml
 !.gitignore
 !.*.md
@@ -20,3 +20,6 @@ home-assistant.log
 
 # Ignore home assistant db
 *.db
+
+# Ignore other files
+.HA_VERSION
