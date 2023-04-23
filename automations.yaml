@@ -170,33 +170,34 @@
   alias: Lock - Unlock front door when arriving home
   description: ''
   trigger:
-  - platform: device
-    device_id: 6b0618e1e634c5859a4b98afd121f5a9
-    domain: device_tracker
-    entity_id: device_tracker.five_mega_pixel
-    type: enters
-    zone: zone.home
-  - platform: device
-    device_id: 58cefa4a820dc087519099d8b1c465c3
-    domain: device_tracker
-    entity_id: device_tracker.chirp
-    type: enters
-    zone: zone.home
+  - platform: state
+    entity_id:
+    - person.jimmy
+    to: home
+    from: not_home
+  - platform: state
+    entity_id:
+    - person.dana
+    from: not_home
+    to: home
   condition:
   - condition: state
     entity_id: lock.front_door
     state: locked
   action:
+  - service: notify.discord
+    data:
+      message: 'Welcome home, {{ trigger.to_state.attributes.friendly_name }}!  Home
+        Assistant has unlocked the front door. :wave:
+
+        '
+      title: Front Door Unlocked
+      target:
+      - '865449623518969866'
   - service: lock.unlock
     data: {}
     target:
       entity_id: lock.front_door
-  - service: notify.discord
-    data:
-      message: 'Welcome home!  Home Assistant has unlocked the front door. :wave:'
-      title: Front Door Unlocked
-      target:
-      - '865449623518969866'
   mode: single
 - id: '1665297130584'
   alias: Fridge - Set Filter Change Date to Today
@@ -210,4 +211,46 @@
     data:
       date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
     entity_id: input_datetime.fridge_filter_installed_date
+  mode: single
+- id: '1665960719209'
+  alias: Air Purifier - Turn on bedroom purifier at 9:00 PM
+  description: Turns on the bedroom air purifier every night at 9:00 PM if someone
+    is home.
+  trigger:
+  - platform: time
+    at: '21:00:00'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: person.jimmy
+      state: home
+    - condition: state
+      entity_id: person.dana
+      state: home
+  - condition: state
+    entity_id: switch.bedroom_air_purifier
+    state: 'off'
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.bedroom_air_purifier
+  mode: single
+- id: '1665961235095'
+  alias: Air Purifier - Turn off bedroom purifier at 9:00 AM
+  description: Turns on the bedroom air purifier every night at 9:00 PM if someone
+    is home.
+  trigger:
+  - platform: time
+    at: 09:30:00
+  condition:
+  - condition: state
+    entity_id: switch.bedroom_air_purifier
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.bedroom_air_purifier
   mode: single
