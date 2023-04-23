@@ -254,3 +254,23 @@
     target:
       entity_id: switch.bedroom_air_purifier
   mode: single
+- id: '1668577671748'
+  alias: Door - Notify discord when rear sliding door is opened
+  description: Notify discord when rear sliding door is opened
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 030185e4fdb155afc62c6a0b08c06852
+    entity_id: binary_sensor.rear_sliding_door_door
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.discord
+    data:
+      message: '<a:alert:1041082538644480110> The rear sliding door has been opened!
+
+        '
+      title: Rear Sliding Door Opened
+      target:
+      - '865449623518969866'
+  mode: single
