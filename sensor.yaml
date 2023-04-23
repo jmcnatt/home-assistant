@@ -11,12 +11,12 @@
       friendly_name: 'Car 1 Oil Life' 
       unit_of_measurement: '%'
       value_template: >-
-        {{ state_attr('sensor.car_1', 'oil_life') | round(2) }}
+        {{ state_attr('sensor.car_1', 'oil_life') | round(0) }}
     car_2_oil_life: 
       friendly_name: 'Car 2 Oil Life' 
       unit_of_measurement: '%'
       value_template: >-
-        {{ state_attr('sensor.car_2', 'oil_life') | round(2) }}
+        {{ state_attr('sensor.car_2', 'oil_life') | round(0) }}
 
 # Represent each car's last reported mileage
 - platform: template
