@@ -299,3 +299,34 @@
     entity_id: switch.pwr_02
     domain: switch
   mode: single
+- id: '1669615800449'
+  alias: Door - Rear sliding door alert at night
+  description: Alerts all speakers when the rear sliding door is opened at night
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.rear_sliding_door_door
+    to: 'on'
+  condition:
+  - condition: time
+    before: 07:00:00
+    weekday: []
+    after: 00:00:00
+  action:
+  - service: media_player.volume_set
+    data:
+      volume_level: 1
+    target:
+      entity_id: media_player.all_google_speakers
+  - repeat:
+      count: '5'
+      sequence:
+      - service: tts.google_translate_say
+        data:
+          entity_id: media_player.all_google_speakers
+          message: Alert! The rear sliding door has been opened.
+      - wait_template: '"{{ is_state(''media_player.all_google_speakers'', ''idle'')
+          }}"'
+        continue_on_timeout: true
+        timeout: '5'
+  mode: single
