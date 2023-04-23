@@ -17,6 +17,11 @@
       unit_of_measurement: '%'
       value_template: >-
         {{ state_attr('sensor.car_2', 'oil_life') | round(0) }}
+    car_3_oil_life: 
+      friendly_name: 'Car 3 Oil Life' 
+      unit_of_measurement: '%'
+      value_template: >-
+        {{ state_attr('sensor.car_3', 'oil_life') | round(0) }}
 
 # Represent each car's last reported mileage
 - platform: template
@@ -31,6 +36,11 @@
       unit_of_measurement: 'mi'
       value_template: >-
         {{ state_attr('sensor.car_2', 'last_reported_mileage') }}
+    car_3_mileage:
+      friendly_name: 'Car 3 Mileage'
+      unit_of_measurement: 'mi'
+      value_template: >-
+        {{ state_attr('sensor.car_3', 'last_reported_mileage') }}
 
 # Represent each car's MPG
 - platform: template
@@ -45,6 +55,11 @@
       unit_of_measurement: 'mpg'
       value_template: >-
         {{ state_attr('sensor.car_2', 'total_mpg') | round(2) }}
+    car_3_mpg:
+      friendly_name: 'Car 3 MPG'
+      unit_of_measurement: 'mpg'
+      value_template: >-
+        {{ state_attr('sensor.car_3', 'total_mpg') | round(2) }}
 
 # Represent each car's total cost per mile
 - platform: template
@@ -59,6 +74,11 @@
       unit_of_measurement: '$'
       value_template: >-
         {{ state_attr('sensor.car_2', 'total_cost_per_mile') | round(2) }}
+    car_3_total_cost_per_mile:
+      friendly_name: 'Car 3 Total Cost Per Mile'
+      unit_of_measurement: '$'
+      value_template: >-
+        {{ state_attr('sensor.car_3', 'total_cost_per_mile') | round(2) }}
 
 #######################################################################################
 # Fridge Filter Days Remaining
