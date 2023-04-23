@@ -24,7 +24,6 @@ http:
   trusted_proxies:
     - '127.0.0.1'
     - '172.30.33.0/24'
-image:
 input_boolean:
 input_button: !include input_button.yaml
 input_datetime: !include input_datetime.yaml
