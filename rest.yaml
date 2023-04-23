@@ -8,7 +8,7 @@
   method: GET
   scan_interval: 3600
   sensor:
-    - name: 'cars_last_data_refresh'
+    - name: 'Cars Last Data Refreshed'
       value_template: "{{ value_json['last_data_refresh'] }}"
     - name: 'Car 1'
       json_attributes_path: "$.car_1"
