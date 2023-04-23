@@ -1,4 +1,9 @@
+#######################################################################################
 # rest.yaml
+# https://www.home-assistant.io/integrations/rest/
+#######################################################################################
+
+# cars
 - resource: !secret scripts_url_cars
   method: GET
   scan_interval: 3600
@@ -35,6 +40,36 @@
         - year
     - name: 'Car 2'
       json_attributes_path: "$.car_2"
+      value_template: "OK"
+      json_attributes:
+        - engine
+        - last_fuel_cost
+        - last_fuel_date
+        - last_fuel_gallons
+        - last_fuel_mileage
+        - last_fuel_price
+        - last_maintenance_cost
+        - last_maintenance_date
+        - last_maintenance_description
+        - last_maintenance_location
+        - last_maintenance_mileage
+        - last_registration_date
+        - last_reported_date
+        - last_reported_event
+        - last_reported_mileage
+        - last_smog_date
+        - license
+        - make
+        - model
+        - nickname
+        - oil_life
+        - total_cost_per_mile
+        - total_mpg
+        - trim
+        - vin
+        - year
+    - name: 'Car 3'
+      json_attributes_path: "$.car_3"
       value_template: "OK"
       json_attributes:
         - engine
