@@ -9,3 +9,10 @@ fridge_filter_installed_date:
   icon: 'mdi:cup-water'
   has_date: true
   has_time: false
+
+# HVAC Filter
+hvac_filter_installed_date:
+  name: 'Fridge Filter Installed Date'
+  icon: 'mdi:cup-water'
+  has_date: true
+  has_time: false
