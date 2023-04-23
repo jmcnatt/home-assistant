@@ -9,6 +9,6 @@ fridge_set_filter_change_to_today:
   icon: 'mdi:cup-water'
 
 # HVAC Filter
-fridge_set_filter_change_to_today:
+hvac_set_filter_change_to_today:
   name: 'HVAC Set Filter Change to Today'
   icon: 'mdi:hvac'
