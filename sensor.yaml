@@ -1,6 +1,46 @@
 # sensor.yaml
 
 #######################################################################################
+# Cars
+#######################################################################################
+
+# Represent each car's oil life
+- platform: template
+  sensors:
+    car_1_oil_life: 
+      friendly_name: 'Car 1 Oil Life' 
+      unit_of_measurement: '%'
+      value_template: >-
+        {{ state_attr('sensor.car_1', 'oil_life') }}
+
+# Represent each car's last reported mileage
+- platform: template
+  sensors:
+    car_1_mileage:
+      friendly_name: 'Car 1 Mileage'
+      unit_of_measurement: 'mi'
+      value_template: >-
+        {{ state_attr('sensor.car_1', 'last_reported_mileage') }}
+
+# Represent each car's MPG
+- platform: template
+  sensors:
+    car_1_mpg:
+      friendly_name: 'Car 1 MPG'
+      unit_of_measurement: 'mpg'
+      value_template: >-
+        {{ state_attr('sensor.car_1', 'total_mpg') }}
+
+# Represent each car's total cost per mile
+- platform: template
+  sensors:
+    car_1_total_cost_per_mile:
+      friendly_name: 'Car 1 Total Cost Per Mile'
+      unit_of_measurement: '$'
+      value_template: >-
+        {{ state_attr('sensor.car_1', 'total_cost_per_mile') }}
+
+#######################################################################################
 # Fridge Filter Days Remaining
 #######################################################################################
 - platform: template
