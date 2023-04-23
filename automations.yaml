@@ -1,18 +1,5 @@
-- alias: notify_on_garage_door_state_change
-  trigger:
-    platform: template
-    value_template: '{{ states(''sensor.garage_door_status'') in [''Open'', ''Closed'']
-      }}'
-  action:
-    service: notify.discord
-    data:
-      title: '{{ trigger.to_state.name }} {{trigger.to_state.state}}'
-      message: Home Assistant has detected that {{ trigger.to_state.name }} is now
-        {{trigger.to_state.state}}.
-      target:
-      - '865449623518969866'
-  id: 4821fd0d4e994779ace52ef6ed2cb8e5
-- alias: Low battery level detection & notification for all battery sensors
+- id: ac4a9f97dc8d47afba2ca580ffb80f17
+  alias: Battery - Low battery level detection & notification for all battery sensors
   description: Detect low battery levels and send a notification to discord
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
@@ -26,11 +13,10 @@
       - service: notify.discord
         data:
           title: Low Battery Warning
-          message: '{{sensors}} battery is low'
+          message: ':zap: {{sensors}} battery is low'
           target:
           - '865449623518969866'
       day: 1
-  id: ac4a9f97dc8d47afba2ca580ffb80f17
 - id: a05a39420c034545bab0c656348d246c
   alias: Lights - Turn off front entry light at 1:00am
   trigger:
@@ -120,8 +106,9 @@
       entity_id:
       - light.kitchen_lights
       - light.office_lights
-      - light.shelly_diningroom_01
       - light.shelly_hallway_01
+      - light.dining_room_light
+    data: {}
   mode: single
 - id: '1646793047500'
   alias: Lock - Front door lock when no one is home
@@ -273,4 +260,42 @@
       title: Rear Sliding Door Opened
       target:
       - '865449623518969866'
+  mode: single
+- id: '1669506333449'
+  alias: Lights - Turn on Christmas Tree every day at 4:00pm
+  description: Turns on the Christmas Tree at 4:00pm everyday day regardless of who
+    is home
+  trigger:
+  - platform: time
+    at: '16:00:00'
+  condition:
+  - condition: device
+    type: is_off
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
+  action:
+  - type: turn_on
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
+  mode: single
+- id: '1669506415856'
+  alias: Lights - Turn off Christmas Tree every night
+  description: Turns off the Christmas Tree at midnight everyday night regardless
+    of who is home
+  trigger:
+  - platform: time
+    at: '23:59:59'
+  condition:
+  - condition: device
+    type: is_on
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: b06814862e17241d06ed1c74e832e919
+    entity_id: switch.pwr_02
+    domain: switch
   mode: single
