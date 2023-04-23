@@ -9,7 +9,7 @@
   scan_interval: 3600
   sensor:
     - name: 'cars_last_data_refresh'
-      value_template: "{{ value_json.last_data_refresh }}"
+      value_template: "{{ value_json['last_data_refresh'] }}"
     - name: 'Car 1'
       json_attributes_path: "$.car_1"
       value_template: "OK"
