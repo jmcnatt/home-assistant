@@ -1,4 +1,22 @@
+#######################################################################################
 # sensor.yaml
+# https://www.home-assistant.io/integrations/sensor/
+#######################################################################################
+
+#######################################################################################
+# Bedroom Air Filter Days Remaining
+#######################################################################################
+- platform: template
+  sensors:
+    bedroom_air_filter_days_remaining:
+      friendly_name: 'Bedroom Air Filter Days Remaining'
+      unit_of_measurement: days
+      icon_template: 'mdi:calendar-clock'
+      value_template: >-
+        {%- set installed = as_timestamp(states('input_datetime.bedroom_air_filter_installed_date')) -%}
+        {%- set diff = states('input_number.bedroom_air_filter_lifespan') | int * 86400 -%}
+        {%- set now = as_timestamp(states('sensor.date')) -%}
+        {{ (((installed + diff) - now) / 86400) | round(0) }}
 
 #######################################################################################
 # Cars
@@ -112,6 +130,36 @@
       value_template: >-
         {%- set installed = as_timestamp(states('input_datetime.fridge_filter_installed_date')) -%}
         {%- set diff = states('input_number.fridge_filter_lifespan') | int * 86400 -%}
+        {%- set now = as_timestamp(states('sensor.date')) -%}
+        {{ (((installed + diff) - now) / 86400) | round(0) }}
+
+#######################################################################################
+# HVAC Filter Days Remaining
+#######################################################################################
+- platform: template
+  sensors:
+    hvac_filter_days_remaining:
+      friendly_name: 'HVAC Filter Days Remaining'
+      unit_of_measurement: days
+      icon_template: 'mdi:calendar-clock'
+      value_template: >-
+        {%- set installed = as_timestamp(states('input_datetime.hvac_filter_installed_date')) -%}
+        {%- set diff = states('input_number.hvac_filter_lifespan') | int * 86400 -%}
+        {%- set now = as_timestamp(states('sensor.date')) -%}
+        {{ (((installed + diff) - now) / 86400) | round(0) }}
+
+#######################################################################################
+# Kitchen Sink Filter Days Remaining
+#######################################################################################
+- platform: template
+  sensors:
+    kitchen_sink_purifier_days_remaining:
+      friendly_name: 'Kitchen Sink Purifier Days Remaining'
+      unit_of_measurement: days
+      icon_template: 'mdi:calendar-clock'
+      value_template: >-
+        {%- set installed = as_timestamp(states('input_datetime.kitchen_sink_purifier_installed_date')) -%}
+        {%- set diff = states('input_number.kitchen_sink_purifier_lifespan') | int * 86400 -%}
         {%- set now = as_timestamp(states('sensor.date')) -%}
         {{ (((installed + diff) - now) / 86400) | round(0) }}
 

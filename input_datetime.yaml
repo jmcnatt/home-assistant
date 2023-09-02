@@ -3,6 +3,13 @@
 # https://www.home-assistant.io/integrations/input_datetime/
 #######################################################################################
 
+# Bedroom Air Filter
+bedroom_air_filter_installed_date:
+  name: 'Bedroom Air Filter Installed Date'
+  icon: 'mdi:air-purifier'
+  has_date: true
+  has_time: false
+
 # Fridge Filter
 fridge_filter_installed_date:
   name: 'Fridge Filter Installed Date'
@@ -12,7 +19,14 @@ fridge_filter_installed_date:
 
 # HVAC Filter
 hvac_filter_installed_date:
-  name: 'Fridge Filter Installed Date'
+  name: 'HVAC Filter Installed Date'
+  icon: 'mdi:hvac'
+  has_date: true
+  has_time: false
+
+# Kitchen Sink Purifier
+kitchen_sink_purifier_installed_date:
+  name: 'Kitchen Sink Purifier Installed Date'
   icon: 'mdi:cup-water'
   has_date: true
   has_time: false

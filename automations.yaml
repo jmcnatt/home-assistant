@@ -4,11 +4,6 @@
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
-      exclude:
-        entity_id:
-        - sensor.chirp_battery_level
-        - sensor.chirp_battery_state
-        - sensor.five_mega_pixel_battery_level
       actions:
       - service: notify.discord
         data:
@@ -17,6 +12,10 @@
           target:
           - '865449623518969866'
       day: 1
+      exclude:
+        entity_id:
+        - sensor.chirp_battery_level_2
+        - sensor.lightcycle_battery_level
 - id: a05a39420c034545bab0c656348d246c
   alias: Lights - Turn off front entry light at 1:00am
   trigger:
@@ -120,34 +119,25 @@
   alias: Lock - Front door lock when no one is home
   description: ''
   trigger:
-  - platform: device
-    device_id: 6b0618e1e634c5859a4b98afd121f5a9
-    domain: device_tracker
-    entity_id: device_tracker.five_mega_pixel
-    type: leaves
-    zone: zone.home
-  - platform: device
-    device_id: 58cefa4a820dc087519099d8b1c465c3
-    domain: device_tracker
-    entity_id: device_tracker.chirp
-    type: leaves
-    zone: zone.home
+  - platform: state
+    entity_id:
+    - person.jimmy
+    to: not_home
+    from: home
+  - platform: state
+    entity_id:
+    - person.dana
+    to: not_home
+    from: home
   condition:
   - condition: and
     conditions:
-    - condition: device
-      device_id: 6b0618e1e634c5859a4b98afd121f5a9
-      domain: device_tracker
-      entity_id: device_tracker.five_mega_pixel
-      type: is_not_home
-    - condition: device
-      device_id: 58cefa4a820dc087519099d8b1c465c3
-      domain: device_tracker
-      entity_id: device_tracker.chirp
-      type: is_not_home
-  - condition: state
-    entity_id: lock.front_door
-    state: unlocked
+    - condition: state
+      entity_id: person.jimmy
+      state: not_home
+    - condition: state
+      entity_id: person.dana
+      state: not_home
   action:
   - service: lock.lock
     data: {}
@@ -192,19 +182,6 @@
     target:
       entity_id: lock.front_door
   mode: single
-- id: '1665297130584'
-  alias: Fridge - Set Filter Change Date to Today
-  description: Sets the fridge filter change date to today's date
-  trigger:
-  - platform: state
-    entity_id: input_button.fridge_set_filter_change_to_today
-  condition: []
-  action:
-  - service: input_datetime.set_datetime
-    data:
-      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
-    entity_id: input_datetime.fridge_filter_installed_date
-  mode: single
 - id: '1665960719209'
   alias: Air Purifier - Turn on bedroom purifier at 9:00 PM
   description: Turns on the bedroom air purifier every night at 9:00 PM if someone
@@ -231,12 +208,12 @@
       entity_id: switch.bedroom_air_purifier
   mode: single
 - id: '1665961235095'
-  alias: Air Purifier - Turn off bedroom purifier at 9:00 AM
+  alias: Air Purifier - Turn off bedroom purifier at 10:00 AM
   description: Turns on the bedroom air purifier every night at 9:00 PM if someone
     is home.
   trigger:
   - platform: time
-    at: 09:30:00
+    at: '10:00:00'
   condition:
   - condition: state
     entity_id: switch.bedroom_air_purifier
@@ -355,5 +332,75 @@
   - service: light.turn_on
     data: {}
     target:
-      device_id: 409bd7fd76bf0e22f7b4e91074e2dd19
+      device_id: d5464737f014804f2abf78bd9c77a320
+  mode: single
+- id: '1682289849532'
+  alias: Fridge - Set filter install date to today
+  description: Set the fridge filter installed date to today
+  trigger: []
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    data:
+      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+    target:
+      entity_id: input_datetime.fridge_filter_installed_date
+  mode: single
+- id: '1682293185693'
+  alias: Kitchen - Purifier - Set Kitchen Sink Purifier Filter Install Date
+  description: Set the kitchen sink purifier filter installed date to today
+  trigger: []
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    data:
+      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+    target:
+      entity_id: input_datetime.kitchen_sink_purifier_installed_date
+  mode: single
+- id: '1682293249148'
+  alias: Air Purifier - Set bedroom air purifier install date to today
+  description: Set the bedroom air purifier filter installed date to today
+  trigger: []
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    data:
+      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+    target:
+      entity_id: input_datetime.bedroom_air_filter_installed_date
+  mode: single
+- id: '1682293519436'
+  alias: HVAC - Filter - Set filter installed date to today
+  description: Set the HVAC filter installed date to today
+  trigger: []
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    data:
+      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
+    target:
+      entity_id: input_datetime.hvac_filter_installed_date
+  mode: single
+- id: '1693693512054'
+  alias: HVAC - Filter - Notify when replacement is needed
+  description: ''
+  trigger:
+  - platform: time
+    at: 09:00:00
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.hvac_filter_days_remaining
+    below: 7
+  action:
+  - service: notify.discord
+    data:
+      target:
+      - '865449623518969866'
+      message: ':window: The HVAC filter needs to be changed in **{{ states.sensor.hvac_filter_days_remaining.state
+        }} days**.  Additional filters can be purchased on [Amazon](https://www.amazon.com/gp/product/B07FQK912B).
+
+
+        Once the filter is changed, navigate to the [Hallway Tab in Home Assistant](https://assistant.home.jmcnatt.net/lovelace/hallway)
+        to reset the filter.'
   mode: single

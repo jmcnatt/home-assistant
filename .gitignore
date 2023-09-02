@@ -7,9 +7,10 @@
 .storage
 .cloud
 .google.token
+__pycache__
 blueprints
 custom_components
-__pycache__
+tts
 www
 
 # Ensure sensitive YAML files are ignored

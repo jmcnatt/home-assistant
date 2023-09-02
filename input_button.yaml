@@ -3,12 +3,22 @@
 # https://www.home-assistant.io/integrations/input_button/
 #######################################################################################
 
+# Bedroom Air Filter
+bedroom_air_filter_change_to_today:
+  name: 'Bedroom Air Filter Change to Today'
+  icon: 'mdi:air-purifier'
+
 # Fridge Filter
-fridge_set_filter_change_to_today:
-  name: 'Fridge Set Filter Change to Today'
+fridge_filter_change_to_today:
+  name: 'Fridge Filter Change to Today'
   icon: 'mdi:cup-water'
 
 # HVAC Filter
-fridge_set_filter_change_to_today:
-  name: 'HVAC Set Filter Change to Today'
+hvac_filter_change_to_today:
+  name: 'HVAC Filter Change to Today'
   icon: 'mdi:hvac'
+
+# Kitchen Sink Purifier
+kitchen_sink_purifier_change_to_today:
+  name: 'Kitchen Sink Purifier Change to Today'
+  icon: 'mdi:cup-water'
