@@ -136,8 +136,8 @@
   method: GET
   scan_interval: 360000
   params:
-    - username: !secret cellartracker_username
-    - password: !secret cellartracker_password
+    username: !secret cellartracker_username
+    password: !secret cellartracker_password
   sensor:
     - name: 'Cellartracker'
       json_attributes_path: "$.cellartracker.list"
