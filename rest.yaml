@@ -139,7 +139,7 @@
     User: !secret cellartracker_username
     Password: !secret cellartracker_password
     Format: xml
-    Table: list
+    Table: List
     Location: 1
   sensor:
     - name: 'Cellartracker'
