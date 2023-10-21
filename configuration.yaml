@@ -31,6 +31,10 @@ input_number: !include input_number.yaml
 input_select:
 input_text:
 logbook:
+logger:
+  default: warning
+  logs:
+    homeassistant.components.rest: debug
 lovelace:
   mode: storage
 media_source:
