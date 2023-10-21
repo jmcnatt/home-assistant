@@ -132,12 +132,13 @@
         - year
 
 # Cellartracker
-- resource: https://www.cellartracker.com/xlquery.asp?Format=xml
+- resource: https://www.cellartracker.com/xlquery.asp
   method: GET
   scan_interval: 360000
   params:
     User: !secret cellartracker_username
     Password: !secret cellartracker_password
+    Format: xml
   sensor:
     - name: 'Cellartracker'
       json_attributes_path: "$.cellartracker.list"
