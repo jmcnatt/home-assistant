@@ -18,7 +18,7 @@ automation: !include automations.yaml
 cloud:
 config:
 frontend:
-history: !include history.yaml
+history:
 http:
   use_x_forwarded_for: true
   trusted_proxies:
@@ -41,18 +41,7 @@ media_source:
 mobile_app:
 my:
 person:
-recorder:
-  exclude:
-    domains:
-      - automation
-      - updater
-    entities:
-      - sun.sun
-      - sensor.last_boot
-      - sensor.date
-      - sensor.time
-    event_types:
-      - call_service
+recorder: !include recorder.yaml
 scene:
 script: !include scripts.yaml
 ssdp:

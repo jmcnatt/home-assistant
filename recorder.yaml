@@ -1,12 +1,12 @@
 #######################################################################################
-# history.yaml
-# https://www.home-assistant.io/integrations/history/
+# recorder.yaml
+# https://www.home-assistant.io/integrations/recorder/
 #######################################################################################
 exclude:
   domains:
     - automation
     - media_player
-    - updater
+    - update
   entity_globs:
     - sensor.*_activity*
     - sensor.*_ascended*
@@ -24,3 +24,10 @@ exclude:
     - sensor.*_steps*
     - sensor.*_storage*
     - sensor.*_voltage
+  entities:
+    - sun.sun
+    - sensor.last_boot
+    - sensor.date
+    - sensor.time
+  event_types:
+    - call_service
