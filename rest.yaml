@@ -139,6 +139,8 @@
     User: !secret cellartracker_username
     Password: !secret cellartracker_password
     Format: xml
+    Table: list
+    Location: 1
   sensor:
     - name: 'Cellartracker'
       json_attributes_path: "$.cellartracker.list"
