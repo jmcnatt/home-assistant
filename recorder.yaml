@@ -26,8 +26,9 @@ exclude:
     - sensor.*_voltage
   entities:
     - sun.sun
-    - sensor.last_boot
+    - sensor.cellartracker
     - sensor.date
+    - sensor.last_boot
     - sensor.time
   event_types:
     - call_service
