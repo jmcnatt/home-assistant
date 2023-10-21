@@ -3,7 +3,7 @@
 # https://www.home-assistant.io/integrations/rest/
 #######################################################################################
 
-# cars
+# Cars
 - resource: !secret scripts_url_cars
   method: GET
   scan_interval: 3600
@@ -130,3 +130,16 @@
         - trim
         - vin
         - year
+
+# Cellartracker
+- resource: https://www.cellartracker.com/xlquery.asp?Format=xml
+  method: GET
+  scan_interval: 360000
+  username: !secret cellartracker_username
+  password: !secret cellartracker_password
+  sensor:
+    - name: 'Cellartracker'
+      json_attributes_path: "$.cellartracker.list"
+      value_template: "{{ now() }}"
+      json_attributes:
+        - row
