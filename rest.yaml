@@ -144,13 +144,13 @@
   sensor:
     - name: 'Cellartracker'
       json_attributes_path: "$.cellartracker.list"
-      value_template: "{{ value_json.list.row | length }}"
+      value_template: "{{ value_json.cellartracker.list.row | length }}"
       json_attributes:
         - row
     - name: 'cellartracker_value'
       value_template: >-
         {% set totals = namespace(valuation=0) %}
-        {% for i in value_json.list.row %}
+        {% for i in value_json.cellartracker.list.row %}
           {% if i.Valuation | is_number %}
             {% set totals.valuation = totals.valuation + (i.Valuation | float) %}
           {% endif %}
