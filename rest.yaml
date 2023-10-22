@@ -149,6 +149,6 @@
         - row
     - name: 'cellartracker_value'
       json_attributes_path: "$.cellartracker.list"
-      value_template: "{{ value_json.row | sum(attribute='Valuation') }}"
+      value_template: "{{ value_json | sum(attribute='Valuation') }}"
       json_attributes:
         - row
