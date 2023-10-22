@@ -13,6 +13,7 @@ exclude:
     - sensor.*_average_active_pace*
     - sensor.*_battery_state*
     - sensor.*_bssid*
+    - sensor.cellartracker*
     - sensor.*_connection_type*
     - sensor.*_current
     - sensor.*_current_consumption
@@ -26,7 +27,6 @@ exclude:
     - sensor.*_voltage
   entities:
     - sun.sun
-    - sensor.cellartracker
     - sensor.date
     - sensor.last_boot
     - sensor.time

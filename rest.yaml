@@ -147,3 +147,13 @@
       value_template: "{{ now() }}"
       json_attributes:
         - row
+    - name: 'cellartracker_value'
+      json_attributes_path: "$.cellartracker.list"
+      value_template: >-
+        {% set totals = namespace(valuation=0) %}
+        {% for i in range(value_json.row) | length %}
+          {% set totals.valuation = totals.valuation + (value_json.row[i].Valuation|float) %}
+        {% endfor %}
+        {{ totals.valuation }}
+      json_attributes:
+        - row
