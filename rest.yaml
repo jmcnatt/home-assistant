@@ -3,7 +3,7 @@
 # https://www.home-assistant.io/integrations/rest/
 #######################################################################################
 
-# cars
+# Cars
 - resource: !secret scripts_url_cars
   method: GET
   scan_interval: 3600
@@ -130,3 +130,30 @@
         - trim
         - vin
         - year
+
+# Cellartracker
+- resource: https://www.cellartracker.com/xlquery.asp
+  method: GET
+  scan_interval: 360000
+  params:
+    User: !secret cellartracker_username
+    Password: !secret cellartracker_password
+    Format: xml
+    Table: List
+    Location: 1
+  sensor:
+    - name: 'Cellartracker'
+      json_attributes_path: "$.cellartracker.list"
+      value_template: "{{ value_json.cellartracker.list.row | length }}"
+      json_attributes:
+        - row
+    - name: 'cellartracker_value'
+      value_template: >-
+        {% set totals = namespace(valuation=0) %}
+        {% for i in value_json.cellartracker.list.row %}
+          {% if i.Valuation | is_number %}
+            {% set totals.valuation = totals.valuation + (i.Valuation | float) %}
+          {% endif %}
+        {% endfor %}
+        {{ totals.valuation | round(2) }}
+      unit_of_measurement: "$"
