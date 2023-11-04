@@ -325,14 +325,14 @@
   condition:
   - condition: device
     type: is_off
-    device_id: 409bd7fd76bf0e22f7b4e91074e2dd19
-    entity_id: light.garage_outer_lights
+    device_id: d5464737f014804f2abf78bd9c77a320
+    entity_id: 89e1f040ed4d98a021711a8efac76db9
     domain: light
   action:
-  - service: light.turn_on
-    data: {}
-    target:
-      device_id: d5464737f014804f2abf78bd9c77a320
+  - type: turn_on
+    device_id: d5464737f014804f2abf78bd9c77a320
+    entity_id: 89e1f040ed4d98a021711a8efac76db9
+    domain: light
   mode: single
 - id: '1682289849532'
   alias: Fridge - Set filter install date to today
