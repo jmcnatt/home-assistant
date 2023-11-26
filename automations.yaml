@@ -89,22 +89,18 @@
       device_id: 1188aa2dfb4ef7f84ba3502fd1afc907
   mode: single
 - id: '1643675363387'
-  alias: Lights - Turn on lights before sunset if someone is home
-  description: Turns on the kitchen, hallway, office, and dining room lights if someone
-    is home.
+  alias: Lights - Turn on lights when someone arrives at home
+  description: Turns on the kitchen, hallway, office, and dining room lights when
+    someone arrives home.
   trigger:
-  - platform: sun
-    event: sunset
-    offset: '-1:00:00'
+  - platform: state
+    entity_id:
+    - zone.home
+    from: '0'
   condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: person.jimmy
-      state: home
-    - condition: state
-      entity_id: person.dana
-      state: home
+  - condition: sun
+    after: sunset
+    after_offset: '-1'
   action:
   - service: light.turn_on
     target:
