@@ -61,10 +61,6 @@
   - service: light.turn_on
     data: {}
     target:
-      device_id: 1188aa2dfb4ef7f84ba3502fd1afc907
-  - service: light.turn_on
-    data: {}
-    target:
       device_id: e21888cd41c7a8c2d9028dc309a294bf
   mode: single
 - id: '1640318394872'
@@ -83,10 +79,6 @@
     data: {}
     target:
       device_id: e21888cd41c7a8c2d9028dc309a294bf
-  - service: light.turn_off
-    data: {}
-    target:
-      device_id: 1188aa2dfb4ef7f84ba3502fd1afc907
   mode: single
 - id: '1643675363387'
   alias: Lights - Turn on lights when someone arrives at home
