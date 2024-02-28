@@ -10,6 +10,7 @@
 __pycache__
 blueprints
 custom_components
+image
 tts
 www
 
@@ -31,3 +32,4 @@ home-assistant.log
 # Ignore other files
 .HA_VERSION
 aircast.xml
+core.device_registry
