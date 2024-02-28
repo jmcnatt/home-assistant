@@ -307,8 +307,8 @@
   trigger:
   - type: opened
     platform: device
-    device_id: 11fc614309497d2d39aef21d85275382
-    entity_id: binary_sensor.laundry_room_door_door
+    device_id: 4e4fee6133b546b1ba6ada5b78fec6da
+    entity_id: 6d7f27c553d7ad266e3b0d8384e0572f
     domain: binary_sensor
   condition:
   - condition: device
