@@ -1,7 +1,7 @@
-#######################################################################################
+##########################################################################################
 # scripts.yaml
 # https://www.home-assistant.io/integrations/script/
-#######################################################################################
+##########################################################################################
 
 ### fireplace
 livingroom_fireplace_power:
@@ -11,7 +11,7 @@ livingroom_fireplace_power:
   fields:
     remote_command:
       description: "The command to send to the remote"
-      example: "power"
+      example: power
   sequence:
     choose:
       - conditions:
@@ -23,22 +23,21 @@ livingroom_fireplace_power:
               entity_id: remote.brd_01_remote
             data:
               command: >
-                b64:JgAyAyYQKA8NKygQKg0NKwwsDCsNKwwsDCsq7CkPKBAMKykPKBAMKw0rDCsNKw4qDCsq
-                7SgPKw0OKSsNKg4MKw8pDCwMKw0rDCwq7CoOKA8NKygPKg4MLAwrDSsMLAwrDSso7ioOKg0P
-                KSoOKg0OKgwrDSsNKw4pDSsp7SkPKg4OKSgQKg0NKwwsDCsNKw0rDCsq7SgPKBAMKysNKBAO
-                KQ0rDCwMKw0sCysr7CoNKg4MLCgPKg4OKQ8pDSsMKw0rDCwq7SgPKg0NKyoOKg0OKgwrDSsM
-                LAwrDSso7ioOKg0PKSoOKg0NKw4qDCsNKwwsDSoq7CkPKQ8MKyoOKg0PKQ0rDCsNKwwsDCsq
-                7SgPKBAMKyoOKg4MKw0rDCsNKw0rDCsp7ioNKg4OKSsNKg4OKQ0rDioMKw0rDCsr7CoNKw0O
-                KigPKQ8OKQ0rDSsMKw4qDCwq7CgQKg0OKioNKg4OKg4pDykMLAwrDSsq7CoOKA8PKSgQKg0N
-                KwwrDSsMLAwrDSso7ioOKg0PKSoOKg0PKQwsDikNKwwsDCsq7CkPKBAOKigPKg4OKQ0rDikN
-                Kw4qDCsq7CsNKg4MKysNKBAOKQ0rDCwMKw0rDCsr7CoNKQ8MLCoNKBAOKQ0rDioMKw0rDCwq
-                7CgPKw0OKioNKQ8OKgwrDSsMKw0rDSsq7CoOKg0NKyoNKw0MLAwrDykMLAwrDykp7SoOKg0P
-                KSoOKA8OKgwrDSsMLAwrDSso7igQKg0PKSgQKA8PKQ4qDCsNKwwsDCso7ikPKBAMKykPKBAM
-                Kw0rDCwMKw0rDioo7igPKQ8NKygPKQ8MLAwrDSsMLAwrDSso7igQKA8NKygQKA8NKwwsDCsN
-                KwwrDSso7ikPKBAMKykPKBAMKw0rDCsNKw0rDCsp7ikOKQ8MLCkOKBANKwwrDSsMKw0rDSsq
-                7CkPKQ4OKikPKA8NKwwrDSsMLAwrDiop7SkPKA8OKikPKA8NKwwsDSoNKw0qDSsp7SkPKBAM
-                KykPKQ8MKw0rDCsNKw0rDCsp7igPKQ8NKykOKQ8NKg0rDSsMKw4qDSso7ikPKQ4NKykPKA8O
-                KgwrDSsNKw0qDSspAA0F
+                b64:JgAyAyYQKA8NKygQKg0NKwwsDCsNKwwsDCsq7CkPKBAMKykPKBAMKw0rDCsNKw4qDCsq7S
+                gPKw0OKSsNKg4MKw8pDCwMKw0rDCwq7CoOKA8NKygPKg4MLAwrDSsMLAwrDSso7ioOKg0PKSoO
+                Kg0OKgwrDSsNKw4pDSsp7SkPKg4OKSgQKg0NKwwsDCsNKw0rDCsq7SgPKBAMKysNKBAOKQ0rDC
+                wMKw0sCysr7CoNKg4MLCgPKg4OKQ8pDSsMKw0rDCwq7SgPKg0NKyoOKg0OKgwrDSsMLAwrDSso
+                7ioOKg0PKSoOKg0NKw4qDCsNKwwsDSoq7CkPKQ8MKyoOKg0PKQ0rDCsNKwwsDCsq7SgPKBAMKy
+                oOKg4MKw0rDCsNKw0rDCsp7ioNKg4OKSsNKg4OKQ0rDioMKw0rDCsr7CoNKw0OKigPKQ8OKQ0r
+                DSsMKw4qDCwq7CgQKg0OKioNKg4OKg4pDykMLAwrDSsq7CoOKA8PKSgQKg0NKwwrDSsMLAwrDS
+                so7ioOKg0PKSoOKg0PKQwsDikNKwwsDCsq7CkPKBAOKigPKg4OKQ0rDikNKw4qDCsq7CsNKg4M
+                KysNKBAOKQ0rDCwMKw0rDCsr7CoNKQ8MLCoNKBAOKQ0rDioMKw0rDCwq7CgPKw0OKioNKQ8OKg
+                wrDSsMKw0rDSsq7CoOKg0NKyoNKw0MLAwrDykMLAwrDykp7SoOKg0PKSoOKA8OKgwrDSsMLAwr
+                DSso7igQKg0PKSgQKA8PKQ4qDCsNKwwsDCso7ikPKBAMKykPKBAMKw0rDCwMKw0rDioo7igPKQ
+                8NKygPKQ8MLAwrDSsMLAwrDSso7igQKA8NKygQKA8NKwwsDCsNKwwrDSso7ikPKBAMKykPKBAM
+                Kw0rDCsNKw0rDCsp7ikOKQ8MLCkOKBANKwwrDSsMKw0rDSsq7CkPKQ4OKikPKA8NKwwrDSsMLA
+                wrDiop7SkPKA8OKikPKA8NKwwsDSoNKw0qDSsp7SkPKBAMKykPKQ8MKw0rDCsNKw0rDCsp7igP
+                KQ8NKykOKQ8NKg0rDSsMKw4qDSso7ikPKQ4NKykPKA8OKgwrDSsNKw0qDSspAA0F
 
 livingroom_tv:
   alias: living room tv
