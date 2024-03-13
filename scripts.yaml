@@ -38,6 +38,57 @@ livingroom_fireplace_power:
                 Kw0rDCsNKw0rDCsp7ikOKQ8MLCkOKBANKwwrDSsMKw0rDSsq7CkPKQ4OKikPKA8NKwwrDSsMLA
                 wrDiop7SkPKA8OKikPKA8NKwwsDSoNKw0qDSsp7SkPKBAMKykPKQ8MKw0rDCsNKw0rDCsp7igP
                 KQ8NKykOKQ8NKg0rDSsMKw4qDSso7ikPKQ4NKykPKA8OKgwrDSsNKw0qDSspAA0F
+      - conditions:
+          condition: template
+          value_template: "{{ remote_command == 'flame' }}"
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.brd_01_remote
+            data:
+              command: >
+                b64:JgDUASYQKA8NKykOKQ8MLAwrKQ8MLAwrDSsMAAEKKBAoDw0rKBAoDw0rDCwoDw0rDCsNKw
+                wAAQooECkPDCsoECgPDSsMLCkODSsMKw0sDAABCSoOKQ8MKygQKBAMKw0rKA8NKwwsDCsNAAEJ
+                KQ8pDwwrKQ8oEAwrDSsoEAwrDSsMLAwAAQooDykPDCwoDykPDCwMKygQDCwMKw0rDAABCigQKA
+                8NKygQKA8NKwwrKQ8NKwwrDSsMAAEKKBAoDw0rKBAoDw4qDCwoDw0rDCsNKw0AAQkpDygQDCso
+                ECgPDioMLCgPDSsMLAwrDQABCSkPKBAMKykPKQ8MKw0rKA8NKw0rDCsNAAEJKQ8pDw0qKQ8oEA
+                0qDSsoEAwrDSsMKw0AAQooDygQDCspDygQDCsNKygQDCsNKwwsDAABCigPKQ8MLCgPKBAMKw0r
+                KBAMKw0rDCwMAAEKKA8pDw0rKA8pDwwsDCspDwwrDSsNKwwAAQsnECgPDSsoECgPDSsMKykPDC
+                wMKw0rDAABCigQKA8NKygQKA8NKwwsKA8NKwwrDSsMAAEKKQ8oEAwrKBAoDw0rDCwoDw0rDCwM
+                Kw0AAQkpDygQDCspDykPDCsNKykODSsMLAwrDQANBQ==
+      - conditions:
+          condition: template
+          value_template: "{{ remote_command == 'heater' }}"
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.brd_01_remote
+            data:
+              command: >
+                b64:JgCgAScPKBANKikPKQ8MKw0rDSopDw0rDCsOAAEJKQ4pDw0qKg4pDwwrDSsMLCkODSsMKw
+                0AAQooDykPDSspDikPDCsNKw0rKQ8NKgwsDAABCigPKQ8MLCkOKBANKg0rDSsoDw0rDSsNAAEJ
+                KA8qDg0rKQ4pDw0rDCsNKykPDCsNKwwAAQopDygPDSspDikPDSsMKw4qKQ8MKw0rDQABCSgQKA
+                8NKygQKA8NKwwrDSsoEAwrDSsNAAEJKBAoDw0rKQ8pDg0rDCsNKykPDSoNKwwAAQopDygQDSop
+                DygQDSoMLAwrKQ8MLAwrDQABCigPKQ8MKykPKBANKg0rDCspDw0rDCsNAAEJKg4pDw0qKQ8pDw
+                wrDSsMLCgPDSsMKw0AAQopDikPDCsqDigQDSoNKwwsKA8OKg0rDAABCikOKQ8NKygPKQ8NKg4q
+                DSsoDw0rDCwNAAEJKBApDg0rKQ4pDwwsDCsNKygQDCsNKwwAAQooECgPDSsoECkODSsMKw0rKQ
+                8MKw0rDQABCSgQKQ4NKygQKQ4NKwwsDCspDwwrDSsNAA0F
+      - conditions:
+          condition: template
+          value_template: "{{ remote_command == 'undulation' }}"
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.brd_01_remote
+            data:
+              command: >
+                b64:JgBsASYQKA8NKygPKg4OKgwrDSsMKykPDCwMAAEKKA8rDQwsKA8qDgwrDSsNKw4pKQ8OKg
+                wAAQooDygQDCspDygQDikPKQwsDCsoEAwrDQABCigPKBAOKSkPKg4MKwwsDCsNKyoODikMAAEK
+                KBAqDQ0rKg4qDQ4qDCsPKQwsKg0NKwwAAQopDyoNDioqDSkPDikNKw0rDSorDQ4qDAABCioNKQ
+                8OKSsNKg4OKQ0rDCsPKSgQDCsNAAEKKg0oEA4pKg4qDg4pDSsOKQ0rKBAMKw4AAQgqDigQDiko
+                ECgPDSsMLA4pDSsqDg4pDgABCCoOKg4OKSoOKg0NKwwsDCsNKyoNDykMAAEKKBAoDw0rKg4qDQ
+                8pDCsNKw0rKg0PKQwAAQspDioNDykqDigPDioMKw0rDCwoDw8pDAABCioOKg0NKyoOKg0OKgwr
+                DykNKyoNDykOAAEIKBAqDQ8pKg4oDw8pDCwMKw0rKg0PKQwADQU=
 
 livingroom_tv:
   alias: living room tv
