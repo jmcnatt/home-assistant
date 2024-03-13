@@ -4,8 +4,8 @@
 ##########################################################################################
 
 ### fireplace
-livingroom_fireplace_power:
-  description: Livingroom fireplace remote - power
+livingroom_fireplace_remote:
+  description: Livingroom fireplace remote
   icon: mdi:fireplace
   mode: single
   fields:
