@@ -3,34 +3,7 @@
 # https://www.home-assistant.io/integrations/script/
 ##########################################################################################
 
-### fireplace
-livingroom_fireplace_remote:
-  description: Livingroom fireplace remote
-  icon: mdi:fireplace
-  mode: single
-  fields:
-    remote_command:
-      description: "The command to send to the remote"
-      example: power
-  sequence:
-    choose:
-      - conditions:
-          condition: template
-          value_template: "{{ remote_command == 'undulation' }}"
-        sequence:
-          - service: remote.send_command
-            target:
-              entity_id: remote.brd_01_remote
-            data:
-              command: >
-                b64:JgBsASYQKA8NKygPKg4OKgwrDSsMKykPDCwMAAEKKA8rDQwsKA8qDgwrDSsNKw4pKQ8OKg
-                wAAQooDygQDCspDygQDikPKQwsDCsoEAwrDQABCigPKBAOKSkPKg4MKwwsDCsNKyoODikMAAEK
-                KBAqDQ0rKg4qDQ4qDCsPKQwsKg0NKwwAAQopDyoNDioqDSkPDikNKw0rDSorDQ4qDAABCioNKQ
-                8OKSsNKg4OKQ0rDCsPKSgQDCsNAAEKKg0oEA4pKg4qDg4pDSsOKQ0rKBAMKw4AAQgqDigQDiko
-                ECgPDSsMLA4pDSsqDg4pDgABCCoOKg4OKSoOKg0NKwwsDCsNKyoNDykMAAEKKBAoDw0rKg4qDQ
-                8pDCsNKw0rKg0PKQwAAQspDioNDykqDigPDioMKw0rDCwoDw8pDAABCioOKg0NKyoOKg0OKgwr
-                DykNKyoNDykOAAEIKBAqDQ8pKg4oDw8pDCwMKw0rKg0PKQwADQU=
-
+### livingroom_tv
 livingroom_tv:
   alias: living room tv
   description: Toggles the TV, sound bar, and hdmi switch in the living room
