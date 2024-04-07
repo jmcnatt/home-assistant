@@ -392,3 +392,105 @@
         Once the filter is changed, navigate to the [Hallway Tab in Home Assistant](https://assistant.home.jmcnatt.net/lovelace/hallway)
         to reset the filter.'
   mode: single
+- id: '1712521206118'
+  alias: Living room fireplace - power button
+  description: Press living room fireplace remote power button
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.living_room_fireplace_power
+  condition: []
+  action:
+  - service: remote.send_command
+    target:
+      entity_id: remote.brd_01_remote
+    data:
+      command: 'b64:JgAyAyYQKA8NKygQKg0NKwwsDCsNKwwsDCsq7CkPKBAMKykPKBAMKw0rDCsNKw4qDCsq7S
+        gPKw0OKSsNKg4MKw8pDCwMKw0rDCwq7CoOKA8NKygPKg4MLAwrDSsMLAwrDSso7ioOKg0PKSoO
+        Kg0OKgwrDSsNKw4pDSsp7SkPKg4OKSgQKg0NKwwsDCsNKw0rDCsq7SgPKBAMKysNKBAOKQ0rDC
+        wMKw0sCysr7CoNKg4MLCgPKg4OKQ8pDSsMKw0rDCwq7SgPKg0NKyoOKg0OKgwrDSsMLAwrDSso
+        7ioOKg0PKSoOKg0NKw4qDCsNKwwsDSoq7CkPKQ8MKyoOKg0PKQ0rDCsNKwwsDCsq7SgPKBAMKy
+        oOKg4MKw0rDCsNKw0rDCsp7ioNKg4OKSsNKg4OKQ0rDioMKw0rDCsr7CoNKw0OKigPKQ8OKQ0r
+        DSsMKw4qDCwq7CgQKg0OKioNKg4OKg4pDykMLAwrDSsq7CoOKA8PKSgQKg0NKwwrDSsMLAwrDS
+        so7ioOKg0PKSoOKg0PKQwsDikNKwwsDCsq7CkPKBAOKigPKg4OKQ0rDikNKw4qDCsq7CsNKg4M
+        KysNKBAOKQ0rDCwMKw0rDCsr7CoNKQ8MLCoNKBAOKQ0rDioMKw0rDCwq7CgPKw0OKioNKQ8OKg
+        wrDSsMKw0rDSsq7CoOKg0NKyoNKw0MLAwrDykMLAwrDykp7SoOKg0PKSoOKA8OKgwrDSsMLAwr
+        DSso7igQKg0PKSgQKA8PKQ4qDCsNKwwsDCso7ikPKBAMKykPKBAMKw0rDCwMKw0rDioo7igPKQ
+        8NKygPKQ8MLAwrDSsMLAwrDSso7igQKA8NKygQKA8NKwwsDCsNKwwrDSso7ikPKBAMKykPKBAM
+        Kw0rDCsNKw0rDCsp7ikOKQ8MLCkOKBANKwwrDSsMKw0rDSsq7CkPKQ4OKikPKA8NKwwrDSsMLA
+        wrDiop7SkPKA8OKikPKA8NKwwsDSoNKw0qDSsp7SkPKBAMKykPKQ8MKw0rDCsNKw0rDCsp7igP
+        KQ8NKykOKQ8NKg0rDSsMKw4qDSso7ikPKQ4NKykPKA8OKgwrDSsNKw0qDSspAA0F
+
+        '
+  mode: single
+- id: '1712527197073'
+  alias: Living room fireplace - flame button
+  description: Press living room fireplace remote flame button
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.living_room_fireplace_flame
+  condition: []
+  action:
+  - service: remote.send_command
+    target:
+      entity_id: remote.brd_01_remote
+    data:
+      command: 'b64:JgDUASYQKA8NKykOKQ8MLAwrKQ8MLAwrDSsMAAEKKBAoDw0rKBAoDw0rDCwoDw0rDCsNKw
+        wAAQooECkPDCsoECgPDSsMLCkODSsMKw0sDAABCSoOKQ8MKygQKBAMKw0rKA8NKwwsDCsNAAEJ
+        KQ8pDwwrKQ8oEAwrDSsoEAwrDSsMLAwAAQooDykPDCwoDykPDCwMKygQDCwMKw0rDAABCigQKA
+        8NKygQKA8NKwwrKQ8NKwwrDSsMAAEKKBAoDw0rKBAoDw4qDCwoDw0rDCsNKw0AAQkpDygQDCso
+        ECgPDioMLCgPDSsMLAwrDQABCSkPKBAMKykPKQ8MKw0rKA8NKw0rDCsNAAEJKQ8pDw0qKQ8oEA
+        0qDSsoEAwrDSsMKw0AAQooDygQDCspDygQDCsNKygQDCsNKwwsDAABCigPKQ8MLCgPKBAMKw0r
+        KBAMKw0rDCwMAAEKKA8pDw0rKA8pDwwsDCspDwwrDSsNKwwAAQsnECgPDSsoECgPDSsMKykPDC
+        wMKw0rDAABCigQKA8NKygQKA8NKwwsKA8NKwwrDSsMAAEKKQ8oEAwrKBAoDw0rDCwoDw0rDCwM
+        Kw0AAQkpDygQDCspDykPDCsNKykODSsMLAwrDQANBQ==
+
+        '
+  mode: single
+- id: '1712527822781'
+  alias: Living room fireplace - heater
+  description: Press living room fireplace remote heater button
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.living_room_fireplace_heater
+  condition: []
+  action:
+  - service: remote.send_command
+    target:
+      entity_id: remote.brd_01_remote
+    data:
+      command: 'b64:JgBsASYQKA8NKygPKg4OKgwrDSsMKykPDCwMAAEKKA8rDQwsKA8qDgwrDSsNKw4pKQ8OKg
+        wAAQooDygQDCspDygQDikPKQwsDCsoEAwrDQABCigPKBAOKSkPKg4MKwwsDCsNKyoODikMAAEK
+        KBAqDQ0rKg4qDQ4qDCsPKQwsKg0NKwwAAQopDyoNDioqDSkPDikNKw0rDSorDQ4qDAABCioNKQ
+        8OKSsNKg4OKQ0rDCsPKSgQDCsNAAEKKg0oEA4pKg4qDg4pDSsOKQ0rKBAMKw4AAQgqDigQDiko
+        ECgPDSsMLA4pDSsqDg4pDgABCCoOKg4OKSoOKg0NKwwsDCsNKyoNDykMAAEKKBAoDw0rKg4qDQ
+        8pDCsNKw0rKg0PKQwAAQspDioNDykqDigPDioMKw0rDCwoDw8pDAABCioOKg0NKyoOKg0OKgwr
+        DykNKyoNDykOAAEIKBAqDQ8pKg4oDw8pDCwMKw0rKg0PKQwADQU=
+
+        '
+  mode: single
+- id: '1712528067066'
+  alias: Living room fireplace - undulation button
+  description: Press living room fireplace remote undulation button
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.living_room_fireplace_undulation
+  condition: []
+  action:
+  - service: remote.send_command
+    target:
+      entity_id: remote.brd_01_remote
+    data:
+      command: 'b64:JgBsASYQKA8NKygPKg4OKgwrDSsMKykPDCwMAAEKKA8rDQwsKA8qDgwrDSsNKw4pKQ8OKg
+        wAAQooDygQDCspDygQDikPKQwsDCsoEAwrDQABCigPKBAOKSkPKg4MKwwsDCsNKyoODikMAAEK
+        KBAqDQ0rKg4qDQ4qDCsPKQwsKg0NKwwAAQopDyoNDioqDSkPDikNKw0rDSorDQ4qDAABCioNKQ
+        8OKSsNKg4OKQ0rDCsPKSgQDCsNAAEKKg0oEA4pKg4qDg4pDSsOKQ0rKBAMKw4AAQgqDigQDiko
+        ECgPDSsMLA4pDSsqDg4pDgABCCoOKg4OKSoOKg0NKwwsDCsNKyoNDykMAAEKKBAoDw0rKg4qDQ
+        8pDCsNKw0rKg0PKQwAAQspDioNDykqDigPDioMKw0rDCwoDw8pDAABCioOKg0NKyoOKg0OKgwr
+        DykNKyoNDykOAAEIKBAqDQ8pKg4oDw8pDCwMKw0rKg0PKQwADQU=
+
+        '
+  mode: single
