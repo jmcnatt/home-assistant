@@ -20,5 +20,22 @@ hvac_filter_change_to_today:
 
 # Kitchen Sink Purifier
 kitchen_sink_purifier_change_to_today:
-  name: 'Kitchen Sink Purifier Change to Today'
-  icon: 'mdi:cup-water'
+  name: Kitchen Sink Purifier Change to Today
+  icon: mdi:cup-water
+
+### Living room fireplace
+living_room_fireplace_power:
+  name: Living Room Fireplace Remote Power
+  icon: mdi:fireplace
+
+living_room_fireplace_flame:
+  name: Living Room Fireplace Remote Flame
+  icon: mdi:fire
+
+living_room_fireplace_heater:
+  name: Living Room Fireplace Remote Heater
+  icon: mdi:heat-wave
+
+living_room_fireplace_undulation:
+  name: Living Room Fireplace Remote Undulation
+  icon: mdi:pulse
