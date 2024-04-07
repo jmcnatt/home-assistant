@@ -27,4 +27,4 @@ For example, our [Duraflame electric fireplace](https://a.co/d/fFEitIg) is contr
 
 The `input_button` entities are also exposed to Google Assistant.  They can then be used in custom routines to be called by a voice command to the Google Assistant.  `input_button` entities from Home Assistant appear as scenes to Google Assistant.
 
-![Custom routine to call the input_button as a scene with the Google Assistant](./images/remote_google_assistant.png)
+![Custom routine to call the input_button as a scene with the Google Assistant](./docs/images/remote_google_assistant.png)
