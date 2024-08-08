@@ -2,7 +2,7 @@
   alias: Battery - Low battery level detection & notification for all battery sensors
   description: Detect low battery levels and send a notification to discord
   use_blueprint:
-    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    path: sbyx/low_battery_level_detection.yaml
     input:
       actions:
       - service: notify.discord
