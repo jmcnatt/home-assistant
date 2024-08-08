@@ -216,21 +216,20 @@
   alias: Door - Notify discord when rear sliding door is opened
   description: Notify discord when rear sliding door is opened
   trigger:
-  - type: opened
-    platform: device
-    device_id: 030185e4fdb155afc62c6a0b08c06852
-    entity_id: binary_sensor.rear_sliding_door_door
-    domain: binary_sensor
+  - platform: state
+    entity_id:
+    - binary_sensor.rear_sliding_door_door
+    to: 'on'
   condition: []
   action:
-  - service: notify.discord
-    data:
+  - data:
       message: '<a:alert:1041082538644480110> The rear sliding door has been opened!
 
         '
       title: Rear Sliding Door Opened
       target:
       - '865449623518969866'
+    action: notify.discord
   mode: single
 - id: '1669506333449'
   alias: Lights - Turn on Christmas Tree every day at 4:00pm
@@ -240,16 +239,15 @@
   - platform: time
     at: '16:00:00'
   condition:
-  - condition: device
-    type: is_off
-    device_id: b06814862e17241d06ed1c74e832e919
+  - condition: state
     entity_id: switch.pwr_02
-    domain: switch
+    state: 'Off'
   action:
-  - type: turn_on
-    device_id: b06814862e17241d06ed1c74e832e919
-    entity_id: switch.pwr_02
-    domain: switch
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.pwr_02
   mode: single
 - id: '1669506415856'
   alias: Lights - Turn off Christmas Tree every night
@@ -259,16 +257,15 @@
   - platform: time
     at: '23:59:59'
   condition:
-  - condition: device
-    type: is_on
-    device_id: b06814862e17241d06ed1c74e832e919
+  - condition: state
     entity_id: switch.pwr_02
-    domain: switch
+    state: 'On'
   action:
-  - type: turn_off
-    device_id: b06814862e17241d06ed1c74e832e919
-    entity_id: switch.pwr_02
-    domain: switch
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.pwr_02
   mode: single
 - id: '1669615800449'
   alias: Door - Rear sliding door alert at night
@@ -305,22 +302,20 @@
   alias: Lights - Laundry door turns on garage outer lights
   description: Turn the garage outer lights on when the laundry room door is opened.
   trigger:
-  - type: opened
-    platform: device
-    device_id: 4e4fee6133b546b1ba6ada5b78fec6da
-    entity_id: 6d7f27c553d7ad266e3b0d8384e0572f
-    domain: binary_sensor
+  - platform: state
+    entity_id:
+    - binary_sensor.laundry_room_door_door
+    to: 'on'
   condition:
-  - condition: device
-    type: is_off
-    device_id: d5464737f014804f2abf78bd9c77a320
-    entity_id: 89e1f040ed4d98a021711a8efac76db9
-    domain: light
+  - condition: state
+    entity_id: light.garage_outer_lights
+    state: 'off'
   action:
-  - type: turn_on
-    device_id: d5464737f014804f2abf78bd9c77a320
-    entity_id: 89e1f040ed4d98a021711a8efac76db9
-    domain: light
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.garage_outer_lights
   mode: single
 - id: '1682289849532'
   alias: Fridge - Set filter install date to today
