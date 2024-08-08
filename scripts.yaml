@@ -4,29 +4,29 @@
 # https://www.home-assistant.io/integrations/script/
 ################################################################################
 
-### livingroom_tv
+# Living Room TV
 livingroom_tv:
   alias: living room tv
   description: Toggles the TV, sound bar, and hdmi switch in the living room
   icon: mdi:power
   mode: single
   sequence:
-  - service: remote.send_command
-    data:
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_tv
       entity_id: remote.brd_01_remote
-      command: power
-      device: livingroom_tv
-    entity_id: remote.brd_01_remote
-  - delay:
-      milliseconds: 500
-  - service: remote.send_command
-    data:
+    - delay:
+        milliseconds: 500
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_soundbar
       entity_id: remote.brd_01_remote
-      command: power
-      device: livingroom_soundbar
-    entity_id: remote.brd_01_remote
-  - service: remote.send_command
-    data:
-      entity_id: remote.brd_01_remote
-      command: power
-      device: livingroom_hdmi_switch
+    - service: remote.send_command
+      data:
+        entity_id: remote.brd_01_remote
+        command: power
+        device: livingroom_hdmi_switch
