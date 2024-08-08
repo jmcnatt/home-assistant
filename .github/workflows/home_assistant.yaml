@@ -1,0 +1,27 @@
+---
+name: Check Home Assistant Config
+on:  # yamllint disable-line rule:truthy
+  push:
+  pull_request:
+jobs:
+  yamllint:
+    name: YAML link check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v4
+      - name: Run yamllint
+        uses: frenck/action-yamllint@v1
+  home-assistant-config-check:
+    name: Home Assistant core configuration check
+    runs-on: ubuntu-latest
+    needs: [yamllint]
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v4
+      - name: Run Home Assistant Configuration Check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: "."
+          secrets: .secrets.sample.yaml
+          version: stable
