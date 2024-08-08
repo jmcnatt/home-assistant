@@ -2,13 +2,22 @@
 name: Check Home Assistant Config
 on: [push, pull_request]
 jobs:
-  home-assistant-config-check:
-    name: Home Assistant Core Configuration Check
+  yamllint:
+    name: YAML link check
     runs-on: ubuntu-latest
     steps:
-      - name: ⤵️ Check out configuration from GitHub
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v4.1.7
+      - name: Run yamllint
+        uses: frenck/action-yamllint@v1.5.0
+  home-assistant-config-check:
+    name: Home Assistant core configuration check
+    runs-on: ubuntu-latest
+    needs: [yamllint]
+    steps:
+      - name: Check out configuration from GitHub
         uses: actions/checkout@v4
-      - name: 🚀 Run Home Assistant Configuration Check
+      - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1
         with:
           path: "."
