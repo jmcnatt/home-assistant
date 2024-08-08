@@ -1,0 +1,16 @@
+---
+name: Check Home Assistant Config
+on: [push, pull_request]
+jobs:
+  home-assistant-config-check:
+    name: Home Assistant Core Configuration Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out configuration from GitHub
+        uses: actions/checkout@v4
+      - name: 🚀 Run Home Assistant Configuration Check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: "./config"
+          secrets: .secrets.sample.yaml
+          version: stable
