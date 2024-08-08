@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out configuration from GitHub
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4
       - name: Run yamllint
-        uses: frenck/action-yamllint@v1.5.0
+        uses: frenck/action-yamllint@v1
   home-assistant-config-check:
     name: Home Assistant core configuration check
     runs-on: ubuntu-latest
