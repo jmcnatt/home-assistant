@@ -1,8 +1,8 @@
 ---
 name: Check Home Assistant Config
 on:  # yamllint disable-line rule:truthy
-  push:
   pull_request:
+    types: [opened]
 jobs:
   yamllint:
     name: YAML link check
