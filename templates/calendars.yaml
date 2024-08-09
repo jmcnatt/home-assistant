@@ -20,10 +20,11 @@
   sensor:
     - name: calendar_birthdays_anniversaries_events
       state: "{{ now() }}"
+      icon: mdi:calendar-clock
       attributes:
-        dates: |
+        dates: >-
           {% set ns = namespace(events={}) %}
-          {% for event in ['Jimmy', 'Dana', 'Wedding'] %}
+          {% for event in ["Jimmy's Birthday", "Dana's Birthday", "Wedding Anniversary"] %}
             {% set date = (calendar['calendar.birthdays_anniversaries']['events']
               | selectattr('summary', 'search', event, ignorecase=true)
               | sort(attribute='start')
@@ -32,6 +33,7 @@
               | map('as_local')
               | first
             ).date() %}
+            {% set ns.events = dict(ns.events, **{event: date|string}) %}
           {%- endfor %}
           {{ ns.events }}
 - sensor:
