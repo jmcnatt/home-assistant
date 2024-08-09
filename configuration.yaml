@@ -125,6 +125,10 @@ rest: !include rest.yaml
 # https://www.home-assistant.io/integrations/sensor/
 sensor: !include sensor.yaml
 
+# template
+# https://www.home-assistant.io/integrations/template/
+template: !include_dir_list templates/
+
 # Text to speech
 # https://www.home-assistant.io/integrations/tts/
 tts:

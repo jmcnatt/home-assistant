@@ -1,0 +1,61 @@
+---
+################################################################################
+# Templates from calendars
+# https://www.home-assistant.io/integrations/template/
+################################################################################
+- trigger: 
+    - platform: time
+      at: 00:00:00
+    - platform: homeassistant
+      event: start
+  action:
+    - action: calendar.get_events
+      target:
+        entity_id: calendar.birthdays_anniversaries
+      data:
+        start_date_time: "{{ today_at('00:00:00') }}"
+        duration:
+          days: 365
+      response_variable: this
+  sensor:
+    - name: calendar_birthdays_anniversaries_events
+      state: "{{ now() }}"
+      attributes:
+        dates: |
+          {% set ns = namespace(events={}) %}
+          {% for event in ['Jimmy', 'Dana', 'Wedding'] %}
+            {% set date = (this['calendar.birthdays_anniversaries']['events'] 
+              | selectattr('summary', 'search', event, ignorecase=true)
+              | sort(attribute='start')
+              | map(attribute='start')
+              | map('as_datetime')
+              | map('as_local') 
+              | first
+            ).date() %}
+          {%- endfor %}
+          {{ ns.events }}
+- sensor:
+  - name: next_jimmy_birthday
+    icon: mdi:cake-variant
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Jimmy\\'s Birthday'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}
+  - name: next_dana_birthday
+    icon: mdi:cake-variant
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Dana\\'s Birthday'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}
+  - name: next_wedding_anniversary
+    icon: mdi:calendar-heart
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Wedding Anniversary'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}

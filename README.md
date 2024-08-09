@@ -5,6 +5,8 @@ This is my [Home Assistant](https://www.home-assistant.io) configuration for my 
 #### Table of Contents
 1. [Platform](#platform)
 1. [Integrations](#integrations)
+  1. [Remote](#remote)
+  1. [Template](#template)
 
 ## Platform
 
@@ -28,3 +30,8 @@ For example, our [Duraflame electric fireplace](https://a.co/d/fFEitIg) is contr
 The `input_button` entities are also exposed to Google Assistant.  They can then be used in custom routines to be called by a voice command to the Google Assistant.  `input_button` entities from Home Assistant appear as scenes to Google Assistant.
 
 ![Custom routine to call the input_button as a scene with the Google Assistant](./docs/images/remote_google_assistant.png)
+
+### Template
+Multiple types of sensors are made available using the template integration.  In this configuraiton, multiple files are used to logically separate the template sensors based on their purpose.  This is accomplished using Home Assistant's [ability to split configurations](https://www.home-assistant.io/docs/configuration/splitting_configuration/#advanced-usage).
+
+- [calendars.yaml](./templates/calendars.yaml) Important recurring dates are stored in Local Calendar events and sensors are created to represent the number of days until that particular event.  Previously this was accomplished using [Garbage Collection](https://github.com/bruxy70/Garbage-Collection) by @bruxy70.
