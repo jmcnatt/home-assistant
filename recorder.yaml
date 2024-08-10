@@ -10,11 +10,12 @@ exclude:
     - update
   entity_globs:
     - sensor.*_activity*
+    - sensor.*_anniversary*
     - sensor.*_ascended*
     - sensor.*_average_active_pace*
     - sensor.*_battery_state*
+    - sensor.*_birthday*
     - sensor.*_bssid*
-    - sensor.cellartracker*
     - sensor.*_connection_type*
     - sensor.*_current
     - sensor.*_current_consumption
@@ -26,10 +27,13 @@ exclude:
     - sensor.*_steps*
     - sensor.*_storage*
     - sensor.*_voltage
+    - sensor.calendar_*
+    - sensor.cellartracker*
+    - sensor.sun*
   entities:
-    - sun.sun
     - sensor.date
     - sensor.last_boot
     - sensor.time
+    - sun.sun
   event_types:
     - call_service
