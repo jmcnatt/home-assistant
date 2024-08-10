@@ -1,0 +1,13 @@
+---
+################################################################################
+# Customizations for entities
+# https://www.home-assistant.io/integrations/homeassistant/
+################################################################################
+sensor.calendar_birthdays_anniversaries_events:
+  friendly_name: Birthday and Anniversaries Calendar Events
+sensor.next_dana_birthday:
+  friendly_name: Dana's Birthday
+sensor.next_jimmy_birthday:
+  friendly_name: Jimmy's Birthday
+sensor.next_wedding_anniversary:
+  friendly_name: Wedding Anniversary
