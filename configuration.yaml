@@ -5,6 +5,7 @@
 ################################################################################
 homeassistant:
   country: 'US'
+  customize: !include customizations/entities.yaml
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   name: !secret home_name

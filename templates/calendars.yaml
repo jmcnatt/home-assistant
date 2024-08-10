@@ -37,8 +37,7 @@
           {%- endfor %}
           {{ ns.events }}
 - sensor:
-    - unique_id: next_jimmy_birthday
-      name: Jimmy's Birthday
+    - name: next_jimmy_birthday
       icon: mdi:cake-variant
       state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Jimmy\\'s Birthday'] }}"
       attributes:
@@ -46,8 +45,7 @@
         days_until: |
           {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
           {{ (event | as_local - today_at('00:00:00')).days }}
-    - unique_id: next_dana_birthday
-      name: Dana's Birthday
+    - name: next_dana_birthday
       icon: mdi:cake-variant
       state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Dana\\'s Birthday'] }}"
       attributes:
@@ -55,8 +53,7 @@
         days_until: |
           {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
           {{ (event | as_local - today_at('00:00:00')).days }}
-    - unique_id: next_wedding_anniversary
-      name: Wedding Anniversary
+    - name: next_wedding_anniversary
       icon: mdi:calendar-heart
       state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Wedding Anniversary'] }}"
       attributes:
