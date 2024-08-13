@@ -1,0 +1,12 @@
+---
+################################################################################
+# scripts.yaml
+#
+# This file must exist for the frontend scripts editor to work.
+# Hence, it is here, empty.
+#
+# If you are looking for the scripts, see the scripts directory in the root.
+#
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+{}
