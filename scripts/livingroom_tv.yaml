@@ -6,8 +6,6 @@
 livingroom_tv:
   alias: living room tv
   description: "Toggles the TV, sound bar, and hdmi switch in the living room"
-  icon: mdi:power
-  mode: single
   sequence:
     - service: remote.send_command
       data:
