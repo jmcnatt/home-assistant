@@ -1,0 +1,84 @@
+---
+################################################################################
+# Controls the livingroom video switch using the livingroom remote
+#
+# This script is used by automations and defines the base64 commands
+# for the remote once for each command
+#
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+livingroom_remote_video_switch:
+  description: >-
+    Controls the livingroom video switch using the livingroom remote
+  fields:
+    command:
+      description: "The command name for the livingroom video switch remote"
+      example: "power"
+  sequence:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'input_1' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJ5IUEhQRFBEUERQRFBEUERQ1FDYUNhQ2FDYUNRQ2F\
+                  DYUERQ2FBEUERQRFBEUERQRFBEUERQ2FDYUNRQ2FDYUNhQ1FAAFGQABKUkUAA\
+                  xPAAEoSRQADFAAAShIFAAMUQABJ0gUAA0FAAAAAAAAAAAAAAAAAAA="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'input_2' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJZUSExITEhMSExITEhMSExI4EjgROBI4EjgSOBI4E\
+                  TkRFBE4EjgSExITEhMSExITEhMSExITEjgSOBI4ETkROBI4EgAFGwABJksSAA\
+                  xSAAElSxIADFIAASdKEQAMUgABKEkSAA0FAAAAAAAAAAAAAAAAAAA="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'input_3' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBwAAABJJURFBITEhMSExITEhMSExI4EjgRORE4EjgSOBI4E\
+                  TkRFBE4EjoQORETEhMSExITEhMSExITEhQROBI4EjgSOBI4EQAFHAABJ0oSAA\
+                  xUAAElSxIADFMAASVLEwAMUQABJ0oTAAxRAAEoSRQADQUAAAAAAAA="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'input_4' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJ5IUERQRFBITEhMSExITEhM2FDYUNhQ2FDUUNhQ2F\
+                  DYUERQ2FBEUERQ1FBITEhMSExITEhQ1FDYUERQ2FDYUNhQ1FAAFGgABKEkUAA\
+                  xPAAEoSRQADE8AASlJGgAMSQABJ0kUAA0FAAAAAAAAAAAAAAAAAAA="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'input_5' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJ5MUERQRFBEUERQRFBEUERQ2FDUVNRQ2FDYUNhQ1F\
+                  DYUERQ2FBEUNhQ2FBEUERQRFBEUERQ1FBITEhM2FDYUNhQ2FAAFGgABKEgUAA\
+                  xQAAEoSRQADE8AAShJFAAMUAABJ0kUAA0FAAAAAAAAAAAAAAAAAAA="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'power' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJ5IUERQRFBEVERMSExITEhQ1FDYUNhQ2FDYUNRQ2F\
+                  DYUERQRFBEUNhQ2FBEUERQRFBEUNRQ2FBEUERQ2FDYUNhQ2EwAFGQABKUkUAA\
+                  xOAAEpSBQADE8AASlIFAANBQAAAAAAAA=="
