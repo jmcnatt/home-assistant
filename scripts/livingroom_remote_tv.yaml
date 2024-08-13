@@ -1,0 +1,311 @@
+---
+################################################################################
+# Script to control devices using the living room remote
+#
+# This script is used by automations and defines the base64 commands
+# for the remote once for each command
+#
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+livingroom_remote_tv:
+  description: >-
+    Controls the livingroom tv using the livingroom remote
+  fields:
+    command:
+      description: "The command name for the livingroom tv remote"
+      example: "power"
+  sequence:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ command = 'power' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgCQAAABJ5ITEhISEzcTEhISExITEhISEzcTNxISEzYTNxM2E\
+                  zcSNxMSExISEhM3EhITEhMSExISNxM2EzcTEhI3EzYTNxM2EwAFJAABKEkSAA\
+                  xPAAEpSBMADE8AASdJEwAMTgABKEkTAAxOAAEoSRIADE8AASdJEwAMTgABKEg\
+                  TAAxPAAEnSRMADE4AASdJEwANBQAAAAAAAA=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'volume_up' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJZQSEhMSEzYTEhMSEhMSEhMSEzYTNxMSEjcTNxgxE\
+                  zYTNxMSEjcTEhITEhITEhMSEhITNxITEjcSNxM3EjcTNxI3EwAFIwABJ0oTAA\
+                  xPAAEnShIADE8AAShJEwAMTwABJ0oSAA0FAAAAAAAAAAAAAAAAAAA="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'volume_down' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                comand: "b64:JgBYAAABJpMSEhMSEzYTEhMSExISEhMSEzcSNxMSEjcTNhM3Ez\
+                  YTNxM2EzcSEhMSExISExISExITEhISEzcSNxM3EjcTNhM3EwAFIwABKEkTAAx\
+                  PAAEnSRMADQUAAAAAAAAAAAAAAAAAAA=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'volume_mute' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                comand: "b64:JgBgAAABJ5IQFBEUETgRFBEUEBUQFBEUETgRORAUETkROBE5ED\
+                  kROBE5ERQQFBE5EBQRFBEUERQQFBE5EDkRFBE4ETkQORE4EQAFJgABJ0oQAAx\
+                  RAAElSxEADFAAAShJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'channel_up' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpITEhMSEzYTEhMSExISEhMSEzYTNxMSEjcTNhM3E\
+                  jcTNxISExITEhMSEhITEhMSEhITNxM2EzcSNxM2EzcTNhM3EwAFJAABJ0kTAA\
+                  xPAAEnSRMADE8AAShJEgANBQAAAAAAAA=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'channel_down' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJZMTEhMSEjcTEhMSEhITEhMSEjcTNxISEzcSNxM3E\
+                  jcTNhM3EhMSEhMSExISEhMSExITEhI3EzYTNxM2EzcSNxM3EgAFJAABKEkSAA\
+                  xPAAEoSBMADE8AASdJEwANBQAAAAAAAA=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'input' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpMSEhMSEzYTEhMSExISEhMSEzYTNxMSEjcTNhM3E\
+                  zYTNxI3EzYTEhM2ExITEhMSEhITEhMSEzYTEhM2EzcTNhM2EwAFJAABJ0kTAA\
+                  xPAAEoSBMADFAAASZJEwANBQAAAAAAAA=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_1' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBoAAABJJQUERQREzYUERQRExISEhQRFDUUNhMSEzYUNRQ3Ej\
+                  YUNhM2ExITEhMRFDYTEhMRFBEUERM2FDYSNxMSEzYUNhI3EwAFIwABKEkTAAxP\
+                  AAEoSRIADE8AAShJEwAMTwABKEkSAA0F"
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_2' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpIRFBEUEjcRFBEUEBQRFBEUEDkRORAUETkQOhA5E\
+                  DkROBEUETgRFBEUETgRFBEUERQQOREUEDkRORAUETkQORE5EAAFJgABJ0oQAA\
+                  xQAAEoShAADFIAASdJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_3' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBYAAABJpMRFBISEzcQFBMSExISExISEzcSNxEUEjcRORA5E\
+                  TkQORE4ETkRFBISEzcQFRAUEhMRFBISETkQOREUETgRORE4EQAFJQABKEkRAA\
+                  xRAAEnShAADQU="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_4' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJZQTERMSEzcTERMSExISEhMSEzcSNxMSEjcUNRQ2E\
+                  zYUNhMRExIUNhMRFDYTEhISExITNhQ2ExITNhQREzYUNhM2FAAFIwABJ0kUAA\
+                  xNAAEoSRQADE4AASVLEwANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_5' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpMTERQRFDYTERQRFBETERQRFDYTNhMSEzYUNhM2E\
+                  zYUNhM2FBETNhMSFDYTERQRFBETEhM2ExITNhQREzYUNhM2EwAFIwABKEkTAA\
+                  xNAAEpSRIADE4AASlIFAANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_6' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpITEhMSEjcTEhMSEhITEhMSEzYTNxISEzcSOBI4E\
+                  TcTNxITEjcSNxMSEjcTEhMSEhMSNxITEhITNxITEjcSNxM3EgAFJAABKEkTAA\
+                  xOAAEoSRIADE8AAShJEgANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_7' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJ5ITEhMSEjcTEhISFBETEhMSEjcTNhMSEzcSNxM2E\
+                  zcSNxM3EjcTNxISEzcSExISExITEhITEhITNxISEzcTNxI3EgAFJAABKEkSAA\
+                  xPAAEoSRIADFAAASdJEwANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_8' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBYAAABJpMRFBISEzcQFBMSEhMSExISEzcQOREUEjcRORE4E\
+                  TkQOREUEhMQFBE5EDkRFBITEBQTNxA5ETkQFBMSETgRORE4EQAFJgABJ0kRAA\
+                  xQAAEpSBEADQU="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_9' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpIRFBEUEjcRFBEUEhISExITEDkROBEUETkQORE4E\
+                  TkQORE5EBQRFBE4ETkRFBAUERQRFBA5ETgRFBEUETgRORA5EQAFJQABKEkRAA\
+                  xPAAEoSREADE8AAShJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'number_0' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpIRFBEUEDkRFBEUEBQRFBEUEDkRORAUETkQORE5E\
+                  DkROBEUERQRFBAUEzcQFRAUExISNxE5ETgRORAUETkROBE5EAAFJgABKEkRAA\
+                  xQAAEoSRAADFAAAShJEwANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'sleep' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJJQRFBEUETgRFBEUEBQRFBEUETgRORAUETkROBE5E\
+                  DkROBEUETkQORE4ERQRFBEUEBQRORAVEBQRFBE4ETkROBE5EAAFJgABJksRAA\
+                  xQAAEmSxEADFAAASZLEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'settings' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpMRFBAUETkQFRAUERQRFBAUETkROBEUETgRORE4E\
+                  TkQORE4ETkRFBAUERQRFBE4ERQRFBAUETkROBE5EDkRFBE4EQAFJQABKEkRAA\
+                  xQAAEoSREADFAAAShJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_up' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJZQRFBAUETkQFRAUERQRFBAUETkROBEUETgRORA5E\
+                  TkQOREUEBQRFBEUERQQFBE5EBUQORE4ETkQORE5EDkRFBE4EQAFJgABJUsRAA\
+                  xQAAEmSxEADFEAASVLEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_down' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJZQRFBAUETkRFBAUERQRFBAVEDkROBEUETgRORE4E\
+                  TkQORE5EBQRFBEUEBUQFBE5EBQRFBE4ETkROBE5ETgRFBE4EQAFJgABJksQAA\
+                  xRAAEmSxEADFEAASVLEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_left' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpITEhMSEjcTEhMSEhITEhQREzYTNxISEzcSNxM3E\
+                  jcTNxI3EzYTNxITEhITEhITEhITEhMSEhMSNxI3EzcSNxM3EgAFJAABKEkSAA\
+                  xOAAEoSREADFEAASdJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_right' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpMQFBEUETgRFBEUERQQFBEUETkQOREUEDkRORA5E\
+                  TgROREUEDkROBEUERQRFBAUERQROBEUERQROBE5ETgRORA5EQAFJgABJUsRAA\
+                  xQAAEmSxEADFAAASZLEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_ok' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpIRFBEUETgRFBEUEBQRFBEUETgRORAUETkROBE5E\
+                  DkRORAUERQROBEUERQRFBA5ERQROBE5EBQRORE4ETkQFBE5EQAFJQABJksRAA\
+                  xQAAEmSxAADFAAASZLEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_back' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBgAAABJpIRFBEUEDkRFBAVEBQRFBEUEDkROBEUETkQORE4E\
+                  TkROBEUERQQFBE5ERQQOREUEBQRORE4ETkQFBE5ERQQORE4EQAFJQABKUgRAA\
+                  xRAAEnSRAADFAAAShJEQANBQ=="
+        - conditions:
+            - condition:
+              value_template: "{{ command = 'nav_exit' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:JgBqASgOKQ8MKisOKQ8MKg4qDioNKg4qDSsq7CoPKA8NKikQK\
+                  Q4NKg0qDioOKg0qDioq7CsOKQ8MKioPKBANKQ0rDSoOKg0qDior7CoOKg4NKS\
+                  sOKQ8NKQ8pDioOKQ4qDikr7CoPKQ4OKSoPKQ4OKA4qDioOKQ4qDykq7CoPKQ8\
+                  NKSoPKQ8NKQ0qDioPKQ4pDykr6ysOKQ8NKSsOKQ8NKQ8pDikPKQ8pDikr7CoP\
+                  KQ4NKioPKQ4NKQ8pDykOKQ4qDykq7CoPKQ8NKSoOKg4OKQ4pDykPKQ4pDykr6\
+                  ysOKQ8NKSsOKQ8NKQ8pDikPKQ8pDikr6ysNKw4NKSsOKg4NKg4pDykNKg4qDy\
+                  kq7CoPKQ4NKikQKA8NKg0qDioOKg0qDiop7SoPKBAMKikQKA4OKg4qDSoOKg0\
+                  qDioq7CoPKBAMKioPKBAMKg4qDSoOKg4qDSor7CkQKA8NKikQKA8MKg4qDioN\
+                  Kg4qDiopAA0F"
