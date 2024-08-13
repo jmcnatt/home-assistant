@@ -18,7 +18,7 @@ livingroom_remote_tv:
     - choose:
         - conditions:
             - condition: template
-              value_template: "{{ command = 'power' }}"
+              value_template: "{{ command == 'power' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -30,7 +30,7 @@ livingroom_remote_tv:
                   TAAxPAAEnSRMADE4AASdJEwANBQAAAAAAAA=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'volume_up' }}"
+              value_template: "{{ command == 'volume_up' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -41,7 +41,7 @@ livingroom_remote_tv:
                   xPAAEnShIADE8AAShJEwAMTwABJ0oSAA0FAAAAAAAAAAAAAAAAAAA="
         - conditions:
             - condition:
-              value_template: "{{ command = 'volume_down' }}"
+              value_template: "{{ command == 'volume_down' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -52,7 +52,7 @@ livingroom_remote_tv:
                   PAAEnSRMADQUAAAAAAAAAAAAAAAAAAA=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'volume_mute' }}"
+              value_template: "{{ command == 'volume_mute' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -63,7 +63,7 @@ livingroom_remote_tv:
                   RAAElSxEADFAAAShJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'channel_up' }}"
+              value_template: "{{ command == 'channel_up' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -74,7 +74,7 @@ livingroom_remote_tv:
                   xPAAEnSRMADE8AAShJEgANBQAAAAAAAA=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'channel_down' }}"
+              value_template: "{{ command == 'channel_down' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -85,7 +85,7 @@ livingroom_remote_tv:
                   xPAAEoSBMADE8AASdJEwANBQAAAAAAAA=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'input' }}"
+              value_template: "{{ command == 'input' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -96,7 +96,7 @@ livingroom_remote_tv:
                   xPAAEoSBMADFAAASZJEwANBQAAAAAAAA=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_1' }}"
+              value_template: "{{ command == 'number_1' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -107,7 +107,7 @@ livingroom_remote_tv:
                   AAEoSRIADE8AAShJEwAMTwABKEkSAA0F"
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_2' }}"
+              value_template: "{{ command == 'number_2' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -118,7 +118,7 @@ livingroom_remote_tv:
                   xQAAEoShAADFIAASdJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_3' }}"
+              value_template: "{{ command == 'number_3' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -129,7 +129,7 @@ livingroom_remote_tv:
                   xRAAEnShAADQU="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_4' }}"
+              value_template: "{{ command == 'number_4' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -140,7 +140,7 @@ livingroom_remote_tv:
                   xNAAEoSRQADE4AASVLEwANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_5' }}"
+              value_template: "{{ command == 'number_5' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -151,7 +151,7 @@ livingroom_remote_tv:
                   xNAAEpSRIADE4AASlIFAANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_6' }}"
+              value_template: "{{ command == 'number_6' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -162,7 +162,7 @@ livingroom_remote_tv:
                   xOAAEoSRIADE8AAShJEgANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_7' }}"
+              value_template: "{{ command == 'number_7' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -173,7 +173,7 @@ livingroom_remote_tv:
                   xPAAEoSRIADFAAASdJEwANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_8' }}"
+              value_template: "{{ command == 'number_8' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -184,7 +184,7 @@ livingroom_remote_tv:
                   xQAAEpSBEADQU="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_9' }}"
+              value_template: "{{ command == 'number_9' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -195,7 +195,7 @@ livingroom_remote_tv:
                   xPAAEoSREADE8AAShJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'number_0' }}"
+              value_template: "{{ command == 'number_0' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -206,7 +206,7 @@ livingroom_remote_tv:
                   xQAAEoSRAADFAAAShJEwANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'sleep' }}"
+              value_template: "{{ command == 'sleep' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -217,7 +217,7 @@ livingroom_remote_tv:
                   xQAAEmSxEADFAAASZLEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'settings' }}"
+              value_template: "{{ command == 'settings' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -228,7 +228,7 @@ livingroom_remote_tv:
                   xQAAEoSREADFAAAShJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_up' }}"
+              value_template: "{{ command == 'nav_up' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -239,7 +239,7 @@ livingroom_remote_tv:
                   xQAAEmSxEADFEAASVLEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_down' }}"
+              value_template: "{{ command == 'nav_down' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -250,7 +250,7 @@ livingroom_remote_tv:
                   xRAAEmSxEADFEAASVLEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_left' }}"
+              value_template: "{{ command == 'nav_left' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -261,7 +261,7 @@ livingroom_remote_tv:
                   xOAAEoSREADFEAASdJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_right' }}"
+              value_template: "{{ command == 'nav_right' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -272,7 +272,7 @@ livingroom_remote_tv:
                   xQAAEmSxEADFAAASZLEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_ok' }}"
+              value_template: "{{ command == 'nav_ok' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -283,7 +283,7 @@ livingroom_remote_tv:
                   xQAAEmSxAADFAAASZLEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_back' }}"
+              value_template: "{{ command == 'nav_back' }}"
           sequence:
             - action: remote.send_command
               target:
@@ -294,7 +294,7 @@ livingroom_remote_tv:
                   xRAAEnSRAADFAAAShJEQANBQ=="
         - conditions:
             - condition:
-              value_template: "{{ command = 'nav_exit' }}"
+              value_template: "{{ command == 'nav_exit' }}"
           sequence:
             - action: remote.send_command
               target:
