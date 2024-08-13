@@ -2,9 +2,9 @@
 ################################################################################
 # Script to control devices using the living room remote
 #
-# This script is used by automations and defines the base64 commands 
+# This script is used by automations and defines the base64 commands
 # for the remote once for each command
-# 
+#
 # https://www.home-assistant.io/integrations/script/
 ################################################################################
 livingroom_remote_tv:
