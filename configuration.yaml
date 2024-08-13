@@ -123,7 +123,8 @@ rest: !include rest.yaml
 
 # script
 # https://www.home-assistant.io/integrations/script
-script: !include_dir_merge_list scripts/
+script: !include scripts.yaml
+script split: !include_dir_named ../scripts
 
 # sensor
 # https://www.home-assistant.io/integrations/sensor/
