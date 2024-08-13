@@ -29,7 +29,7 @@ livingroom_remote_tv:
                   xPAAEpSBMADE8AASdJEwAMTgABKEkTAAxOAAEoSRIADE8AASdJEwAMTgABKEg\
                   TAAxPAAEnSRMADE4AASdJEwANBQAAAAAAAA=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'volume_up' }}"
           sequence:
             - action: remote.send_command
@@ -40,7 +40,7 @@ livingroom_remote_tv:
                   zYTNxMSEjcTEhITEhITEhMSEhITNxITEjcSNxM3EjcTNxI3EwAFIwABJ0oTAA\
                   xPAAEnShIADE8AAShJEwAMTwABJ0oSAA0FAAAAAAAAAAAAAAAAAAA="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'volume_down' }}"
           sequence:
             - action: remote.send_command
@@ -51,7 +51,7 @@ livingroom_remote_tv:
                   YTNxM2EzcSEhMSExISExISExITEhISEzcSNxM3EjcTNhM3EwAFIwABKEkTAAx\
                   PAAEnSRMADQUAAAAAAAAAAAAAAAAAAA=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'volume_mute' }}"
           sequence:
             - action: remote.send_command
@@ -62,7 +62,7 @@ livingroom_remote_tv:
                   kROBE5ERQQFBE5EBQRFBEUERQQFBE5EDkRFBE4ETkQORE4EQAFJgABJ0oQAAx\
                   RAAElSxEADFAAAShJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'channel_up' }}"
           sequence:
             - action: remote.send_command
@@ -73,7 +73,7 @@ livingroom_remote_tv:
                   jcTNxISExITEhMSEhITEhMSEhITNxM2EzcSNxM2EzcTNhM3EwAFJAABJ0kTAA\
                   xPAAEnSRMADE8AAShJEgANBQAAAAAAAA=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'channel_down' }}"
           sequence:
             - action: remote.send_command
@@ -84,7 +84,7 @@ livingroom_remote_tv:
                   jcTNhM3EhMSEhMSExISEhMSExITEhI3EzYTNxM2EzcSNxM3EgAFJAABKEkSAA\
                   xPAAEoSBMADE8AASdJEwANBQAAAAAAAA=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'input' }}"
           sequence:
             - action: remote.send_command
@@ -95,7 +95,7 @@ livingroom_remote_tv:
                   zYTNxI3EzYTEhM2ExITEhMSEhITEhMSEzYTEhM2EzcTNhM2EwAFJAABJ0kTAA\
                   xPAAEoSBMADFAAASZJEwANBQAAAAAAAA=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_1' }}"
           sequence:
             - action: remote.send_command
@@ -106,7 +106,7 @@ livingroom_remote_tv:
                   YUNhM2ExITEhMRFDYTEhMRFBEUERM2FDYSNxMSEzYUNhI3EwAFIwABKEkTAAxP\
                   AAEoSRIADE8AAShJEwAMTwABKEkSAA0F"
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_2' }}"
           sequence:
             - action: remote.send_command
@@ -117,7 +117,7 @@ livingroom_remote_tv:
                   DkROBEUETgRFBEUETgRFBEUERQQOREUEDkRORAUETkQORE5EAAFJgABJ0oQAA\
                   xQAAEoShAADFIAASdJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_3' }}"
           sequence:
             - action: remote.send_command
@@ -128,7 +128,7 @@ livingroom_remote_tv:
                   TkQORE4ETkRFBISEzcQFRAUEhMRFBISETkQOREUETgRORE4EQAFJQABKEkRAA\
                   xRAAEnShAADQU="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_4' }}"
           sequence:
             - action: remote.send_command
@@ -139,7 +139,7 @@ livingroom_remote_tv:
                   zYUNhMRExIUNhMRFDYTEhISExITNhQ2ExITNhQREzYUNhM2FAAFIwABJ0kUAA\
                   xNAAEoSRQADE4AASVLEwANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_5' }}"
           sequence:
             - action: remote.send_command
@@ -150,7 +150,7 @@ livingroom_remote_tv:
                   zYUNhM2FBETNhMSFDYTERQRFBETEhM2ExITNhQREzYUNhM2EwAFIwABKEkTAA\
                   xNAAEpSRIADE4AASlIFAANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_6' }}"
           sequence:
             - action: remote.send_command
@@ -161,7 +161,7 @@ livingroom_remote_tv:
                   TcTNxITEjcSNxMSEjcTEhMSEhMSNxITEhITNxITEjcSNxM3EgAFJAABKEkTAA\
                   xOAAEoSRIADE8AAShJEgANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_7' }}"
           sequence:
             - action: remote.send_command
@@ -172,7 +172,7 @@ livingroom_remote_tv:
                   zcSNxM3EjcTNxISEzcSExISExITEhITEhITNxISEzcTNxI3EgAFJAABKEkSAA\
                   xPAAEoSRIADFAAASdJEwANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_8' }}"
           sequence:
             - action: remote.send_command
@@ -183,7 +183,7 @@ livingroom_remote_tv:
                   TkQOREUEhMQFBE5EDkRFBITEBQTNxA5ETkQFBMSETgRORE4EQAFJgABJ0kRAA\
                   xQAAEpSBEADQU="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_9' }}"
           sequence:
             - action: remote.send_command
@@ -194,7 +194,7 @@ livingroom_remote_tv:
                   TkQORE5EBQRFBE4ETkRFBAUERQRFBA5ETgRFBEUETgRORA5EQAFJQABKEkRAA\
                   xPAAEoSREADE8AAShJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'number_0' }}"
           sequence:
             - action: remote.send_command
@@ -205,7 +205,7 @@ livingroom_remote_tv:
                   DkROBEUERQRFBAUEzcQFRAUExISNxE5ETgRORAUETkROBE5EAAFJgABKEkRAA\
                   xQAAEoSRAADFAAAShJEwANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'sleep' }}"
           sequence:
             - action: remote.send_command
@@ -216,7 +216,7 @@ livingroom_remote_tv:
                   DkROBEUETkQORE4ERQRFBEUEBQRORAVEBQRFBE4ETkROBE5EAAFJgABJksRAA\
                   xQAAEmSxEADFAAASZLEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'settings' }}"
           sequence:
             - action: remote.send_command
@@ -227,7 +227,7 @@ livingroom_remote_tv:
                   TkQORE4ETkRFBAUERQRFBE4ERQRFBAUETkROBE5EDkRFBE4EQAFJQABKEkRAA\
                   xQAAEoSREADFAAAShJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_up' }}"
           sequence:
             - action: remote.send_command
@@ -238,7 +238,7 @@ livingroom_remote_tv:
                   TkQOREUEBQRFBEUERQQFBE5EBUQORE4ETkQORE5EDkRFBE4EQAFJgABJUsRAA\
                   xQAAEmSxEADFEAASVLEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_down' }}"
           sequence:
             - action: remote.send_command
@@ -249,7 +249,7 @@ livingroom_remote_tv:
                   TkQORE5EBQRFBEUEBUQFBE5EBQRFBE4ETkROBE5ETgRFBE4EQAFJgABJksQAA\
                   xRAAEmSxEADFEAASVLEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_left' }}"
           sequence:
             - action: remote.send_command
@@ -260,7 +260,7 @@ livingroom_remote_tv:
                   jcTNxI3EzYTNxITEhITEhITEhITEhMSEhMSNxI3EzcSNxM3EgAFJAABKEkSAA\
                   xOAAEoSREADFEAASdJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_right' }}"
           sequence:
             - action: remote.send_command
@@ -271,7 +271,7 @@ livingroom_remote_tv:
                   TgROREUEDkROBEUERQRFBAUERQROBEUERQROBE5ETgRORA5EQAFJgABJUsRAA\
                   xQAAEmSxEADFAAASZLEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_ok' }}"
           sequence:
             - action: remote.send_command
@@ -282,7 +282,7 @@ livingroom_remote_tv:
                   DkRORAUERQROBEUERQRFBA5ERQROBE5EBQRORE4ETkQFBE5EQAFJQABJksRAA\
                   xQAAEmSxAADFAAASZLEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_back' }}"
           sequence:
             - action: remote.send_command
@@ -293,7 +293,7 @@ livingroom_remote_tv:
                   TkROBEUERQQFBE5ERQQOREUEBQRORE4ETkQFBE5ERQQORE4EQAFJQABKUgRAA\
                   xRAAEnSRAADFAAAShJEQANBQ=="
         - conditions:
-            - condition:
+            - condition: template
               value_template: "{{ command == 'nav_exit' }}"
           sequence:
             - action: remote.send_command
