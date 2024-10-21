@@ -73,17 +73,6 @@ camera:
 # light
 # https://www.home-assistant.io/integrations/light/
 light:
-  - name: Kitchen Lights
-    platform: group
-    entities:
-      - light.lfx_kitchen_01
-      - light.lfx_kitchen_02
-      - light.lfx_kitchen_03
-      - light.lfx_kitchen_04
-      - light.lfx_kitchen_05
-      - light.lfx_kitchen_06
-      - light.lfx_kitchen_07
-      - light.lfx_kitchen_08
   - name: Bedroom Lights
     platform: group
     entities:
