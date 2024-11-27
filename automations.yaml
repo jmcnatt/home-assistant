@@ -84,24 +84,23 @@
   alias: Lights - Turn on lights when someone arrives at home
   description: Turns on the kitchen, hallway, office, and dining room lights when
     someone arrives home.
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - zone.home
     from: '0'
-  condition:
+    trigger: state
+  conditions:
   - condition: sun
     after: sunset
     after_offset: '-1'
-  action:
-  - service: light.turn_on
-    target:
+  actions:
+  - target:
       entity_id:
       - light.kitchen_lights
-      - light.office_lights
       - light.shelly_hallway_01
-      - light.dining_room_light
+      - light.dining_room_lights
     data: {}
+    action: light.turn_on
   mode: single
 - id: '1646793047500'
   alias: Lock - Front door lock when no one is home
@@ -215,13 +214,16 @@
 - id: '1668577671748'
   alias: Door - Notify discord when rear sliding door is opened
   description: Notify discord when rear sliding door is opened
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.rear_sliding_door_door
     to: 'on'
-  condition: []
-  action:
+    trigger: state
+  conditions:
+  - condition: time
+    after: 01:00:00
+    before: 06:00:00
+  actions:
   - data:
       message: '<a:alert:1041082538644480110> The rear sliding door has been opened!
 
@@ -235,64 +237,63 @@
   alias: Lights - Turn on Christmas Tree every day at 4:00pm
   description: Turns on the Christmas Tree at 4:00pm everyday day regardless of who
     is home
-  trigger:
-  - platform: time
-    at: '16:00:00'
-  condition:
+  triggers:
+  - at: '16:00:00'
+    trigger: time
+  conditions:
   - condition: state
-    entity_id: switch.pwr_02
     state: 'Off'
-  action:
+    entity_id: switch.christmas_tree_switch_0
+  actions:
   - action: switch.turn_on
     metadata: {}
     data: {}
     target:
-      entity_id: switch.pwr_02
+      entity_id: switch.christmas_tree_switch_0
   mode: single
 - id: '1669506415856'
   alias: Lights - Turn off Christmas Tree every night
   description: Turns off the Christmas Tree at midnight everyday night regardless
     of who is home
-  trigger:
-  - platform: time
-    at: '23:59:59'
-  condition:
+  triggers:
+  - at: '23:59:59'
+    trigger: time
+  conditions:
   - condition: state
-    entity_id: switch.pwr_02
-    state: 'On'
-  action:
+    entity_id: switch.christmas_tree_switch_0
+    state: 'on'
+  actions:
   - action: switch.turn_off
     metadata: {}
     data: {}
     target:
-      entity_id: switch.pwr_02
+      entity_id: switch.christmas_tree_switch_0
   mode: single
 - id: '1669615800449'
   alias: Door - Rear sliding door alert at night
   description: Alerts all speakers when the rear sliding door is opened at night
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.rear_sliding_door_door
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: time
-    before: 07:00:00
-    weekday: []
-    after: 00:00:00
-  action:
-  - service: media_player.volume_set
-    data:
+    before: 06:00:00
+    after: 01:00:00
+  actions:
+  - data:
       volume_level: 1
     target:
       entity_id: media_player.all_google_speakers
+    action: media_player.volume_set
   - repeat:
       count: '5'
       sequence:
-      - service: tts.google_translate_say
-        data:
+      - data:
           entity_id: media_player.all_google_speakers
           message: Alert! The rear sliding door has been opened.
+        action: tts.google_translate_say
       - wait_template: '"{{ is_state(''media_player.all_google_speakers'', ''idle'')
           }}"'
         continue_on_timeout: true
