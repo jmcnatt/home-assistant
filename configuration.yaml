@@ -59,19 +59,6 @@ zone:
 # https://www.home-assistant.io/integrations/binary_sensor/
 binary_sensor: !include binary_sensor.yaml
 
-# camera
-# https://www.home-assistant.io/integrations/camera/
-camera:
-  - platform: ffmpeg
-    input: !secret nvr_cam_01_input
-    name: Front Yard
-  - platform: ffmpeg
-    input: !secret nvr_cam_02_input
-    name: Front Door
-  - platform: ffmpeg
-    input: !secret nvr_cam_03_input
-    name: garage
-
 # light
 # https://www.home-assistant.io/integrations/light/
 light:
@@ -80,13 +67,6 @@ light:
     entities:
       - light.lfx_bedroom_left
       - light.lfx_bedroom_right
-  - name: 'Office Lights'
-    platform: group
-    entities:
-      - light.lfx_office_01
-      - light.lfx_office_02
-      - light.lfx_office_03
-      - light.lfx_office_04
 
 # media_player
 # https://www.home-assistant.io/integrations/media_player/
