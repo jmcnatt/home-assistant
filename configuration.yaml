@@ -5,12 +5,14 @@
 ################################################################################
 homeassistant:
   country: 'US'
+  currency: 'USD'
   customize: !include customizations/entities.yaml
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   name: !secret home_name
+  radius: 25
   time_zone: !secret home_timezone
-  unit_system: imperial
+  unit_system: us_customary
 
 ################################################################################
 # Core Components (non-default)
