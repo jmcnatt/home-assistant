@@ -27,7 +27,8 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - '127.0.0.1'
-    - '172.30.33.0/24'
+    - '172.16.0.0/12'
+  server_port: 30103
 input_boolean:
 input_button: !include input_button.yaml
 input_datetime: !include input_datetime.yaml

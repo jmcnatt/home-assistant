@@ -8,6 +8,7 @@
 .cloud
 .google.token
 __pycache__
+backups
 custom_components
 image
 tts
