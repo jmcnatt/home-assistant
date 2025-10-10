@@ -242,7 +242,7 @@
     trigger: time
   conditions:
   - condition: state
-    state: 'Off'
+    state: 'off'
     entity_id: switch.christmas_tree_switch_0
   actions:
   - action: switch.turn_on
