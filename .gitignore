@@ -18,7 +18,6 @@ www
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
-home-assistant.log
 *.august.conf
 
 # Ignore home assistant db
@@ -31,5 +30,6 @@ home-assistant.log
 
 # Ignore other files
 .HA_VERSION
+*.lock
 aircast.xml
 core.device_registry

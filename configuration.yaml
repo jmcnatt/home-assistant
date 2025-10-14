@@ -55,58 +55,18 @@ zone:
 ################################################################################
 # Other Integrations
 ################################################################################
-
-# binary_sensor
-# https://www.home-assistant.io/integrations/binary_sensor/
 binary_sensor: !include binary_sensor.yaml
-
-# light
-# https://www.home-assistant.io/integrations/light/
-light:
-  - name: Bedroom Lights
-    platform: group
-    entities:
-      - light.lfx_bedroom_left
-      - light.lfx_bedroom_right
-
-# media_player
-# https://www.home-assistant.io/integrations/media_player/
-media_player:
-  - name: All Google Speakers
-    platform: group
-    unique_id: all_google_speakers
-    entities:
-      - media_player.living_room_speaker
-      - media_player.bedroom_speaker
-      - media_player.kitchen_display
-
-# notify
-# https://www.home-assistant.io/integrations/notify/S
+light: !include lights.yaml
 notify:
   - name: all_mobile_devices
     platform: group
     services:
       - service: mobile_app_five_mega_pixel
       - service: mobile_app_chirp
-
-# rest
-# https://www.home-assistant.io/integrations/rest/
 rest: !include rest.yaml
-
-# script
-# https://www.home-assistant.io/integrations/script
 script: !include scripts.yaml
 script split: !include_dir_merge_named scripts/
-
-# sensor
-# https://www.home-assistant.io/integrations/sensor/
 sensor: !include sensor.yaml
-
-# template
-# https://www.home-assistant.io/integrations/template/
 template: !include_dir_merge_list templates/
-
-# Text to speech
-# https://www.home-assistant.io/integrations/tts/
 tts:
   - platform: google_translate
