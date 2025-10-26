@@ -13,7 +13,6 @@ homeassistant:
   radius: 25
   time_zone: !secret home_timezone
   unit_system: us_customary
-
 ################################################################################
 # Core Components (non-default)
 # https://www.home-assistant.io/integrations/default_config/
@@ -29,7 +28,7 @@ http:
     - '127.0.0.1'
     - '172.16.0.0/12'
   server_port: 30103
-input_boolean:
+input_boolean: !include input_booleans.yaml
 input_button: !include input_button.yaml
 input_datetime: !include input_datetime.yaml
 input_number: !include input_number.yaml
@@ -51,7 +50,6 @@ system_health:
 tag:
 zeroconf:
 zone:
-
 ################################################################################
 # Other Integrations
 ################################################################################
