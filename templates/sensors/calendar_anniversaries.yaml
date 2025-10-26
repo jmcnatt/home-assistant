@@ -1,0 +1,26 @@
+---
+- sensor:
+  - name: next_jimmy_birthday
+    icon: mdi:cake-variant
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Jimmy\\'s Birthday'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}
+  - name: next_dana_birthday
+    icon: mdi:cake-variant
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Dana\\'s Birthday'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}
+  - name: next_wedding_anniversary
+    icon: mdi:calendar-heart
+    state: "{{ state_attr('sensor.calendar_birthdays_anniversaries_events', 'dates')['Wedding Anniversary'] }}"
+    attributes:
+      day_of_week: "{{ strptime(this.state, '%Y-%m-%d', now()).strftime('%A') }}"
+      days_until: |
+        {% set event = strptime(this.state, '%Y-%m-%d', now()) %}
+        {{ (event | as_local - today_at('00:00:00')).days }}
