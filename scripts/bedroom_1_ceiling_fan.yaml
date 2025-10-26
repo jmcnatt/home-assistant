@@ -1,0 +1,68 @@
+---
+################################################################################
+# Controls the bedroom_1_ceiling_fan using the Broadlink remote
+#
+# This script is used by automations and defines the base64 commands
+# for the remote once for each command
+#
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+bedroom_01_remote_ceiling_fan:
+  description: >-
+    Controls the bedroom 1 ceiling fan using the bedroom 1 remote
+  fields:
+    command:
+      description: "The command name for the bedroom 1 remote"
+      example: "speed_1"
+  sequence:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'speed_1' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:dsAyApDKBAALFwsXCxcLFwoMFhcLFwoMFhcLFwsWCwABigoXC\
+                  hcLFwsXCxcKDBYXCxYLDBYXCxcLFgsAAYoKFwsWCxcLFwsXCwsWFwsXCwsWFw\
+                  sXCxYLAAGJCxcLFgwWDBYLFwsLFhcLFwsLFhgKFwsXCgABigoXCxcLFwoXCxc\
+                  LCxcWCxgKDBUXDBYLFwoAAYoLFgsXCxcLFgsXCwsXFwsWCwwWFwsWCxcLAAGJ\
+                  CxcKFwsXCxcKFwsMFhcLFwoMFhcLFwsWCwABigoXCxYLFwsXCxcKDBYXCxcLC\
+                  xYXCxcLFwoAAYkMFgsWDBYLFwsXCwwVFwsXCwwWFwoXCxcLAAGJChcLFwsXCh\
+                  cLFwsMFhYLFwsMFhcLFgsXCwABiQsXChcLFwsXCxcKDBYXCxYMCxYXCxcKFws\
+                  AAYkLFwsWDBYLFwsXCwsWFwsXCwsXFgsXCxYMAAGJChcLFwsWCxcLFwsMFhYL\
+                  FwsMFhcKFwsXCwABiQsWCxcLFwsXChcLDBYXCxYMCxYXCxcKFwsAAYkLFwsWC\
+                  xcLFwsWCwwWFwsXCwsWFwsXCxYLAAGJCxcLFwsWCxcLFwsLFhcLFwsMFRgKFw\
+                  sXCwABiQsWCxcLFwsWCxcLDBYWDBYLDBYXChcLFwsAAYkLFwsWCxcLFwsXCgw\
+                  WFwsXCwsWFwsXCxYLAAGKChcLFwsWCxcLFwsLFhcLFwsLFxYLFwsWDAABiQoX\
+                  CxcLFwoXCxcKDBYXCxcLHAQeBBgLFwoABdw="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'speed_6' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:eMBSAXjOBAANFQ0VDBUNFQ0KFwsXFgwVDRUMFgwVDQABhw0VD\
+                  BYMFQ0VDRUMChgKGBUMFgwWDBYLFgwAAYgMFQ0VDRUMFgwVDQoXCxcWDBYLFg\
+                  wWDBYMAAGIDBUNFQwWDBUNFQ0KFwoYFQ0VDBYMFgwVDAABiA0VDBYMFQ0VDBY\
+                  MChgKFxYMFgwVDRUMFgwAAYgMFgwVDRUMFgwVDQoXCxcWDBYLFgwWDBYMAAGH\
+                  DRUMFgwWDBUNFQwKGAoYFQwWDBYMFQ0VDAABiQwVDBYMFQ0VDBYMChgKFxYMF\
+                  gwVDBYMFgwAAYgMFQ0VDRUMFgwVDQoXCxcWDBUMFgwWDBYMAAGHDRUMFgwVDR\
+                  UMFQ0KFxUNFQwWDBUMFgwVDQABgw0VDBUNFQ0UDRUMChgVDRUMFQwWDBYMFQw\
+                  AAYQNFQwVDRUMFgwVDAoYFQwWDBUMFgwVDBYMAAXc"
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'stop' }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8DIABTOBAAKFQ0VDRUMFg0bBgoXFgwWCxYMFgwKFxcLAAGID\
+                  BYMFgwVDRUMFgwKFxYMFgwVDBYMCxcWDAABhw0VDRUMFgwVDRUNChcWCxYMFg\
+                  wWDAoXFgwAAYgMFgwWDBUMFgwWDAoXFgwWDBUMFgwLFxYLAAGJDBUMFgwWDBU\
+                  NFQwKGBUMFgwWDBYLCxcWDAABiAwWDBUMFgwWDBUNChcWDBYLFgwWDAoXFwsA\
+                  AYgMFgwVDBUNFQwVDQoXFgwVDBYMFgsWDBYLAAXc"
