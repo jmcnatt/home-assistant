@@ -1,0 +1,37 @@
+---
+################################################################################
+# Automations for outdoor front lights
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1761606233923'
+  alias: Lights - Turn on outdoor front lights at sunset
+  description: 'Turns on the outdoor front lights around sunet'
+  triggers:
+  - event: sunset
+    offset: -01:00:00
+    trigger: sun
+  conditions:
+  - condition: state
+    entity_id: light.outdoor_front_lights
+    state: 'off'
+  actions:
+  - target:
+      entity_id: light.outdoor_front_lights
+    action: light.turn_on
+  mode: single
+
+- id: '1761596427982'
+  alias: Lights - Turn off outdoor front lights at 1:00am
+  description: 'Turns off the outdoor front lights at 1:00am'
+  triggers:
+  - at: 01:00:00
+    trigger: time
+  conditions:
+  - condition: state
+    entity_id: light.outdoor_front_lights
+    state: 'on'
+  actions:
+  - target:
+      entity_id: light.outdoor_front_lights
+    action: light.turn_off
+  mode: single

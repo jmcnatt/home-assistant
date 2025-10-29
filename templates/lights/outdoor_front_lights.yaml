@@ -1,0 +1,17 @@
+---
+################################################################################
+# Template for outdoor front lights
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+  - name: "Outdoor Front Lights"
+    availability: "{{ has_value('switch.outdoor_front_lights') }}"
+    state: "{{ is_state('switch.outdoor_front_lights', 'on') }}"
+    turn_on:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.outdoor_front_lights
+    turn_off:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.outdoor_front_lights
