@@ -1,6 +1,6 @@
 ---
 ################################################################################
-# Templates for lights
+# Templates for living room cabinet lights
 # https://www.home-assistant.io/integrations/template/#light
 ################################################################################
 - light:
