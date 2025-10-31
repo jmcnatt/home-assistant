@@ -1,0 +1,39 @@
+- id: '1761874698537'
+  alias: Bedroom 1 Dimmer Sync
+  description: ''
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_boolean.bedroom_1_ceiling_fan_power
+        - input_number.bedroom_1_ceiling_fan_speed
+  variables:
+    fan_on: "{{ is_state('input_boolean.bedroom_1_ceiling_fan_power', 'on') }}"
+    speed: "{{ states('input_number.bedroom_1_ceiling_fan_speed') | int(0) }}"
+    step: "{{ 255 / 6 }}"
+    brightness: >
+      {% if not fan_on %}
+        0
+      {% else %}
+        {{ (speed * step) | round(0) | int }}
+      {% endif %}
+  condition:
+  - condition: template
+    value_template: >
+      {% set current = state_attr('light.bedroom_1_dimmer', 'brightness') | int(0) %}
+      {% set expected = brightness | int(0) %}
+      {{ (current != expected) or (fan_on and is_state('light.bedroom_1_dimmer', 'off')) or (not fan_on and is_state('light.bedroom_1_dimmer', 'on')) }}
+  action:
+    - choose:
+        - conditions: "{{ not fan_on }}"
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: light.bedroom_1_dimmer
+        - conditions: "{{ fan_on }}"
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: light.bedroom_1_dimmer
+              data:
+                brightness: "{{ brightness | int }}"

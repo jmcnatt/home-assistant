@@ -1,0 +1,19 @@
+---
+- id: '1761782709704'
+  alias: Bedroom 1 Ceiling Fan Helper Script Trigger
+  description: ''
+  mode: restart
+  triggers:
+  - entity_id: input_number.bedroom_1_ceiling_fan_speed
+    trigger: state
+  - entity_id: input_boolean.bedroom_1_ceiling_fan_power
+    trigger: state
+  actions:
+    - action: script.bedroom_01_remote_ceiling_fan
+      data:
+        command: >-
+          {% if is_state('input_boolean.bedroom_1_ceiling_fan_power', 'off') %}
+            0
+          {% else %}
+            {{ states('input_number.bedroom_1_ceiling_fan_speed') | int }}
+          {% endif %}

@@ -6,6 +6,12 @@
 - fan:
   - name: "Bedroom 1 Ceiling Fan"
     speed_count: 6
+    state: >
+      {% if is_state('input_boolean.bedroom_1_ceiling_fan_power', 'on') %}
+        on
+      {% else %}
+        off
+      {% endif %}
     percentage: >
       {% set speed = states('input_number.bedroom_1_ceiling_fan_speed') | int %}
       {% if speed == 0 %}
@@ -22,15 +28,6 @@
       target:
         entity_id: input_boolean.bedroom_1_ceiling_fan_power
     set_percentage:
-      - variables:
-          step: "{{ 100 / 6 }}"
-          level: >
-            {% if percentage == 0 %}
-              0
-            {% else %}
-              {% set this = (percentage / step) | round(0) | int %}
-              {% if this < 1 %}1{% elif this > 6 %}6{% else %}{{ this }}{% endif %}
-            {% endif %}
       - service: >
           {% if percentage == 0 %}
             input_boolean.turn_off

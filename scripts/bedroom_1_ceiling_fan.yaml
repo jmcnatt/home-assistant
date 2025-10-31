@@ -13,12 +13,25 @@ bedroom_01_remote_ceiling_fan:
   fields:
     command:
       description: "The command name for the bedroom 1 remote"
-      example: "speed_1"
+      example: 1
   sequence:
     - choose:
         - conditions:
             - condition: template
-              value_template: "{{ command == 'speed_1' }}"
+              value_template: "{{ command == 0 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8DIABTOBAAKFQ0VDRUMFg0bBgoXFgwWCxYMFgwKFxcLAAGID\
+                  BYMFgwVDRUMFgwKFxYMFgwVDBYMCxcWDAABhw0VDRUMFgwVDRUNChcWCxYMFg\
+                  wWDAoXFgwAAYgMFgwWDBUMFgwWDAoXFgwWDBUMFgwLFxYLAAGJDBUMFgwWDBU\
+                  NFQwKGBUMFgwWDBYLCxcWDAABiAwWDBUMFgwWDBUNChcWDBYLFgwWDAoXFwsA\
+                  AYgMFgwVDBUNFQwVDQoXFgwVDBYMFgsWDBYLAAXc"
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 1 }}"
           sequence:
             - action: remote.send_command
               target:
@@ -39,7 +52,79 @@ bedroom_01_remote_ceiling_fan:
                   CxcLFwoXCxcKDBYXCxcLHAQeBBgLFwoABdw="
         - conditions:
             - condition: template
-              value_template: "{{ command == 'speed_6' }}"
+              value_template: "{{ command == 2 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8A0AhTOBAAMFA0VDRUNFA4UDQoYFQwWDAoYFQ0KFxYMAAGID\
+                  RUMFQ0VDRUMFgwKGBUMFgwLFxYMChcWDAABiA0VDBYMFQ0VDRUMChgVDRUMCx\
+                  cWDAoXFgwAAYkMFQ0VDBYMFQ0VDQoXFgwWDAoXFgwLFxYLAAGJDBYMFQ0VDBU\
+                  NFQ0KFxYMFgwKGBUMCxcWDAABiAwWDBYMFgwVDBYMChgVDRUMCxcWDAoXFgwA\
+                  AYgNFQ0VDBYMFQ0VDQkYFgwVDAsXFgwLFxYLAAGJDBUNFQ0VDBUNFQ0KFxYMF\
+                  gwKGBUMCxcWDAABiAwWDBUNFQwWDBYMChgVDBYMChgWCwsXFgwAAYgNFQ0VDB\
+                  UNFQ0VDAsXFgwVDAsXFgwLFxYLAAGIDRUNFQ0VDBUNFQ0KFxYMFgwKFxYMCxc\
+                  WDAABiQsWDBUNFQwWDBYMChgVDBYMChgWDAoXFgwAAYgMFgwWDBUNFQ0VDAoY\
+                  FQ0VDAsXFgwKGBYLAAGIDRUNFQ0VDBUNFQ0KFxYMFgwKFxYMCxcWDAABiAwVD\
+                  RUNFQ0VDBUNChgVDBYMChgVDAsXFgwAAYgMFgwWDBUNFQwWDAoYFgwVDAsXFg\
+                  wKGBYLAAGJDBUNFQ0VDBUNFQ0KFxYMFgwKFxYMCxcWDAABiAwWDBUNFQ0VDBM\
+                  ChgVDRUMCxcWDAoXFgwAAYUNFQwVDRUMFQ0VDAoYFQwWDBUMFgwVDBYMAAGED\
+                  RUMFgwVDRUMFQ0NFRUMFQwWDBUMFgwVDQAF3A=="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 3 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8DEARTOBAAMFQ0VDBUNFQ0VDAoYFgwKFxYMFgwWCxYMAAGID\
+                  RUMFQ0VDRUMFgwKGBUMCxcWDBYLFgwWDAABiAwWDBUNFQwWDBUNChcWDAsXFg\
+                  sWDBYMFgwAAYgMFgsWDBYMFgwVDAsXFgwKGBYLFgwWDBYMAAGICxYMFgwWDBY\
+                  MFQwLFxYMChcXCxYMFgwWCwABiQwVDBYMFgwWCxYMCxcWDAoXFgwWDBYLFwsA\
+                  AYgMFgwWDBYMFQwWDAsXFgwKFxYMFgsXCxYMAAGJCxYMFgwVDBYMFgwKGBUMC\
+                  xcWDBYMFgsWDAABiAwWDBYMFgsWDBYMChgVDAsXFgwWCxYMFgwAAYkLFgwWCx\
+                  YMFgwWDAoXFgwLFxYMFgsWDBYMAAGIDBYMFgwVDBYMFgwKFxYMCxcWDBYLFgw\
+                  WDAABiQsWDBUMFgwWDBYMChcWDAsXFgwVDBYMFgwAAYgMFgwWCxYMFgwWDAoX\
+                  FgwLFxYLFwsWDBYMAAGIDBYMFQwWDBYMFgsLFxYMCxcWCxYMFgwWDAABiAwWD\
+                  BUMFgwWDBYMChcWDAsXFgsWDBYMFgwAAYUMFgwVDBYMFgsWDAoYFQwWDBUMFg\
+                  wVDBYMAAXc"
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 4 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8BUARTOBAALFQ0UDhQNFQ0VDQkYFQ0KFwsXFgwWDBUMAAGID\
+                  RUNFA0VDRUNFQwKGBUNChcLFxYMFgsWDAABiA0VDBYMFQ0VDBYMChgVDQoXCx\
+                  cWDBUMFgwAAYkMFQ0VDBUNFQwWDAoYFQwLFwsXFgwVDBYMAAGIDBYMFgwVDBY\
+                  MFgwKGBUMCxcLFxYMFgsWDAABiA0VDBYMFQ0VDRUMChgVDQoXCxcWDBYLFgwA\
+                  AYgNFQwWDBUNFQwWDAoYFQ0KFwsXFgwWCxYMAAGIDRUMFgwVDRUMFgwKGBYMC\
+                  hcLFxYMFgsXCwABiA0VDBYMFgwVDBYMCxcWDAoXCxcWDBYLFwsAAYgNFQ0VDB\
+                  YMFQ0VDAsXFgwKGAoXFgwWDBYLAAGJDBUNFQwWDBUNFQwLFxYMChgKFxYMFgw\
+                  WCwABiQwVDRUMGAoWDBUMCxcWDAoYChcWDBYMFgwABdw="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 5 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8BUARTOBAALFQ0VDRQOFA0VDQkYChgVDRUMFgwKGBUMAAGID\
+                  RUNFA0VDRUNFQwKGAoXFgwWDBYMChcWDAABiAwWDBYMFQ0VDBUNChgKFxYMFg\
+                  wVDAsXFgwAAYgMFgwVDRUMFgwVDQoXCxcWDBYLFgwLFxYMAAGIDBUNFQwWDBY\
+                  MFQwLFwsXFgwWCxYMCxcWDAABiAwVDRUMFgwVDRUMCxcLFxYMFQwWDAsXFgsA\
+                  AYkMFQwWDBYMFQ0VDAoYChgVDBYMFgwLFxUMAAGIDBYMFgwWDBUMFgwKGAoYF\
+                  QwWDBYMChcWDAABiAwWDBYMFQwWDBYMChgKFxYMFgwWDAoYFQwAAYYNFQwVDR\
+                  UMFgwVDAoYFQwWDBUMFgwWCxYMAAGEDRUMFQ0VDBUNFQwKGBUMFgwVDBYMFQw\
+                  WDAABhA0VDBUNFQwVDRUMChgVDBYMFQwWDBUMFgwABdw="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 6 }}"
           sequence:
             - action: remote.send_command
               target:
@@ -53,16 +138,3 @@ bedroom_01_remote_ceiling_fan:
                   gwVDBYMFgwAAYgMFQ0VDRUMFgwVDQoXCxcWDBUMFgwWDBYMAAGHDRUMFgwVDR\
                   UMFQ0KFxUNFQwWDBUMFgwVDQABgw0VDBUNFQ0UDRUMChgVDRUMFQwWDBYMFQw\
                   AAYQNFQwVDRUMFgwVDAoYFQwWDBUMFgwVDBYMAAXc"
-        - conditions:
-            - condition: template
-              value_template: "{{ command == 'stop' }}"
-          sequence:
-            - action: remote.send_command
-              target:
-                entity_id: remote.brd_01_remote
-              data:
-                command: "b64:d8DIABTOBAAKFQ0VDRUMFg0bBgoXFgwWCxYMFgwKFxcLAAGID\
-                  BYMFgwVDRUMFgwKFxYMFgwVDBYMCxcWDAABhw0VDRUMFgwVDRUNChcWCxYMFg\
-                  wWDAoXFgwAAYgMFgwWDBUMFgwWDAoXFgwWDBUMFgwLFxYLAAGJDBUMFgwWDBU\
-                  NFQwKGBUMFgwWDBYLCxcWDAABiAwWDBUMFgwWDBUNChcWDBYLFgwWDAoXFwsA\
-                  AYgMFgwVDBUNFQwVDQoXFgwVDBYMFgsWDBYLAAXc"
