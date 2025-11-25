@@ -1,3 +1,4 @@
+---
 - id: '1761874698537'
   alias: Bedroom 1 Dimmer Sync
   description: ''
@@ -18,11 +19,11 @@
         {{ (speed * step) | round(0) | int }}
       {% endif %}
   condition:
-  - condition: template
-    value_template: >
-      {% set current = state_attr('light.bedroom_1_dimmer', 'brightness') | int(0) %}
-      {% set expected = brightness | int(0) %}
-      {{ (current != expected) or (fan_on and is_state('light.bedroom_1_dimmer', 'off')) or (not fan_on and is_state('light.bedroom_1_dimmer', 'on')) }}
+    - condition: template
+      value_template: >
+        {% set current = state_attr('light.bedroom_1_dimmer', 'brightness') | int(0) %}
+        {% set expected = brightness | int(0) %}
+        {{ (current != expected) or (fan_on and is_state('light.bedroom_1_dimmer', 'off')) or (not fan_on and is_state('light.bedroom_1_dimmer', 'on')) }}
   action:
     - choose:
         - conditions: "{{ not fan_on }}"
