@@ -4,26 +4,26 @@
 # https://www.home-assistant.io/integrations/template/#light
 ################################################################################
 - light:
-  - name: "Living Room Cabinet Left"
-    availability: "{{ has_value('switch.living_room_cabinet_left') }}"
-    state: "{{ is_state('switch.living_room_cabinet_left', 'on') }}"
-    turn_on:
-      - action: switch.turn_on
-        target:
-          entity_id: switch.living_room_cabinet_left
-    turn_off:
-      - action: switch.turn_off
-        target:
-          entity_id: switch.living_room_cabinet_left
+    - name: "Living Room Cabinet Left"
+      availability: "{{ has_value('switch.living_room_cabinet_left') }}"
+      state: "{{ is_state('switch.living_room_cabinet_left', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.living_room_cabinet_left
+      turn_off:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.living_room_cabinet_left
 
-  - name: "Living Room Cabinet Right"
-    availability: "{{ has_value('switch.living_room_cabinet_right') }}"
-    state: "{{ is_state('switch.living_room_cabinet_right', 'on') }}"
-    turn_on:
-      - action: switch.turn_on
-        target:
-          entity_id: switch.living_room_cabinet_right
-    turn_off:
-      - action: switch.turn_off
-        target:
+    - name: "Living Room Cabinet Right"
+      availability: "{{ has_value('switch.living_room_cabinet_right') }}"
+      state: "{{ is_state('switch.living_room_cabinet_right', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.living_room_cabinet_right
+      turn_off:
+        - action: switch.turn_off
+          target:
             entity_id: switch.living_room_cabinet_right
