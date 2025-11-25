@@ -1,0 +1,17 @@
+---
+################################################################################
+# Template for stairway lights
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+  - name: "Stairway Lights"
+    availability: "{{ has_value('switch.stairway_lights') }}"
+    state: "{{ is_state('switch.stairway_lights', 'on') }}"
+    turn_on:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.stairway_lights
+    turn_off:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.stairway_lights
