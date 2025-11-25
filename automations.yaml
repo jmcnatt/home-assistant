@@ -277,3 +277,38 @@
         Once the filter is changed, navigate to the [Hallway Tab in Home Assistant](https://assistant.home.jmcnatt.net/lovelace/hallway)
         to reset the filter.'
   mode: single
+- id: '1762909656942'
+  alias: Stairway Lights Sync with Upper Hallway Scene Controller Button 2
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - switch.stairway_lights
+  conditions: []
+  actions:
+  - action: light.turn_{{ 'on' if trigger.to_state.state == 'on' else 'off' }}
+    target:
+      entity_id: light.upper_hallway_scene_controller_button_2_led_indicator
+  mode: single
+- id: '1762986803752'
+  alias: Hallway Upper Scene Controller Button 2 Toggles Stairway Lights
+  description: ''
+  triggers:
+  - device_id: 59b5c0bd816769a4a1ba3eb95bb199c6
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+    trigger: device
+    value: 0
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.stairway_lights
+  mode: single
