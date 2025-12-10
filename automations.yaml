@@ -103,32 +103,6 @@
       target: '865449623518969866'
     action: notify.discord
   mode: single
-- id: '1646888893633'
-  alias: Lock - Unlock front door when arriving home
-  description: ''
-  triggers:
-  - entity_id:
-    - person.jimmy
-    to: home
-    from: not_home
-    trigger: state
-  - entity_id:
-    - person.dana
-    from: not_home
-    to: home
-    trigger: state
-  conditions: []
-  actions:
-  - data:
-      message: 'Welcome home, {{ trigger.to_state.attributes.friendly_name }}!  Home
-        Assistant has unlocked the front door. :wave:
-
-        '
-      title: Front Door Unlocked
-      target:
-      - '865449623518969866'
-    action: notify.discord
-  mode: single
 - id: '1665960719209'
   alias: Air Purifier - Turn on bedroom purifier at 9:00 PM
   description: Turns on the bedroom air purifier every night at 9:00 PM if someone

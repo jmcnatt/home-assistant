@@ -1,0 +1,44 @@
+---
+################################################################################
+# Unlocks the front door when someone arrives at home
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1646888893633'
+  alias: Front Door Unlocks When Someone Arrives at Home
+  description: 'Unlocks the front door when someone arrives at home'
+  triggers:
+    - entity_id:
+        - person.jimmy
+      to: home
+      from: not_home
+      trigger: state
+    - entity_id:
+        - person.dana
+      from: not_home
+      to: home
+      trigger: state
+  actions:
+    - action: lock.unlock
+      target:
+        entity_id: lock.front_door_lock
+    - wait_for_trigger:
+        - entity_id:
+            - lock.front_door_lock
+          to:
+            - unlocked
+          trigger: state
+      timeout:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+      continue_on_timeout: false
+    - action: notify.discord
+      data:
+        message: 'Hey {{ trigger.to_state.attributes.friendly_name }}, welcome home!  Home
+          Assistant has unlocked the front door. :wave: :scout:
+          '
+        title: Front Door Unlocked
+        target:
+          - '1448208998255034520'
+  mode: single
