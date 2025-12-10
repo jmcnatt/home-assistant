@@ -1,0 +1,17 @@
+---
+################################################################################
+# Template for bedroom 1 ceiling fan light
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+    - name: "Bedroom 1 Ceiling Fan"
+      availability: "{{ has_value('switch.bedroom_1_dimmer') }}"
+      state: "{{ is_state('switch.bedroom_1_dimmer', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.bedroom_1_dimmer
+      turn_off:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.bedroom_1_dimmer

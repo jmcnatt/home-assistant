@@ -7,7 +7,7 @@
 #
 # https://www.home-assistant.io/integrations/script/
 ################################################################################
-bedroom_01_remote_ceiling_fan:
+bedroom_1_remote_ceiling_fan:
   description: >-
     Controls the bedroom 1 ceiling fan using the bedroom 1 remote
   fields:
@@ -138,3 +138,35 @@ bedroom_01_remote_ceiling_fan:
                   gwVDBYMFgwAAYgMFQ0VDRUMFgwVDQoXCxcWDBUMFgwWDBYMAAGHDRUMFgwVDR\
                   UMFQ0KFxUNFQwWDBUMFgwVDQABgw0VDBUNFQ0UDRUMChgVDRUMFQwWDBYMFQw\
                   AAYQNFQwVDRUMFgwVDAoYFQwWDBUMFgwVDBYMAAXc"
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 7 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8BUARTOBAALFQwVDRUMFQ0VDAsXFgwVDBYMFQwWDAoXAAGID\
+                  RUMFQ0VDBYMFQ0KFxYMFQwWDBUMFgwLFwABiAwVDBYMFQ0VDBUNChcWDBUMFg\
+                  wWCxYMCxcAAYgMFgwVDBUNFQwWDAoXFgwWCxYMFgwVDAsXAAGIDBYMFQwWDBU\
+                  MFgwKGBUMFgwVDBYMFgwKFwABiAwWDBUNFQwVDRUMCxcWCxYMFgsWDBYMCxYA\
+                  AYgNFQwWDBYLFgwVFAQXFgwVDBYMFQwWDAsWAAGJDBUMFgwVDBYMFgwKFxYMF\
+                  gsWDBYLFgwLFwABiAwWDBUMFgwVDBYMChcWDBYMFQwWDBUMCxcAAYkLFgwVDB\
+                  YMFgwVDAsXFgsWDBYMFQwWDAsWAAGIDBUMFgwVDRUMFQ0KFxYMFQwWDBUMFgw\
+                  VDAABhQwVDRUMFQ0VDBUNChcWDBUMFgwWCxYMFgwABdw="
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 8 }}"
+          sequence:
+            - action: remote.send_command
+              target:
+                entity_id: remote.brd_01_remote
+              data:
+                command: "b64:d8BUARTOBAAMFQ0VDBYMFQwWDAoYFQwWDAoYFgsWDAsXAAGID\
+                  BYMFgwVDBYMFQwLFxYMFgwKFxYMFgsLFwABiQwVDBYMFQ0VDBYMChgVDBYMCx\
+                  cWCxYMCxcAAYgMFgwWDBUMFgwVDAsXFgwWDAoXFgwWDAoXAAGJDBUMFgwWDBU\
+                  MFgwKGBYLFgwLFxYLFgwLFwABiAwWDBYMFQwWDBYMChcWDBYMChcWDBYMChcA\
+                  AYkMFQ0VDBYMFgsWDAsXFgwVDAsXFgwWCwsXAAGIDRUMFgwVDRUMFgwKGBUMF\
+                  gwLFxYLFgwLFwABiAwWDBYMFQwWDBUNChcWDBYMChcWDBYMChcAAYkMFQwWDB\
+                  YMFQwWDAoYFgsWDAsXFgsXCwsXAAGJCxYMFgwVDBYMFgwKFxYMFgwKFxYMFgw\
+                  KFwABiQwVDRUMFgwVDRUMChgVDBYMFQwWDBUMFgwABdw="

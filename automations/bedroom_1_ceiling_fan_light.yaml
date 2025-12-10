@@ -1,0 +1,22 @@
+---
+################################################################################
+# Bedroom 1 ceiling fan light script trigger
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1764273461989'
+  alias: Bedroom 1 Ceiling Fan Light
+  description: 'Calls the bedroom 1 remote to send on and off commands when the dimmer light switch is triggered'
+  triggers:
+    - trigger: state
+      entity_id:
+        - switch.bedroom_1_dimmer
+  action:
+    - service: script.bedroom_1_remote_ceiling_fan
+      data:
+        command: >
+          {% if trigger.to_state.state == 'on' %}
+            7
+          {% elif trigger.to_state.state == 'off' %}
+            8
+          {% endif %}
+  mode: single

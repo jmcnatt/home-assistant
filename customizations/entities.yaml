@@ -3,6 +3,9 @@
 # Customizations for entities
 # https://www.home-assistant.io/integrations/homeassistant/
 ################################################################################
+light.bedroom_1_ceiling_fan:
+  icon: mdi:ceiling-fan
+
 light.living_room_cabinet_left:
   icon: mdi:light-recessed
 
