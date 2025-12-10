@@ -1,0 +1,21 @@
+---
+################################################################################
+# Outdoor Holiday Lights Turn On Every Day
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1669506333449'
+  alias: Outdoor Holiday Lights Turn On Every Day
+  description: Turns the outdoor holiday lights on every day at 4:00pm local time
+  triggers:
+    - at: '16:00:00'
+      trigger: time
+  conditions:
+    - condition: state
+      state:
+        - 'off'
+      entity_id: switch.outdoor_holiday_lights
+  actions:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.outdoor_holiday_lights
+  mode: single
