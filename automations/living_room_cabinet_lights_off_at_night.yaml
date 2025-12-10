@@ -1,0 +1,29 @@
+---
+################################################################################
+# Turns off the living room cabinet lights at night
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1765353141170'
+  alias: Living Room Cabinet Lights Off at Night
+  description: Turns off the living room cabinet lights at night
+  triggers:
+    - trigger: time
+      at: 02:00:00
+  conditions:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.living_room_cabinet_left
+          state:
+            - 'on'
+        - condition: state
+          entity_id: light.living_room_cabinet_right
+          state:
+            - 'on'
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.living_room_cabinet_left
+          - light.living_room_cabinet_right
+  mode: single
