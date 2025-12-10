@@ -2,12 +2,19 @@
 ################################################################################
 # lights.yaml
 # https://www.home-assistant.io/integrations/light/
-################################################################################
-# Living Room Lights Group
 # https://www.home-assistant.io/integrations/group/#yaml-configuration
+################################################################################
+
+# Living Room Lights Group
 - platform: group
   name: "Living Room Lights"
   entities:
     - light.living_room_cabinet_left
     - light.living_room_cabinet_right
+    - light.living_room_lamp
+
+# All Floor 1 Lights Group
+- platform: group
+  name: "Floor 1 Lights"
+  entities:
     - light.living_room_lamp
