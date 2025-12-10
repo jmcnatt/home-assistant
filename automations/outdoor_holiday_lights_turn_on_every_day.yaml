@@ -10,6 +10,14 @@
     - at: '16:00:00'
       trigger: time
   conditions:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: switch.outdoor_holiday_lights
+          state: "unavailable"
+        - condition: state
+          entity_id: switch.outdoor_holiday_lights
+          state: "unknown"
     - condition: state
       state:
         - 'off'
