@@ -6,6 +6,8 @@
 - id: '1646888893633'
   alias: Front Door Unlocks When Someone Arrives at Home
   description: 'Unlocks the front door when someone arrives at home'
+  mode: single
+
   triggers:
     - entity_id:
         - person.jimmy
@@ -17,6 +19,13 @@
       from: not_home
       to: home
       trigger: state
+
+  conditions:
+    - condition: state
+      entity_id: lock.front_door_lock
+      state:
+        - unlocked
+
   actions:
     - action: lock.unlock
       target:
@@ -41,4 +50,3 @@
         title: Front Door Unlocked
         target:
           - '1448208998255034520'
-  mode: single
