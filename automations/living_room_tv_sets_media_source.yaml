@@ -1,0 +1,26 @@
+---
+################################################################################
+# Living Room TV Automatically Sets Media Source
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: "1765613465870"
+  alias: Living Room TV Automatically Sets Media Source
+  description: >
+    When the Living Room TV is turned on the sound output is changed 
+    to external arc
+  mode: single
+
+  triggers:
+    - trigger: state
+      entity_id:
+        - media_player.living_room_tv
+      to:
+        - "on"
+
+  conditions: []
+
+  actions:
+    - action: webostv.select_sound_output
+      data:
+        entity_id: media_player.living_room_tv
+        sound_output: "external_arc"
