@@ -24,7 +24,7 @@
     - condition: state
       entity_id: lock.front_door_lock
       state:
-        - unlocked
+        - locked
 
   actions:
     - action: lock.unlock
