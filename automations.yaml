@@ -73,36 +73,6 @@
     data: {}
     action: light.turn_on
   mode: single
-- id: '1646793047500'
-  alias: Lock - Front door lock when no one is home
-  description: ''
-  triggers:
-  - entity_id:
-    - person.jimmy
-    to: not_home
-    from: home
-    trigger: state
-  - entity_id:
-    - person.dana
-    to: not_home
-    from: home
-    trigger: state
-  conditions:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: person.jimmy
-      state: not_home
-    - condition: state
-      entity_id: person.dana
-      state: not_home
-  actions:
-  - data:
-      title: Front Door Locked
-      message: Home Assistant has automatically locked the front door.
-      target: '865449623518969866'
-    action: notify.discord
-  mode: single
 - id: '1665960719209'
   alias: Air Purifier - Turn on bedroom purifier at 9:00 PM
   description: Turns on the bedroom air purifier every night at 9:00 PM if someone
