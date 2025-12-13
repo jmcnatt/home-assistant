@@ -1,0 +1,32 @@
+---
+################################################################################
+# Living Room Holiday Tree Turns Off at Night
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1765441143475'
+  alias: Living Room Holiday Tree Off at Night
+  description: Turns off the living room holiday tree at night
+  mode: single
+
+  triggers:
+    - trigger: time
+      at: '01:00:00'
+
+  conditions:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: switch.living_room_holiday_tree
+          state: unavailable
+        - condition: state
+          entity_id: switch.living_room_holiday_tree
+          state: unknown
+    - condition: state
+      entity_id: switch.living_room_holiday_tree
+      state:
+        - on
+
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.living_room_holiday_tree

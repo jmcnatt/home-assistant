@@ -1,0 +1,32 @@
+---
+################################################################################
+# Living Room Holiday Tree Turns On Every Day
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1765614797658'
+  alias: Living Room Holiday Tree Turns On Every Day
+  description: Turns on the living room holiday tree in the evening
+  mode: single
+
+  triggers:
+    - trigger: time
+      at: '18:00:00'
+
+  conditions:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: switch.living_room_holiday_tree
+          state: unavailable
+        - condition: state
+          entity_id: switch.living_room_holiday_tree
+          state: unknown
+    - condition: state
+      entity_id: switch.living_room_holiday_tree
+      state:
+        - off
+
+  actions:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.living_room_holiday_tree
