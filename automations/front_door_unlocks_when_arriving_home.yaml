@@ -10,14 +10,14 @@
   mode: single
 
   triggers:
-    - entity_id: person.jimmy
-      to: home
-      from: not_home
-      trigger: state
-    - entity_id: person.dana
-      from: not_home
-      to: home
-      trigger: state
+    - trigger: state
+      entity_id: person.jimmy
+      to: "home"
+      from: "not_home"
+    - trigger: state
+      entity_id: person.dana
+      from: "not_home"
+      to: "home"
 
   conditions:
     - condition: state
