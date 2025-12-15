@@ -5,19 +5,18 @@
 ################################################################################
 - id: "1646793047500"
   alias: Front Door Locks When No One is Home
-  description: 'Locks the front door if unlocked if no one is home for 15 minutes'
+  description: >
+    Locks the front door if unlocked if no one is home for 15 minutes
   mode: single
 
   triggers:
     - trigger: state
-      entity_id:
-        - person.jimmy
+      entity_id: person.jimmy
       to: "not_home"
       from: "home"
       for: "00:15:00"
     - trigger: state
-      entity_id:
-        - person.dana
+      entity_id: person.dana
       to: "not_home"
       from: "home"
       for: "00:15:00"
@@ -27,16 +26,13 @@
       conditions:
         - condition: state
           entity_id: person.jimmy
-          state:
-            - "not_home"
+          state: "not_home"
         - condition: state
           entity_id: person.dana
-          state:
-            - "not_home"
+          state: "not_home"
         - condition: state
           entity_id: lock.front_door_lock
-          state:
-            - "unlocked"
+          state: "unlocked"
 
   actions:
     - action: lock.lock
@@ -44,15 +40,10 @@
         entity_id: lock.front_door_lock
     - wait_for_trigger:
         - trigger: state
-          entity_id:
-            - lock.front_door_lock
-          to:
-            - "locked"
+          entity_id: lock.front_door_lock
+          to: "locked"
       timeout:
-        hours: 0
-        minutes: 0
         seconds: 15
-        milliseconds: 0
       continue_on_timeout: false
     - action: notify.discord
       data:
