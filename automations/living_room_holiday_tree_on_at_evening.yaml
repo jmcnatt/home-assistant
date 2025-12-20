@@ -10,7 +10,7 @@
 
   triggers:
     - trigger: time
-      at: "18:00:00"
+      at: "7:30:00"
 
   conditions:
     - condition: not
@@ -24,6 +24,14 @@
     - condition: state
       entity_id: switch.living_room_holiday_tree
       state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.jimmy
+          state: "home"
+        - condition: state
+          entity_id: person.dana
+          state: "home"
 
   actions:
     - action: switch.turn_on
