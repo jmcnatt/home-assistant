@@ -12,24 +12,22 @@
   triggers:
     - trigger: state
       entity_id: person.jimmy
-      to: "not_home"
       from: "home"
       for: "00:15:00"
     - trigger: state
       entity_id: person.dana
-      to: "not_home"
       from: "home"
       for: "00:15:00"
 
   conditions:
-    - condition: and
+    - condition: not
       conditions:
         - condition: state
           entity_id: person.jimmy
-          state: "not_home"
+          state: "home"
         - condition: state
           entity_id: person.dana
-          state: "not_home"
+          state: "home"
         - condition: state
           entity_id: lock.front_door_lock
           state: "unlocked"
