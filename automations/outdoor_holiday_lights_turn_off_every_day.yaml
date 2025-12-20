@@ -3,12 +3,16 @@
 # Outdoor Holiday Lights Turn Off at Night
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1669506415856'
+- id: "1669506415856"
   alias: Outdoor Holiday Lights Turn Off at Night
-  description: Turns the outdoor holiday lights off every day at 5:11am local time
+  description: >
+    Turns the outdoor holiday lights off every day at 5:11am local time
+  mode: single
+
   triggers:
     - at: 05:11:00
       trigger: time
+
   conditions:
     - condition: not
       conditions:
@@ -20,10 +24,9 @@
           state: "unknown"
     - condition: state
       entity_id: switch.outdoor_holiday_lights
-      state:
-        - 'on'
+      state: "on"
+
   actions:
     - action: switch.turn_off
       target:
         entity_id: switch.outdoor_holiday_lights
-  mode: single
