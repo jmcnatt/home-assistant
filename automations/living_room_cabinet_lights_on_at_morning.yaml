@@ -1,28 +1,31 @@
 ---
 ################################################################################
-# Turns on the living room cabinet lights at morning if someone is home
+# Living Room Cabinet Lights On at Morning
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1763969173441'
+- id: "1763969173441"
   alias: Living Room Cabinet Lights On at Morning
+  description: >
+    Turns on the living room cabinet lights in the morning
+  mode: single
+
   triggers:
     - trigger: time
-      at: 07:00:00
+      at: "07:00:00"
+
   conditions:
     - condition: or
       conditions:
         - condition: state
           entity_id: person.jimmy
-          state:
-            - home
+          state: "home"
         - condition: state
           entity_id: person.dana
-          state:
-            - home
+          state: "home"
+
   actions:
     - action: light.turn_on
       target:
         entity_id:
           - light.living_room_cabinet_left
           - light.living_room_cabinet_right
-  mode: single

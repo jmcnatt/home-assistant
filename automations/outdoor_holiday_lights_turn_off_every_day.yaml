@@ -10,7 +10,7 @@
   mode: single
 
   triggers:
-    - at: 05:11:00
+    - at: "05:11:00"
       trigger: time
 
   conditions:
