@@ -30,7 +30,7 @@
           state: "home"
         - condition: state
           entity_id: lock.front_door_lock
-          state: "unlocked"
+          state: "locked"
 
   actions:
     - action: lock.lock

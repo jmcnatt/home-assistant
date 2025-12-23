@@ -13,10 +13,8 @@
     - trigger: state
       entity_id: person.jimmy
       to: "home"
-      from: "not_home"
     - trigger: state
       entity_id: person.dana
-      from: "not_home"
       to: "home"
 
   conditions:
@@ -38,7 +36,7 @@
     - action: notify.discord
       data:
         message: 'Hey {{ trigger.to_state.attributes.friendly_name }}, welcome home!  Home
-          Assistant has unlocked the front door. :wave: :scout:
+          Assistant has unlocked the front door. :wave:
           '
         title: Front Door Unlocked
         target: "1448208998255034520"
