@@ -9,6 +9,7 @@
     - platform: homeassistant
       event: start
   action:
+    - wait_template: "{{ states('calendar.birthdays_anniversaries') != 'unavailable' }}"
     - action: calendar.get_events
       target:
         entity_id: calendar.birthdays_anniversaries
