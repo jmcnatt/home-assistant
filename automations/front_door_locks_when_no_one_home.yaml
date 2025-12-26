@@ -41,7 +41,7 @@
           entity_id: lock.front_door_lock
           to: "locked"
       timeout:
-        seconds: 15
+        seconds: 60
       continue_on_timeout: false
     - action: notify.discord
       data:
