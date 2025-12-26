@@ -26,12 +26,9 @@
     - action: lock.unlock
       target:
         entity_id: lock.front_door_lock
-    - wait_for_trigger:
-        - trigger: state
-          entity_id: lock.front_door_lock
-          to: "unlocked"
+    - wait_template: "{{ is_state('lock.front_door_lock', 'unlocked') }}"
       timeout:
-        seconds: 60
+        seconds: 15
       continue_on_timeout: false
     - action: notify.discord
       data:
