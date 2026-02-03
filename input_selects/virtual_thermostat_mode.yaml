@@ -1,0 +1,13 @@
+---
+################################################################################
+# The mode of the virtual thermostat
+#
+# https://www.home-assistant.io/integrations/input_select/
+################################################################################
+virtual_thermostat_mode:
+  name: "Virtual Temperature Mode"
+  icon: mdi:form-dropdown
+  options:
+    - heat
+    - cool
+    - off

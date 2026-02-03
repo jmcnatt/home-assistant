@@ -1,0 +1,22 @@
+---
+################################################################################
+# Template for the virtual thermostat humidity
+#
+# The value of the sensor is based on the input_select and will determine which
+# floor or room should represent the current humidity.
+#
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    - name: "Virtual Thermostat Humidity"
+      unit_of_measurement: "%"
+      state: >
+        {% set map = {
+          'Living Room': 'sensor.living_room_thermostat_humidity',
+          'Main bedroom': 'sensor.bedroom_1_htg3_humidity',
+          'Guest bedroom': 'sensor.bedroom_2_htg3_humidity',
+          'Kids Bedroom': 'sensor.bedroom_3_htg3_humidity',
+          'First Floor': 'sensor.floor_1_humidity',
+          'Second Floor': 'sensor.floor_2_humidity'
+        } %}
+        {{ states(map[states('input_select.virtual_thermostat_temperature_select')]) }}

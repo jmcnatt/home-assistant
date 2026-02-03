@@ -1,0 +1,14 @@
+---
+################################################################################
+# The timestamp when the living_room_thermostat last changed
+# Used to protect the living_room_thermostat hardware
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- trigger:
+    - platform: state
+      entity_id: climate.living_room_thermostat
+  sensor:
+    - name: living_room_thermostat_last_change
+      device_class: timestamp
+      icon: mdi:timer
+      state: "{{ now().isoformat() }}"

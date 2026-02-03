@@ -23,10 +23,10 @@ My Home Assistant instance is deployed on Docker.  I switched over from the OVA 
 
 Here are a few interesting automations used in this instance.
 
-### Bedroom Ceiling Fan Control (via Zen30 Dimmer + Template Fan)
+### Ceiling Fan Control via RF Commands and a Wall Dimmer Switch
 
 This configuration allows a Zooz Zen30 dimmer to control a 6-speed ceiling fan through Home Assistant using RF commands sent by a script.
-Both the Home Assistant UI and the physical dimmer paddles remain fully synchronized — no matter where the fan is controlled from.
+Both the Home Assistant UI and the physical dimmer paddles remain fully synchronized regardless of where the fan is controlled.
 
 #### ⚙️ Components
 | Entity                                      | Description                                               |
@@ -37,7 +37,7 @@ Both the Home Assistant UI and the physical dimmer paddles remain fully synchron
 | `fan.bedroom_1_ceiling_fan`                 | Template fan entity combining the helpers above           |
 | `script.bedroom_1_ceiling_fan`              | Sends RF commands to the fan via `remote.bedroom_1_remote`|
 
-#### 🧩 Logic Overview
+#### Logic Overview
 
 1. Template Fan Entity
   - Defines a 6-speed fan entity whose state and speed are derived from the helper entities.
@@ -45,14 +45,14 @@ Both the Home Assistant UI and the physical dimmer paddles remain fully synchron
   - Setting a speed updates `input_number.bedroom_1_ceiling_fan_speed`.
   - The fan entity reflects any helper updates, keeping it in sync with the dimmer and RF control script.
 
-2. Dimmer → Fan Automation
+2. Dimmer to Fan Automation
 Monitors the Zen30 dimmer (light.bedroom_1_dimmer) and maps its state and brightness to fan speed and power.
   - Turning the dimmer off stops the fan.
   - Turning the dimmer on restores the last known fan speed.
   - Adjusting brightness (0–255) changes the fan speed between 1–6.
   - Built-in conditions prevent feedback loops or redundant updates.
 
-3. Helpers → Dimmer Sync
+3. Helpers to Dimmer Sync
 A companion automation keeps the Zen30 dimmer’s LEDs and brightness aligned with fan activity.
   - If the fan is turned on/off in the UI, the dimmer’s LEDs mirror that state.
   - Adjusting the fan speed from the UI updates the dimmer brightness to match.
@@ -60,7 +60,7 @@ A companion automation keeps the Zen30 dimmer’s LEDs and brightness aligned wi
 4. RF Fan Script
 `script.bedroom_1_ceiling_fan` translates the helper states into RF commands using `remote.bedroom_1_remote`, ensuring the physical fan speed and power state always match Home Assistant.
 
-#### 🔄 Behavior Summary
+#### Behavior Summary
 | Action                             | Result                                             |
 | ---------------------------------- | -------------------------------------------------- |
 | Turn on fan in Home Assistant      | Fan powers on, dimmer LED turns on                 |

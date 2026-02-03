@@ -1,0 +1,13 @@
+---
+################################################################################
+# The threshold / variance allowed between the temperature sensor and
+# the target temperature of the virtual thermostat
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+virtual_thermostat_deadband:
+  name: "Virtual Thermostat Deadband"
+  min: 0.2
+  max: 2.0
+  step: 0.1
+  unit_of_measurement: "°F"
+  initial: 0.5

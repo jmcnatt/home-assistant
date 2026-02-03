@@ -1,8 +1,8 @@
 ---
 ################################################################################
-# input_booleans.yaml
+# Whether or not to enable eco mode for the virtual thermostat
 # https://www.home-assistant.io/integrations/input_boolean/
 ################################################################################
-bedroom_1_ceiling_fan_power:
-  name: Bedroom 1 Ceiling Fan Power
-  icon: mdi:power
+virtual_thermostat_eco_mode:
+  name: "Virtual Thermostat Eco Mode"
+  icon: mdi:thermostat

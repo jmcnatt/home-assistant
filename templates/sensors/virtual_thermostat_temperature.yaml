@@ -1,0 +1,22 @@
+---
+################################################################################
+# Template for the virtual thermostat
+#
+# The value of the sensor is based on the input_select and will determine which
+# floor or room should represent the current temperature.
+#
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    - name: "Virtual Thermostat Temperature"
+      unit_of_measurement: "°F"
+      state: >
+        {% set map = {
+          'Living Room': 'sensor.living_room_thermostat_air_temperature',
+          'Main bedroom': 'sensor.bedroom_1_htg3_temperature',
+          'Guest bedroom': 'sensor.bedroom_2_htg3_temperature',
+          'Kids Bedroom': 'sensor.bedroom_3_htg3_temperature',
+          'First Floor': 'sensor.floor_1_temperature',
+          'Second Floor': 'sensor.floor_2_temperature'
+        } %}
+        {{ states(map[states('input_select.virtual_thermostat_temperature_select')]) }}
