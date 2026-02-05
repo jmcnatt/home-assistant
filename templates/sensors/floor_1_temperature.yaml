@@ -1,0 +1,17 @@
+---
+################################################################################
+# Template for floor 1 temperature
+#
+# Used to average all temperature sensors and provide a reasonable value
+# for normal virtual thermostat use
+#
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    - name: "Floor 1 Temperature"
+      unit_of_measurement: "°F"
+      state: >
+        {% set temperatures = [
+          states('sensor.living_room_thermostat_air_temperature') | float(0)
+        ] %}
+        {{ (temperatures | sum / temperatures | count) | round(1) }}

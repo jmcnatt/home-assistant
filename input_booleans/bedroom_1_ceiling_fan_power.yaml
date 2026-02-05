@@ -1,0 +1,8 @@
+---
+################################################################################
+# Bedroom 1 ceiling fan power on or off
+# https://www.home-assistant.io/integrations/input_boolean/
+################################################################################
+bedroom_1_ceiling_fan_power:
+  name: Bedroom 1 Ceiling Fan Power
+  icon: mdi:power

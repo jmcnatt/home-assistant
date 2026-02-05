@@ -1,0 +1,182 @@
+---
+################################################################################
+# Living Room Thermostat Control for Virtual Thermostat
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1769975743711'
+  alias: Living Room Thermostat Control for Virtual Thermostat
+  description: >
+    Controls the living room thermostat as an actuator by using helper
+    inputs and temperature sensors throughout the house to effectively regulate the
+    temperature
+  mode: single
+
+  variables:
+    thermostat_state: >
+      {{ states('climate.living_room_thermostat') }}
+    thermostat_last_change: >
+      {{ as_timestamp(states('sensor.living_room_thermostat_last_change'))
+        if states('sensor.living_room_thermostat_last_change')
+          not in ['unknown','unavailable']
+        else now().timestamp() }}
+    hvac_mode: >
+      {{ state_attr('climate.virtual_thermostat', 'hvac_mode') }}
+    setpoint: >
+      {{ state_attr('climate.virtual_thermostat', 'temperature') | float }}
+    effective_deadband: >
+      {{ states('input_number.virtual_thermostat_eco_deadband') | float
+        if is_state('input_boolean.virtual_thermostat_eco_mode', 'on')
+        else states('input_number.virtual_thermostat_deadband') | float }}
+    current_temperature: >
+      {{ states('sensor.virtual_thermostat_temperature') | float }}
+    seconds_since_change: >
+      {{ now().timestamp() - thermostat_last_change }}
+    min_run_seconds: >
+      {{ (
+        states('input_number.virtual_thermostat_heat_runtime_minimum')
+        if hvac_mode == 'heat'
+        else states('input_number.virtual_thermostat_cool_runtime_minimum')
+      ) | float * 60 }}
+    max_run_seconds: >
+      {{ (
+        states('input_number.virtual_thermostat_heat_runtime_maximum')
+        if hvac_mode == 'heat'
+        else states('input_number.virtual_thermostat_cool_runtime_maximum')
+      ) | float * 60 }}
+    lockout_minimum_seconds: >
+      {{ states('input_number.virtual_thermostat_lockout_time') | float * 60 }}
+    is_lockout: >
+      {{ thermostat_state == 'off'
+        and seconds_since_change < lockout_minimum_seconds }}
+
+  triggers:
+    - entity_id:
+        - climate.virtual_thermostat
+        - input_select.virtual_thermostat_temperature_select
+        - input_boolean.virtual_thermostat_eco_mode
+        - input_number.virtual_thermostat_deadband
+        - input_number.virtual_thermostat_eco_deadband
+        - input_number.virtual_thermostat_heat_runtime_minimum
+        - input_number.virtual_thermostat_heat_runtime_maximum
+        - input_number.virtual_thermostat_cool_runtime_minimum
+        - input_number.virtual_thermostat_cool_runtime_maximum
+        - input_number.virtual_thermostat_lockout_time
+      trigger: state
+    - minutes: /2
+      trigger: time_pattern
+
+  conditions: []
+
+  action:
+    - choose:
+        # if hvac_mode of virtual_thermostat is heat
+        - conditions:
+            - condition: template
+              value_template: "{{ hvac_mode == 'heat' }}"
+          sequence:
+            - choose:
+                # if current_temperature is less than the setpoint - deadband
+                # heat is needed
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ current_temperature < (setpoint - effective_deadband)
+                          and thermostat_state == 'off'
+                          and not is_lockout }}
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        hvac_mode: heat
+                    - service: climate.set_temperature
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        temperature: 77
+
+                # if current_temperature is at setpoint or greater + min run exceeded
+                # or max run reached
+                # turn off living_room_thermostat
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ thermostat_state != 'off'
+                          and (
+                            seconds_since_change >= max_run_seconds
+                            or (
+                              current_temperature >= setpoint
+                              and seconds_since_change >= min_run_seconds
+                            )
+                          ) }}
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        hvac_mode: "off"
+
+        # if hvac_mode of virtual_thermostat is cool
+        - conditions:
+            - condition: template
+              value_template: "{{ hvac_mode == 'cool' }}"
+          sequence:
+            - choose:
+                # if current_temperature is greater than the setpoint + deadband
+                # and not in cooling lockout
+                # cool is needed
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ current_temperature > (setpoint + effective_deadband)
+                          and thermostat_state == 'off'
+                          and not is_lockout }}
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        hvac_mode: cool
+                    - service: climate.set_temperature
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        temperature: 64
+
+                # if current_temperature is at setpoint or less
+                # and the minimum runtime has been reached
+                # turn off living_room_thermostat
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ thermostat_state != 'off'
+                            and (
+                              seconds_since_change >= max_run_seconds
+                              or (
+                                current_temperature <= setpoint
+                                and seconds_since_change >= min_run_seconds
+                              )
+                            ) }}
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        hvac_mode: "off"
+
+        # if the hvac mode of virtual_thermostat is off
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ hvac_mode == 'off' }}
+          sequence:
+            - choose:
+                - conditions: >
+                    {{ thermostat_state != 'off'
+                      and seconds_since_change >= min_run_seconds }}
+                  sequence:
+                    - service: climate.set_hvac_mode
+                      target:
+                        entity_id: climate.living_room_thermostat
+                      data:
+                        hvac_mode: "off"

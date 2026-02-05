@@ -1,0 +1,76 @@
+---
+################################################################################
+# Virtual Thermostat used to control the living_room_thermostat combined with
+# the temperature sensors and additional settings provided by inputs.
+# https://www.home-assistant.io/integrations/climate/
+################################################################################
+- name: "Virtual Thermostat"
+  platform: climate_template
+  unique_id: virtual_thermostat
+  min_temp: 60
+  max_temp: 80
+
+  modes:
+    - heat
+    - cool
+    - "off"
+
+  preset_modes:
+    - none
+    - eco
+
+  hvac_mode_template: >
+    {{ states('input_select.virtual_thermostat_mode') }}
+
+  hvac_action_template: >
+    {{ states('sensor.virtual_thermostat_hvac_action') }}
+
+  preset_mode_template: >
+    {% if is_state('input_boolean.virtual_thermostat_eco_mode', 'on') %}
+      eco
+    {% else %}
+      none
+    {% endif %}
+
+  current_temperature_template: >
+    {% set temperature = states('sensor.virtual_thermostat_temperature') %}
+    {% if temperature not in ['unknown', 'unavailable', 'none', ''] %}
+      {{ temperature }}
+    {% else %}
+      {{ state_attr('climate.living_room_thermostat', 'current_temperature') }}
+    {% endif %}
+
+  current_humidity_template: >
+    {% set humidity = states('sensor.virtual_thermostat_humidity') %}
+    {% if humidity not in ['unknown', 'unavailable'] %}
+      {{ humidity | float | round(0) }}
+    {% else %}
+      {{ state_attr('climate.living_room_thermostat', 'current_humidity') }}
+    {% endif %}
+
+  target_temperature_template: >
+    {{ states('input_number.virtual_thermostat_setpoint') }}
+
+  set_hvac_mode:
+    service: input_select.select_option
+    target:
+      entity_id: input_select.virtual_thermostat_mode
+    data:
+      option: "{{ hvac_mode }}"
+
+  set_temperature:
+    service: input_number.set_value
+    target:
+      entity_id: input_number.virtual_thermostat_setpoint
+    data:
+      value: "{{ temperature }}"
+
+  set_preset_mode:
+    service: >
+      {% if preset_mode == 'eco' %}
+        input_boolean.turn_on
+      {% else %}
+        input_boolean.turn_off
+      {% endif %}
+    target:
+      entity_id: input_boolean.virtual_thermostat_eco_mode

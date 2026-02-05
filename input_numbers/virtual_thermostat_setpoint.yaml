@@ -1,0 +1,13 @@
+---
+################################################################################
+# The target temperature / setpoint for the virtual thermostat
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+virtual_thermostat_setpoint:
+  name: "Virtual Thermostat Setpoint"
+  icon: mdi:thermometer-plus
+  initial: 72
+  min: 60
+  max: 80
+  step: 1
+  unit_of_measurement: "°F"

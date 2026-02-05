@@ -1,0 +1,14 @@
+---
+################################################################################
+# The maximum amount of minutes the virtual thermostat is allowed to run in cool
+# Used to protect the living_room_thermostat hardware
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+virtual_thermostat_cool_run_time_maximum:
+  name: Virtual Thermostat Cool Run Time Maximum
+  icon: mdi:timer-stop
+  initial: 30
+  min: 10
+  max: 90
+  step: 5
+  unit_of_measurement: "min"

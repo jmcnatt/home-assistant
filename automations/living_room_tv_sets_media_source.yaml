@@ -6,7 +6,7 @@
 - id: "1765613465870"
   alias: Living Room TV Automatically Sets Media Source
   description: >
-    When the Living Room TV is turned on the sound output is changed 
+    When the Living Room TV is turned on the sound output is changed
     to external arc
   mode: single
 

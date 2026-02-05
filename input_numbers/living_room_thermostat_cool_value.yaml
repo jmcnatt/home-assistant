@@ -1,0 +1,14 @@
+---
+################################################################################
+# The value used by the virtual_thermostat to actuate the cooling
+# This value is usually very low to force the living_room_thermostat to cool
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+living_room_thermostat_cool_value:
+  name: Living Room Thermostat Cool Value
+  icon: mdi:thermometer-low
+  initial: 64
+  min: 60
+  max: 68
+  step: 1
+  unit_of_measurement: "°F"

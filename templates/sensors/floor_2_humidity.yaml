@@ -1,0 +1,19 @@
+---
+################################################################################
+# Template for floor 2 humidity
+#
+# Used to average all temperature sensors and provide a reasonable value
+# for normal virtual thermostat operation
+#
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    - name: "Floor 2 Humidity"
+      unit_of_measurement: "%"
+      state: >
+        {% set humidities = [
+          states('sensor.bedroom_1_htg3_humidity') | float(0),
+          states('sensor.bedroom_2_htg3_humidity') | float(0),
+          states('sensor.bedroom_3_htg3_humidity') | float(0)
+        ] %}
+        {{ (humidities | sum / humidities | count) | round(1) }}

@@ -1,0 +1,16 @@
+---
+################################################################################
+# Determines which sensor is used for the virtual thermostat temperature reading
+#
+# https://www.home-assistant.io/integrations/input_select/
+################################################################################
+virtual_thermostat_temperature_select:
+  name: "Virtual Temperature Select"
+  icon: mdi:form-dropdown
+  options:
+    - Living Room
+    - Main bedroom
+    - Guest bedroom
+    - Kids Bedroom
+    - First Floor
+    - Second Floor

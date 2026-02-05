@@ -1,0 +1,14 @@
+---
+################################################################################
+# The threshold / variance allowed between the temperature sensor and
+# the target temperature of the virtual thermostat when in eco mode
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+virtual_thermostat_eco_offset:
+  name: "Virtual Thermostat Eco Offset"
+  icon: mdi:thermometer-plus
+  initial: 5
+  min: 1
+  max: 10
+  step: 1
+  unit_of_measurement: "°F"
