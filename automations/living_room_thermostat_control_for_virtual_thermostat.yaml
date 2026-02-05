@@ -14,22 +14,21 @@
   variables:
     thermostat_state: >
       {{ states('climate.living_room_thermostat') }}
+    thermostat_last_change: >
+      {{ as_timestamp(states('sensor.living_room_thermostat_last_change'))
+        if states('sensor.living_room_thermostat_last_change')
+          not in ['unknown','unavailable']
+        else now().timestamp() }}
     hvac_mode: >
       {{ state_attr('climate.virtual_thermostat', 'hvac_mode') }}
     setpoint: >
       {{ state_attr('climate.virtual_thermostat', 'temperature') | float }}
-    eco_mode: >
-      {{ is_state('input_boolean.virtual_thermostat_eco_mode', 'on') }}
-    eco_deadband: >
-      {{ states('input_number.virtual_thermostat_eco_deadband') | float }}
     effective_deadband: >
-      {{ eco_deadband if eco_mode else 0 }}
+      {{ states('input_number.virtual_thermostat_eco_deadband') | float 
+        if is_state('input_boolean.virtual_thermostat_eco_mode', 'on')
+        else states('input_number.virtual_thermostat_deadband') | float }}
     current_temperature: >
       {{ states('sensor.virtual_thermostat_temperature') | float }}
-    thermostat_last_change: >
-      {{ as_timestamp(states('sensor.living_room_thermostat_last_change'))
-        if states('sensor.living_room_thermostat_last_change') not in ['unknown','unavailable']
-        else now().timestamp() }}
     seconds_since_change: >
       {{ now().timestamp() - thermostat_last_change }}
     min_run_seconds: >
@@ -44,24 +43,24 @@
         if hvac_mode == 'heat'
         else states('input_number.virtual_thermostat_cool_runtime_maximum')
       ) | float * 60 }}
-    cool_off_lockout_seconds: >
-      {{ states('input_number.virtual_thermostat_cool_off_time_minimum') | float * 60 }}
-    cooling_lockout_active: >
-      {{ hvac_mode == 'cool'
-        and thermostat_state == 'off'
-        and seconds_since_change < cool_off_lockout_seconds }}
+    lockout_minimum_seconds: >
+      {{ states('input_number.virtual_thermostat_lockout_time') | float * 60 }}
+    is_lockout: >
+      {{ thermostat_state == 'off' 
+        and seconds_since_change < lockout_minimum_seconds }}
 
   triggers:
     - entity_id:
         - climate.virtual_thermostat
         - input_select.virtual_thermostat_temperature_select
         - input_boolean.virtual_thermostat_eco_mode
+        - input_number.virtual_thermostat_deadband
         - input_number.virtual_thermostat_eco_deadband
         - input_number.virtual_thermostat_heat_runtime_minimum
         - input_number.virtual_thermostat_heat_runtime_maximum
         - input_number.virtual_thermostat_cool_runtime_minimum
         - input_number.virtual_thermostat_cool_runtime_maximum
-        - input_number.virtual_thermostat_cool_off_time_minimum
+        - input_number.virtual_thermostat_lockout_time
       trigger: state
     - minutes: /2
       trigger: time_pattern
@@ -69,20 +68,21 @@
   conditions: []
 
   action:
-    # if hvac_mode of virtual_thermostat is heat
     - choose:
+        # if hvac_mode of virtual_thermostat is heat
         - conditions:
             - condition: template
               value_template: "{{ hvac_mode == 'heat' }}"
           sequence:
-            # if current_temperature is less than the setpoint - deadband
-            # heat is needed
             - choose:
+                # if current_temperature is less than the setpoint - deadband
+                # heat is needed
                 - conditions:
                     - condition: template
                       value_template: >
                         {{ current_temperature < (setpoint - effective_deadband)
-                          and thermostat_state == 'off' }}
+                          and thermostat_state == 'off'
+                          and not is_lockout }}
                   sequence:
                     - service: climate.set_hvac_mode
                       target:
@@ -130,7 +130,7 @@
                       value_template: >
                         {{ current_temperature > (setpoint + effective_deadband)
                           and thermostat_state == 'off'
-                          and not cooling_lockout_active }}
+                          and not is_lockout }}
                   sequence:
                     - service: climate.set_hvac_mode
                       target:
