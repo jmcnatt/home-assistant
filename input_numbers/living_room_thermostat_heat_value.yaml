@@ -1,0 +1,14 @@
+---
+################################################################################
+# The value used by the virtual_thermostat to actuate the heat
+# This value is usually very high to force the living_room_thermostat to heat
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+living_room_thermostat_heat_value:
+  name: Living Room Thermostat Heat Value
+  icon: mdi:thermometer-high
+  initial: 78
+  min: 74
+  max: 82
+  step: 1
+  unit_of_measurement: "°F"
