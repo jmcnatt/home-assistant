@@ -13,7 +13,7 @@
   modes:
     - heat
     - cool
-    - off
+    - "off"
 
   preset_modes:
     - none

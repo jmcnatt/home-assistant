@@ -10,4 +10,4 @@ virtual_thermostat_mode:
   options:
     - heat
     - cool
-    - off
+    - "off"
