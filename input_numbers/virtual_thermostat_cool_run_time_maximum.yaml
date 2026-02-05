@@ -6,9 +6,9 @@
 ################################################################################
 virtual_thermostat_cool_run_time_maximum:
   name: Virtual Thermostat Cool Run Time Maximum
+  icon: mdi:timer-stop
+  initial: 30
   min: 10
   max: 90
   step: 5
   unit_of_measurement: "min"
-  initial: 30
-  icon: mdi:timer-stop

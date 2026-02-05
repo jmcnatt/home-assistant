@@ -7,6 +7,7 @@
 virtual_thermostat_eco_offset:
   name: "Virtual Thermostat Eco Offset"
   icon: mdi:thermometer-plus
+  initial: 5
   min: 1
   max: 10
   step: 1

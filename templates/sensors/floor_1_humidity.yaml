@@ -8,10 +8,10 @@
 # https://www.home-assistant.io/integrations/template/#sensor
 ################################################################################
 - sensor:
-    name: "Floor 1 Humidity"
-    unit_of_measurement: "%"
-    state: >
-      {% set humidities = [
-        states('sensor.living_room_thermostat_humidity') | float(0)
-      ] %}
-      {{ (humidities | sum / humidities | count) | round(1) }}
+    - name: "Floor 1 Humidity"
+      unit_of_measurement: "%"
+      state: >
+        {% set humidities = [
+          states('sensor.living_room_thermostat_humidity') | float(0)
+        ] %}
+        {{ (humidities | sum / humidities | count) | round(1) }}

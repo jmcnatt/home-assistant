@@ -8,12 +8,12 @@
 # https://www.home-assistant.io/integrations/template/#sensor
 ################################################################################
 - sensor:
-    name: "Floor 2 Temperature"
-    unit_of_measurement: "°F"
-    state: >
-      {% set temperatures = [
-        states('sensor.bedroom_1_htg3_temperature') | float(0),
-        states('sensor.bedroom_2_htg3_temperature') | float(0),
-        states('sensor.bedroom_3_htg3_temperature') | float(0)
-      ] %}
-      {{ (temperatures | sum / temperatures | count) | round(1) }}
+    - name: "Floor 2 Temperature"
+      unit_of_measurement: "°F"
+      state: >
+        {% set temperatures = [
+          states('sensor.bedroom_1_htg3_temperature') | float(0),
+          states('sensor.bedroom_2_htg3_temperature') | float(0),
+          states('sensor.bedroom_3_htg3_temperature') | float(0)
+        ] %}
+        {{ (temperatures | sum / temperatures | count) | round(1) }}
