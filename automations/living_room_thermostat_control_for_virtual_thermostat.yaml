@@ -7,8 +7,8 @@
   alias: Living Room Thermostat Control for Virtual Thermostat
   description: >
     Controls the living room thermostat as an actuator by using helper
-    inputs and temperature sensors throughout the house to effectively regulate the
-    temperature
+    inputs and temperature sensors throughout the house to effectively regulate 
+    the temperature
   mode: single
 
   variables:
@@ -20,7 +20,7 @@
           not in ['unknown','unavailable']
         else now().timestamp() }}
     hvac_mode: >
-      {{ state_attr('climate.virtual_thermostat', 'hvac_mode') }}
+      {{ states('climate.virtual_thermostat') }}
     setpoint: >
       {{ state_attr('climate.virtual_thermostat', 'temperature') | float }}
     effective_deadband: >
@@ -33,15 +33,15 @@
       {{ now().timestamp() - thermostat_last_change }}
     min_run_seconds: >
       {{ (
-        states('input_number.virtual_thermostat_heat_runtime_minimum')
+        states('input_number.virtual_thermostat_heat_run_time_minimum')
         if hvac_mode == 'heat'
-        else states('input_number.virtual_thermostat_cool_runtime_minimum')
+        else states('input_number.virtual_thermostat_cool_run_time_minimum')
       ) | float * 60 }}
     max_run_seconds: >
       {{ (
-        states('input_number.virtual_thermostat_heat_runtime_maximum')
+        states('input_number.virtual_thermostat_heat_run_time_maximum')
         if hvac_mode == 'heat'
-        else states('input_number.virtual_thermostat_cool_runtime_maximum')
+        else states('input_number.virtual_thermostat_cool_run_time_maximum')
       ) | float * 60 }}
     lockout_minimum_seconds: >
       {{ states('input_number.virtual_thermostat_lockout_time') | float * 60 }}
@@ -56,10 +56,10 @@
         - input_boolean.virtual_thermostat_eco_mode
         - input_number.virtual_thermostat_deadband
         - input_number.virtual_thermostat_eco_deadband
-        - input_number.virtual_thermostat_heat_runtime_minimum
-        - input_number.virtual_thermostat_heat_runtime_maximum
-        - input_number.virtual_thermostat_cool_runtime_minimum
-        - input_number.virtual_thermostat_cool_runtime_maximum
+        - input_number.virtual_thermostat_heat_run_time_minimum
+        - input_number.virtual_thermostat_heat_run_time_maximum
+        - input_number.virtual_thermostat_cool_run_time_minimum
+        - input_number.virtual_thermostat_cool_run_time_maximum
         - input_number.virtual_thermostat_lockout_time
       trigger: state
     - minutes: /2
@@ -95,7 +95,7 @@
                       data:
                         temperature: 77
 
-                # if current_temperature is at setpoint or greater + min run exceeded
+                # if current_temperature is setpoint or greater + min run past
                 # or max run reached
                 # turn off living_room_thermostat
                 - conditions:
@@ -144,7 +144,7 @@
                         temperature: 64
 
                 # if current_temperature is at setpoint or less
-                # and the minimum runtime has been reached
+                # and the minimum run time has been reached
                 # turn off living_room_thermostat
                 - conditions:
                     - condition: template
@@ -171,9 +171,11 @@
                 {{ hvac_mode == 'off' }}
           sequence:
             - choose:
-                - conditions: >
-                    {{ thermostat_state != 'off'
-                      and seconds_since_change >= min_run_seconds }}
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ thermostat_state != 'off'
+                          and seconds_since_change >= min_run_seconds }}
                   sequence:
                     - service: climate.set_hvac_mode
                       target:

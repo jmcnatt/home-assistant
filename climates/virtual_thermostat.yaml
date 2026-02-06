@@ -23,7 +23,7 @@
     {{ states('input_select.virtual_thermostat_mode') }}
 
   hvac_action_template: >
-    {{ states('sensor.virtual_thermostat_hvac_action') }}
+    {{ state_attr('climate.living_room_thermostat', 'hvac_action') }}
 
   preset_mode_template: >
     {% if is_state('input_boolean.virtual_thermostat_eco_mode', 'on') %}
