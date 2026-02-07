@@ -10,6 +10,7 @@
     inputs and temperature sensors throughout the house to effectively regulate 
     the temperature
   mode: single
+  max_exceeded: silent
 
   variables:
     thermostat_state: >
