@@ -20,6 +20,10 @@
         if states('sensor.living_room_thermostat_last_change')
           not in ['unknown','unavailable']
         else now().timestamp() }}
+    thermostat_cool_value: >
+      {{ states('input_number.living_room_thermostat_cool_value') | float }}
+    thermostat_heat_value: >
+      {{ states('input_number.living_room_thermostat_heat_value') | float }}
     hvac_mode: >
       {{ states('climate.virtual_thermostat') }}
     setpoint: >
@@ -94,7 +98,7 @@
                       target:
                         entity_id: climate.living_room_thermostat
                       data:
-                        temperature: 77
+                        temperature: "{{ thermostat_heat_value }}"
 
                 # if current_temperature is setpoint or greater + min run past
                 # or max run reached
@@ -142,7 +146,7 @@
                       target:
                         entity_id: climate.living_room_thermostat
                       data:
-                        temperature: 64
+                        temperature: "{{ thermostat_cool_value }}"
 
                 # if current_temperature is at setpoint or less
                 # and the minimum run time has been reached
