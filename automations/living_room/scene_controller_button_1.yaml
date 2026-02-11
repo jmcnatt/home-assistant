@@ -1,0 +1,99 @@
+---
+################################################################################
+# Living Room Scene Controller Button 1
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1770762427937'
+  alias: Living Room Scene Controller Button 1
+  description: >
+    Syncs the living_room_scene_controller button 1 relay/dimmer with the smart
+    bulb light.living_room_lamp
+  mode: restart
+
+  triggers:
+    - trigger: state
+      entity_id: light.living_room_scene_controller
+    - trigger: state
+      entity_id: light.living_room_lamp
+      
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.entity_id == 'light.living_room_scene_controller' }}
+          sequence:
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: light.living_room_scene_controller
+                      state: "off"
+                  sequence:
+                    - condition: template
+                      value_template: >
+                        {{ not is_state('light.living_room_lamp', 'off') }}
+                    - service: light.turn_off
+                      target:
+                        entity_id: light.living_room_lamp
+
+                - conditions:
+                    - condition: state
+                      entity_id: light.living_room_scene_controller
+                      state: "on"
+                  sequence:
+                    - variables:
+                        relay_brightness: >
+                          {{ state_attr('light.living_room_scene_controller', 'brightness') | int(0) }}
+                        bulb_brightness: >
+                          {{ state_attr('light.living_room_lamp', 'brightness') | int(0) }}
+
+                    - condition: template
+                      value_template: >
+                        {{ relay_brightness != bulb_brightness
+                          or not is_state('light.living_room_lamp','on') }}
+
+                    - service: light.turn_on
+                      data:
+                        entity_id: light.living_room_lamp
+                        brightness: "{{ relay_brightness }}"
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.entity_id == 'light.living_room_lamp' }}
+          sequence:
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: light.living_room_lamp
+                      state: "off"
+                  sequence:
+                    - condition: template
+                      value_template: >
+                        {{ not is_state('light.living_room_scene_controller','off') }}
+                    - service: light.turn_off
+                      target:
+                        entity_id: light.living_room_scene_controller
+
+                - conditions:
+                    - condition: state
+                      entity_id: light.living_room_lamp
+                      state: "on"
+                  sequence:
+                    - variables:
+                        bulb_brightness: >
+                          {{ state_attr('light.living_room_lamp', 'brightness') | int(0) }}
+                        relay_brightness: >
+                          {{ state_attr('light.living_room_scene_controller', 'brightness') | int(0) }}
+
+                    - condition: template
+                      value_template: >
+                        {{ bulb_brightness != relay_brightness
+                          or not is_state('light.living_room_scene_controller','on') }}
+
+                    - service: light.turn_on
+                      data:
+                        entity_id: light.living_room_scene_controller
+                        brightness: "{{ bulb_brightness }}"
