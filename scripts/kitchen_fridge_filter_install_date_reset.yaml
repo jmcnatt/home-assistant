@@ -1,0 +1,16 @@
+---
+################################################################################
+# Sets the kitchen fridge filter install date to now
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+kitchen_fridge_filter_install_date_reset:
+  alias: Kitchen Fridge Filter Install Date Reset
+  description: >
+    Sets the kitchen fridge filter install date to now
+
+  sequence:
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.kitchen_fridge_filter_install_date
+      data:
+        date: '{{ as_timestamp(now()) | timestamp_custom(''%Y-%m-%d'') }}'

@@ -1,0 +1,15 @@
+---
+################################################################################
+# Template for the number of days remaining before the kitchen fridge filter
+# needs to be changed
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    name: Kitchen Fridge Filter Days Remaining
+    unit_of_measurement: days
+    icon: mdi:calendar-clock
+    state: >
+      {% set installed = as_timestamp(states('input_datetime.kitchen_fridge_filter_install_date')) %}
+      {% set lifespan = states('input_number.kitchen_fridge_filter_lifespan') | int * 86400 %}
+      {% set now = as_timestamp(states('sensor.date')) %}
+      {{ (((installed + lifespan) - now) / 86400) | round(0) }}
