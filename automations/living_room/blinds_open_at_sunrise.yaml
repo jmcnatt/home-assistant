@@ -1,0 +1,37 @@
+---
+################################################################################
+# Living Room Blinds Open Every Morning at Sunrise
+#
+# Battery level needs to be above 5% and there needs to be someone home
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1768546264236'
+  alias: Living Room Blinds Open at Sunrise
+  description: >
+    Opens the living room blinds at sunrise offset by 30 minutes
+  mode: single
+
+  triggers:
+    - trigger: sun
+      event: sunrise
+      offset: '0:30:00'
+
+  conditions:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: cover.living_room_blinds
+          state:
+            - closed
+        - condition: numeric_state
+          entity_id: sensor.living_room_blinds_battery_level
+          above: 5
+        - condition: numeric_state
+          entity_id: zone.home
+          above: 0
+
+  actions:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.living_room_blinds
