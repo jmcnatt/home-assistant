@@ -1,19 +1,19 @@
 ---
 ################################################################################
-# Template for stairway lights
+# Templates for living room cabinet right light
 # https://www.home-assistant.io/integrations/template/#light
 ################################################################################
 - light:
-    - name: Stairway Lights
-      unique_id: "e2036b28-bdcd-48b5-bb13-eaf7840b12cc"
+    - name: Living Room Cabinet Right
+      unique_id: "c90700ba-83ef-46a4-84d3-0914924aec51"
       icon: mdi:light-recessed
-      availability: "{{ has_value('switch.stairway_lights') }}"
-      state: "{{ is_state('switch.stairway_lights', 'on') }}"
+      availability: "{{ has_value('switch.living_room_cabinet_right') }}"
+      state: "{{ is_state('switch.living_room_cabinet_right', 'on') }}"
       turn_on:
         - action: switch.turn_on
           target:
-            entity_id: switch.stairway_lights
+            entity_id: switch.living_room_cabinet_right
       turn_off:
         - action: switch.turn_off
           target:
-            entity_id: switch.stairway_lights
+            entity_id: switch.living_room_cabinet_right
