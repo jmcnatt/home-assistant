@@ -9,11 +9,6 @@ bedroom_air_filter_change_to_today:
   name: 'Bedroom Air Filter Change to Today'
   icon: 'mdi:air-purifier'
 
-# Fridge Filter
-fridge_filter_change_to_today:
-  name: 'Fridge Filter Change to Today'
-  icon: 'mdi:cup-water'
-
 # HVAC Filter
 hvac_filter_change_to_today:
   name: 'HVAC Filter Change to Today'

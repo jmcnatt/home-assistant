@@ -1,0 +1,14 @@
+---
+################################################################################
+# The number of days the kitchen fridge filter is considered usable
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+kitchen_fridge_filter_lifespan:
+  name: Kitchen Fridge Filter Lifespan
+  icon: mdi:history
+  initial: 180
+  min: 60
+  max: 360
+  step: 30
+  mode: box
+  unit_of_measurement: days

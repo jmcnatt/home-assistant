@@ -22,17 +22,6 @@ bedroom_1_ceiling_fan_speed:
   max: 6
   step: 1
 
-# Fridge Filter Lifespan
-fridge_filter_lifespan:
-  name: 'Fridge Filter Lifespan'
-  initial: 180
-  min: 0
-  max: 365
-  step: 1
-  mode: box
-  unit_of_measurement: days
-  icon: mdi:history
-
 # HVAC Filter Lifespan
 hvac_filter_lifespan:
   name: 'HVAC Filter Lifespan'

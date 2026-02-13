@@ -15,7 +15,7 @@
       entity_id: light.living_room_scene_controller
     - trigger: state
       entity_id: light.living_room_lamp
-      
+
   conditions: []
 
   actions:

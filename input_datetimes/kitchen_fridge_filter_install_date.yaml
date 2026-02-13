@@ -1,0 +1,10 @@
+---
+################################################################################
+# Helps track the age of the kitchen fridge filter
+# https://www.home-assistant.io/integrations/input_datetime/
+################################################################################
+kitchen_fridge_filter_install_date:
+  name: Kitchen Fridge Filter Install Date
+  icon: mdi:filter-plus
+  has_date: true
+  has_time: false

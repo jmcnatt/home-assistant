@@ -7,7 +7,7 @@
   alias: Living Room Thermostat Control for Virtual Thermostat
   description: >
     Controls the living room thermostat as an actuator by using helper
-    inputs and temperature sensors throughout the house to effectively regulate 
+    inputs and temperature sensors throughout the house to effectively regulate
     the temperature
   mode: single
   max_exceeded: silent
