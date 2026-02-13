@@ -4,7 +4,9 @@
 # https://www.home-assistant.io/integrations/template/#light
 ################################################################################
 - light:
-    - name: "Outdoor Front Lights"
+    - name: Outdoor Front Lights
+      unique_id: "bac6566e-d06c-4886-bf3f-8376b2c30631"
+      icon: mdi:outdoor-lamp
       availability: "{{ has_value('switch.outdoor_front_lights') }}"
       state: "{{ is_state('switch.outdoor_front_lights', 'on') }}"
       turn_on:

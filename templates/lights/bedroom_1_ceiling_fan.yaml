@@ -4,7 +4,9 @@
 # https://www.home-assistant.io/integrations/template/#light
 ################################################################################
 - light:
-    - name: "Bedroom 1 Ceiling Fan"
+    - name: Bedroom 1 Ceiling Fan
+      unique_id: "2ad66767-d25e-4a07-b8e5-94e89ef48f7c"
+      icon: mdi:ceiling-fan
       availability: "{{ has_value('switch.bedroom_1_dimmer') }}"
       state: "{{ is_state('switch.bedroom_1_dimmer', 'on') }}"
       turn_on:
