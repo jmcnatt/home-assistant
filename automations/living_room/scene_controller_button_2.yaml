@@ -44,7 +44,7 @@
                 - conditions:
                     - condition: template
                       value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed2x' 
+                        {{ trigger.event.data.value == 'KeyPressed2x'
                             and not is_state('climate.virtual_thermostat', 'off') }}
                   sequence:
                     - choose:
@@ -116,7 +116,7 @@
                         entity_id: select.living_room_scene_controller_button_1_indicator_color
                       data:
                         option: Blue
-                
+
             - choose:
                 - conditions:
                     - condition: not
