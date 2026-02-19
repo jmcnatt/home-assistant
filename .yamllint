@@ -54,10 +54,7 @@ rules:
   key-duplicates:
     level: error
   line-length:
-    level: warning
-    max: 140
-    allow-non-breakable-words: true
-    allow-non-breakable-inline-mappings: true
+    level: disable
   new-line-at-end-of-file:
     level: error
   new-lines:
