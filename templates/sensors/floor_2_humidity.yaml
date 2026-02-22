@@ -11,9 +11,17 @@
     - name: "Floor 2 Humidity"
       unit_of_measurement: "%"
       state: >
-        {% set humidities = [
-          states('sensor.bedroom_1_htg3_humidity') | float(0),
-          states('sensor.bedroom_2_htg3_humidity') | float(0),
-          states('sensor.bedroom_3_htg3_humidity') | float(0)
-        ] %}
-        {{ (humidities | sum / humidities | count) | round(1) }}
+        {% set entities = expand(
+          'sensor.bedroom_1_htg3_humidity',
+          'sensor.bedroom_2_htg3_humidity',
+          'sensor.bedroom_3_htg3_humidity'
+        ) %}
+
+        {% set values = entities
+          | selectattr('state', 'is_number')
+          | map(attribute='state')
+          | map('float')
+          | list
+        %}
+
+        {{ (values | average | round(1)) if values else none }}
