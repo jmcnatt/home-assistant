@@ -1,0 +1,53 @@
+---
+################################################################################
+# Living Room Scene Controller Relay Indicator
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1772176367866'
+  alias: Living Room Scene Controller Relay Indicator
+  description: >
+    Syncs the living_room_scene_controller relay indicator with the
+    living_room_lamp
+  mode: restart
+
+  triggers:
+    - trigger: state
+      entity_id: light.living_room_lamp
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.to_state.state == 'on' }}
+          sequence:
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.living_room_scene_controller_relay_indicator_color
+                      state: White
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.living_room_scene_controller_relay_indicator_color
+                  data:
+                    option: White
+            - action: select.select_option
+              target:
+                entity_id: select.living_room_scene_controller_relay_indicator
+              data:
+                option: Always on
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.to_state.state == 'off' }}
+          sequence:
+            - action: select.select_option
+              target:
+                entity_id: select.living_room_scene_controller_relay_indicator
+              data:
+                option: Always off

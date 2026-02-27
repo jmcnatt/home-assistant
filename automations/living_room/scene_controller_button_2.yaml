@@ -3,25 +3,22 @@
 # Living Room Scene Controller Button 2
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1770508696339'
+- id: '1771018714402'
   alias: Living Room Scene Controller Button 2
   description: >
-    Handles Button 2 (Scene 001) on the living_room_scene_controller as well as
-    changes the light depending on the state of the virtual_thermostat
-  mode: single
-  max_exceeded: silent
+    Syncs the living_room_scene_controller button 2 with the smart light
+    group
+  mode: restart
 
   triggers:
     - trigger: state
-      entity_id:
-        - automation.living_room_thermostat_control_for_virtual_thermostat
-        - climate.virtual_thermostat
+      entity_id: light.living_room_cabinet_lights
     - trigger: event
       event_type: zwave_js_value_notification
       event_data:
         device_id: 4731b628f236657a7a89933eb4a870ad
         property: scene
-        property_key: "001"
+        property_key: "002"
 
   conditions: []
 
@@ -38,93 +35,67 @@
                       value_template: >
                         {{ trigger.event.data.value == 'KeyPressed' }}
                   sequence:
-                    - service: automation.toggle
+                    - service: light.toggle
                       target:
-                        entity_id: automation.living_room_thermostat_control_for_virtual_thermostat
+                        entity_id: light.living_room_cabinet_lights
                 - conditions:
                     - condition: template
                       value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed2x'
-                            and not is_state('climate.virtual_thermostat', 'off') }}
+                        {{ trigger.event.data.value == 'KeyPressed2x' }}
                   sequence:
                     - choose:
                         - conditions:
                             - condition: state
-                              entity_id: climate.virtual_thermostat
-                              state: heat
+                              entity_id: light.living_room_cabinet_lights
+                              state: "on"
                           sequence:
-                            - service: climate.set_hvac_mode
-                              target:
-                                entity_id: climate.virtual_thermostat
-                              data:
-                                hvac_mode: cool
+                            - service: light.turn_off
+                              entity_id: light.living_room_cabinet_lights
+                    - choose:
                         - conditions:
                             - condition: state
-                              entity_id: climate.virtual_thermostat
-                              state: cool
+                              entity_id: light.living_room_lamp
+                              state: "on"
                           sequence:
-                            - service: climate.set_hvac_mode
-                              target:
-                                entity_id: climate.virtual_thermostat
-                              data:
-                                hvac_mode: heat
+                            - service: light.turn_off
+                              entity_id: light.living_room_lamp
 
     - choose:
         - conditions:
             - condition: state
-              entity_id: automation.living_room_thermostat_control_for_virtual_thermostat
+              entity_id: light.living_room_cabinet_lights
               state: "off"
           sequence:
             - service: switch.turn_off
               target:
-                entity_id: switch.living_room_scene_controller_button_2_indication
-
+                entity_id: switch.living_room_scene_controller_button_3_indication
         - conditions:
             - condition: state
-              entity_id: automation.living_room_thermostat_control_for_virtual_thermostat
+              entity_id: light.living_room_cabinet_lights
               state: "on"
           sequence:
             - choose:
                 - conditions:
-                    - condition: state
-                      entity_id: climate.virtual_thermostat
-                      state: heat
                     - condition: not
                       conditions:
                         - condition: state
-                          entity_id: select.living_room_scene_controller_button_1_indicator_color
-                          state: Red
+                          entity_id: select.living_room_scene_controller_button_2_indicator_color
+                          state: White
                   sequence:
                     - service: select.select_option
                       target:
-                        entity_id: select.living_room_scene_controller_button_1_indicator_color
+                        entity_id: select.living_room_scene_controller_button_2_indicator_color
                       data:
-                        option: Red
-
-                - conditions:
-                    - condition: state
-                      entity_id: climate.virtual_thermostat
-                      state: cool
-                    - condition: not
-                      conditions:
-                        - condition: state
-                          entity_id: select.living_room_scene_controller_button_1_indicator_color
-                          state: Blue
-                  sequence:
-                    - service: select.select_option
-                      target:
-                        entity_id: select.living_room_scene_controller_button_1_indicator_color
-                      data:
-                        option: Blue
+                        option: White
 
             - choose:
                 - conditions:
                     - condition: not
                       conditions:
                         - condition: state
-                          entity_id: switch.living_room_scene_controller_button_2_indication
+                          entity_id: switch.living_room_scene_controller_button_3_indication
                           state: "on"
                   sequence:
                     - service: switch.turn_on
                       target:
-                        entity_id: switch.living_room_scene_controller_button_2_indication
+                        entity_id: switch.living_room_scene_controller_button_3_indication

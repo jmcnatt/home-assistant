@@ -1,0 +1,54 @@
+---
+################################################################################
+# Living Room Scene Controller Button 3 Indicator
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1772148653662'
+  alias: Living Room Scene Controller Button 3 Indicator
+  description: >
+    Syncs the living_room_scene_controller button 3 indicator with the 
+    switch.living_room_fireplace_flame state
+  mode: restart
+
+  triggers:
+    - trigger: state
+      entity_id: switch.living_room_fireplace_flame
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.to_state.state == 'on' }}
+          sequence:
+            - choose:
+                - conditions:
+                    - condition: not
+                      conditions:
+                        - condition: state
+                          entity_id: select.living_room_scene_controller_button_3_indicator_color
+                          state: Red
+                  sequence:
+                    - service: select.select_option
+                      target:
+                        entity_id: select.living_room_scene_controller_button_3_indicator_color
+                      data:
+                        option: Red
+            - action: select.select_option
+              target:
+                entity_id: select.living_room_scene_controller_button_3_indicator
+              data:
+                option: Always on
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.to_state.state == 'off' }}
+          sequence:
+            - action: select.select_option
+              target:
+                entity_id: select.living_room_scene_controller_button_3_indicator
+              data:
+                option: Always off

@@ -3,99 +3,93 @@
 # Living Room Scene Controller Button 3
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1771018714402'
+- id: '1771793669130'
   alias: Living Room Scene Controller Button 3
   description: >
-    Syncs the living_room_scene_controller button 3 with the smart light
-    group
-  mode: restart
+    Syncs the living_room_scene_controller button 3 with the living_room
+    fireplace controls
+  mode: single
+
+  variables:
+    flame_state: >
+      {{ states('switch.living_room_fireplace_flame') }}
+    fan_state: >
+      {{ states('switch.living_room_fireplace_fan') }}
 
   triggers:
-    - trigger: state
-      entity_id: light.living_room_cabinet_lights
     - trigger: event
       event_type: zwave_js_value_notification
       event_data:
         device_id: 4731b628f236657a7a89933eb4a870ad
         property: scene
-        property_key: "002"
+        property_key: "003"
 
   conditions: []
 
   actions:
     - choose:
+        # Press and hold toggles the flame, and if the flame turns off, turns off the fan
         - conditions:
             - condition: template
               value_template: >
-                {{ trigger.platform == 'event' }}
+                {{ trigger.event.data.value == 'KeyHeldDown' }}
           sequence:
             - choose:
                 - conditions:
                     - condition: template
                       value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed' }}
-                  sequence:
-                    - service: light.toggle
-                      target:
-                        entity_id: light.living_room_cabinet_lights
-                - conditions:
-                    - condition: template
-                      value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed2x' }}
-                  sequence:
-                    - choose:
-                        - conditions:
-                            - condition: state
-                              entity_id: light.living_room_cabinet_lights
-                              state: "on"
-                          sequence:
-                            - service: light.turn_off
-                              entity_id: light.living_room_cabinet_lights
-                    - choose:
-                        - conditions:
-                            - condition: state
-                              entity_id: light.living_room_lamp
-                              state: "on"
-                          sequence:
-                            - service: light.turn_off
-                              entity_id: light.living_room_lamp
-
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: light.living_room_cabinet_lights
-              state: "off"
-          sequence:
-            - service: switch.turn_off
-              target:
-                entity_id: switch.living_room_scene_controller_button_3_indication
-        - conditions:
-            - condition: state
-              entity_id: light.living_room_cabinet_lights
-              state: "on"
-          sequence:
-            - choose:
-                - conditions:
-                    - condition: not
-                      conditions:
-                        - condition: state
-                          entity_id: select.living_room_scene_controller_button_2_indicator_color
-                          state: White
-                  sequence:
-                    - service: select.select_option
-                      target:
-                        entity_id: select.living_room_scene_controller_button_2_indicator_color
-                      data:
-                        option: White
-
-            - choose:
-                - conditions:
-                    - condition: not
-                      conditions:
-                        - condition: state
-                          entity_id: switch.living_room_scene_controller_button_3_indication
-                          state: "on"
+                        {{ flame_state == 'off' }}
                   sequence:
                     - service: switch.turn_on
                       target:
-                        entity_id: switch.living_room_scene_controller_button_3_indication
+                        entity_id: switch.living_room_fireplace_flame
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ flame_state == 'on' }}
+                  sequence:
+                    - choose:
+                        - conditions:
+                            - condition: template
+                              value_template: >
+                                {{ fan_state == 'on' }}
+                          sequence:
+                            - service: switch.turn_off
+                              target:
+                                entity_id: switch.living_room_fireplace_fan
+                    - service: switch.turn_off
+                      target:
+                        entity_id: switch.living_room_fireplace_flame
+
+        # Double tap toggles the fan and if the fan turns off, turns off the flame
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed2x' }}
+          sequence:
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ fan_state == 'off' }}
+                  sequence:
+                    - choose:
+                        - conditions:
+                            - condition: template
+                              value_template: >
+                                {{ flame_state == 'off' }}
+                          sequence:
+                            - service: switch.turn_on
+                              target:
+                                entity_id: switch.living_room_fireplace_flame
+                    - service: switch.turn_on
+                      target:
+                        entity_id: switch.living_room_fireplace_fan
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ fan_state == 'on' }}
+                  sequence:
+                    - service: switch.turn_off
+                      target:
+                        entity_id: switch.living_room_fireplace_fan

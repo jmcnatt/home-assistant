@@ -1,0 +1,71 @@
+---
+################################################################################
+# Living Room Scene Controller Button 4
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1772182334924'
+  alias: Living Room Scene Controller Button 4
+  description: >
+    Controls the floor_1 blinds based on key press input
+  mode: single
+
+  triggers:
+    - trigger: event
+      event_type: zwave_js_value_notification
+      event_data:
+        device_id: 4731b628f236657a7a89933eb4a870ad
+        property: scene
+        property_key: "004"
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed' }}
+          sequence:
+            - service: cover.toggle
+              target:
+                entity_id: cover.living_room_blinds
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed2x' }}
+          sequence:
+            - service: cover.toggle
+              target:
+                entity_id: cover.dining_room_blinds_right
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed3x' }}
+          sequence:
+            - service: cover.toggle
+              target:
+                entity_id: cover.dining_room_blinds_left
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed4x' }}
+          sequence:
+            - service: cover.toggle
+              target:
+                entity_id: cover.kitchen_blinds
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyHeldDown' }}
+          sequence:
+            - service: cover.close_cover
+              target:
+                entity_id: 
+                  - cover.living_room_blinds
+                  - cover.dining_room_blinds_left
+                  - cover.dining_room_blinds_right
+                  - cover.kitchen_blinds
