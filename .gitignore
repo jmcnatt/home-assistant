@@ -4,8 +4,9 @@
 !.*.md
 
 # Ignore directories
-.storage
+.cache
 .cloud
+.storage
 .google.token
 __pycache__
 backups
