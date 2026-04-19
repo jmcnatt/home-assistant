@@ -1,0 +1,105 @@
+---
+################################################################################
+# Kitchen Scene Controller Button 3 Indicator
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1772233393104'
+  alias: Kitchen Scene Controller Button 3 Indicator
+  description: >
+    Syncs the kitchen_scene_controller button 3 indicator with the garage door
+    and lights
+  mode: restart
+
+  variables:
+    garage_door_state: >
+      {{ states('cover.garage_door') }}
+    garage_lights_state: >
+      {{ states('light.garage_lights') }}
+
+  triggers:
+    - trigger: state
+      entity_id: cover.garage_door
+    - trigger: state
+      entity_id: light.garage_lights
+
+  conditions: []
+
+  actions:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ garage_door_state != 'closed' }}
+          sequence:
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.kitchen_scene_controller_button_3_indicator_color
+                      state: Red
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.kitchen_scene_controller_button_3_indicator_color
+                  data:
+                    option: Red
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.kitchen_scene_controller_button_3_indicator
+                      state: Always on
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.kitchen_scene_controller_button_3_indicator
+                  data:
+                    option: Always on
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ garage_lights_state != 'off' }}
+          sequence:
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.kitchen_scene_controller_button_3_indicator_color
+                      state: White
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.kitchen_scene_controller_button_3_indicator_color
+                  data:
+                    option: White
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.kitchen_scene_controller_button_3_indicator
+                      state: Always on
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.kitchen_scene_controller_button_3_indicator
+                  data:
+                    option: Always on
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ garage_door_state == 'closed' and garage_lights_state == 'off'}}
+          sequence:
+            - if:
+                - condition: not
+                  conditions:
+                    - condition: state
+                      entity_id: select.kitchen_scene_controller_button_3_indicator
+                      state: Always off
+              then:
+                - service: select.select_option
+                  target:
+                    entity_id: select.kitchen_scene_controller_button_3_indicator
+                  data:
+                    option: Always off
