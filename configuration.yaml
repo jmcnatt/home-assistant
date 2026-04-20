@@ -51,7 +51,6 @@ zone:
 ################################################################################
 # Other Integrations
 ################################################################################
-binary_sensor: !include binary_sensor.yaml
 climate: !include_dir_merge_list climates/
 light: !include lights.yaml
 notify:
