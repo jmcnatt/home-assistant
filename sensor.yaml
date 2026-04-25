@@ -75,21 +75,6 @@
         {{ (((installed + diff) - now) / 86400) | round(0) }}
 
 ################################################################################
-# Kitchen Sink Filter Days Remaining
-################################################################################
-- platform: template
-  sensors:
-    kitchen_sink_purifier_days_remaining:
-      friendly_name: 'Kitchen Sink Purifier Days Remaining'
-      unit_of_measurement: days
-      icon_template: 'mdi:calendar-clock'
-      value_template: >-
-        {%- set installed = as_timestamp(states('input_datetime.kitchen_sink_purifier_installed_date')) -%}
-        {%- set diff = states('input_number.kitchen_sink_purifier_lifespan') | int * 86400 -%}
-        {%- set now = as_timestamp(states('sensor.date')) -%}
-        {{ (((installed + diff) - now) / 86400) | round(0) }}
-
-################################################################################
 # Time Date
 ################################################################################
 - platform: time_date

@@ -13,9 +13,3 @@ bedroom_air_filter_change_to_today:
 hvac_filter_change_to_today:
   name: 'HVAC Filter Change to Today'
   icon: 'mdi:hvac'
-
-# Kitchen Sink Purifier
-kitchen_sink_purifier_change_to_today:
-  name: Kitchen Sink Purifier Change to Today
-  icon: mdi:cup-water
-
