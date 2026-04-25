@@ -1,0 +1,16 @@
+---
+################################################################################
+# Set the kitchen sink purifier filter installed date to today
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+kitchen_sink_purifier_filter_install_date_reset:
+  alias: Kitchen Sink Purifier Filter Install Date Reset
+  description: >
+    Set the kitchen sink purifier filter install date to today
+
+  sequence:
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.kitchen_sink_purifier_filter_install_date
+      data:
+        date: '{{ as_timestamp(now()) | timestamp_custom(''%Y-%m-%d'') }}'

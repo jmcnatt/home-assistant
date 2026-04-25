@@ -1,0 +1,10 @@
+---
+################################################################################
+# The date the kitchen sink purifier filter was last installed
+# https://www.home-assistant.io/integrations/input_datetime/
+################################################################################
+kitchen_sink_purifier_filter_install_date:
+  name: 'Kitchen Sink Purifier Filter Install Date'
+  icon: 'mdi:cup-water'
+  has_date: true
+  has_time: false
