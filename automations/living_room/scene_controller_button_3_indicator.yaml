@@ -6,7 +6,7 @@
 - id: '1772148653662'
   alias: Living Room Scene Controller Button 3 Indicator
   description: >
-    Syncs the living_room_scene_controller button 3 indicator with the 
+    Syncs the living_room_scene_controller button 3 indicator with the
     switch.living_room_fireplace_flame state
   mode: restart
 
