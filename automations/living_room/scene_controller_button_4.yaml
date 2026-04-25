@@ -64,7 +64,7 @@
           sequence:
             - service: cover.close_cover
               target:
-                entity_id: 
+                entity_id:
                   - cover.living_room_blinds
                   - cover.dining_room_blinds_left
                   - cover.dining_room_blinds_right
