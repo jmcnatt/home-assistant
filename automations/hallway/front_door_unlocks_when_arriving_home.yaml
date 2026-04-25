@@ -19,14 +19,14 @@
 
   conditions:
     - condition: state
-      entity_id: lock.front_door_lock
+      entity_id: lock.front_door
       state: "locked"
 
   actions:
     - action: lock.unlock
       target:
-        entity_id: lock.front_door_lock
-    - wait_template: "{{ is_state('lock.front_door_lock', 'unlocked') }}"
+        entity_id: lock.front_door
+    - wait_template: "{{ is_state('lock.front_door', 'unlocked') }}"
       timeout:
         seconds: 15
       continue_on_timeout: false
