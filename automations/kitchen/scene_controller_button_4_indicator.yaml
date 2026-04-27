@@ -1,0 +1,79 @@
+---
+################################################################################
+# Kitchen Scene Controller Button 4 Indicator
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1776634030180'
+  alias: Kitchen Scene Controller Button 4 Indicator
+  description: >
+    Syncs the kitchen_scene_controller button 4 indicator with the first floor door locks
+  mode: restart
+
+  variables:
+    front_door_locked: >
+      {{ is_state('lock.front_door', 'locked') }}
+    front_door_closed: >
+      {{ is_state('binary_sensor.front_door', 'off') }}
+    back_door_locked: >
+      {{ is_state('lock.back_door', 'locked') }}
+    back_door_closed: >
+      {{ is_state('binary_sensor.back_door', 'off') }}
+
+  triggers:
+    - trigger: state
+      entity_id: lock.front_door
+    - trigger: state
+      entity_id: lock.back_door
+    - trigger: state
+      entity_id: binary_sensor.front_door
+    - trigger: state
+      entity_id: binary_sensor.back_door
+
+  conditions: []
+
+  actions:
+    - if:
+        - condition: not
+          conditions:
+            - condition: template
+              value_template: >
+                {{ front_door_locked and front_door_closed and back_door_locked and back_door_closed }}
+      then:
+        - if:
+            - condition: not
+              conditions:
+                - condition: state
+                  entity_id: select.kitchen_scene_controller_button_4_indicator_color
+                  state: Red
+          then:
+            - service: select.select_option
+              target:
+                entity_id: select.kitchen_scene_controller_button_4_indicator_color
+              data:
+                option: Red
+        - if:
+            - condition: not
+              conditions:
+                - condition: state
+                  entity_id: select.kitchen_scene_controller_button_4_indicator
+                  state: Always on
+          then:
+            - service: select.select_option
+              target:
+                entity_id: select.kitchen_scene_controller_button_4_indicator
+              data:
+                option: Always on
+      
+      else:
+        - if:
+            - condition: not
+              conditions:
+                - condition: state
+                  entity_id: select.kitchen_scene_controller_button_4_indicator
+                  state: Always off
+          then:
+            - service: select.select_option
+              target:
+                entity_id: select.kitchen_scene_controller_button_4_indicator
+              data:
+                option: Always off
