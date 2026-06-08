@@ -1,0 +1,19 @@
+---
+################################################################################
+# Template for garage lights
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+    - name: Garage Lights
+      unique_id: "f3ccde5b-f8a9-4c32-8943-991b114a90fa"
+      icon: mdi:bal
+      availability: "{{ has_value('switch.garage_lights') }}"
+      state: "{{ is_state('switch.garage_lights', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.garage_lights
+      turn_off:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.garage_lights

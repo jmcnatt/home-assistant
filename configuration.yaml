@@ -25,10 +25,7 @@ frontend:
 history:
 http:
   use_x_forwarded_for: true
-  trusted_proxies:
-    - '127.0.0.1'
-    - '172.16.0.0/12'
-    - '192.168.4.0/24'
+  trusted_proxies: !secret http_trusted_proxies
 input_boolean: !include_dir_merge_named input_booleans/
 input_button: !include input_button.yaml
 input_datetime: !include_dir_merge_named input_datetimes/
@@ -54,7 +51,6 @@ zone:
 ################################################################################
 # Other Integrations
 ################################################################################
-binary_sensor: !include binary_sensor.yaml
 climate: !include_dir_merge_list climates/
 light: !include lights.yaml
 notify:

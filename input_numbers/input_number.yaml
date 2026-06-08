@@ -32,14 +32,3 @@ hvac_filter_lifespan:
   mode: box
   unit_of_measurement: days
   icon: mdi:history
-
-# Kitchen Sink Purifier Lifespan
-kitchen_sink_purifier_lifespan:
-  name: 'Kitchen Sink Purifier Lifespan'
-  initial: 180
-  min: 0
-  max: 365
-  step: 1
-  mode: box
-  unit_of_measurement: days
-  icon: mdi:history

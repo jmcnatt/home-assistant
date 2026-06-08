@@ -1,0 +1,14 @@
+---
+################################################################################
+# The number of days the kitchen sink purifier filter is considered usable
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+kitchen_sink_purifier_filter_lifespan:
+  name: 'Kitchen Sink Purifier Filter Lifespan'
+  initial: 180
+  min: 0
+  max: 365
+  step: 1
+  mode: box
+  unit_of_measurement: days
+  icon: mdi:history

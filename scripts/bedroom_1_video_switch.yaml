@@ -22,7 +22,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBoAAABJ5IUEhQRFBEUERQRFBEUERQ1FDYUNhQ2FDYUNRQ2F\
                   DYUERQ2FBEUERQRFBEUERQRFBEUERQ2FDYUNRQ2FDYUNhQ1FAAFGQABKUkUAA\
@@ -33,7 +33,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBoAAABJZUSExITEhMSExITEhMSExI4EjgROBI4EjgSOBI4E\
                   TkRFBE4EjgSExITEhMSExITEhMSExITEjgSOBI4ETkROBI4EgAFGwABJksSAA\
@@ -44,7 +44,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBwAAABJJURFBITEhMSExITEhMSExI4EjgRORE4EjgSOBI4E\
                   TkRFBE4EjoQORETEhMSExITEhMSExITEhQROBI4EjgSOBI4EQAFHAABJ0oSAA\
@@ -55,7 +55,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBoAAABJ5IUERQRFBITEhMSExITEhM2FDYUNhQ2FDUUNhQ2F\
                   DYUERQ2FBEUERQ1FBITEhMSExITEhQ1FDYUERQ2FDYUNhQ1FAAFGgABKEkUAA\
@@ -66,7 +66,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBoAAABJ5MUERQRFBEUERQRFBEUERQ2FDUVNRQ2FDYUNhQ1F\
                   DYUERQ2FBEUNhQ2FBEUERQRFBEUERQ1FBITEhM2FDYUNhQ2FAAFGgABKEgUAA\
@@ -77,7 +77,7 @@ livingroom_remote_video_switch:
           sequence:
             - action: remote.send_command
               target:
-                entity_id: remote.brd_01_remote
+                entity_id: remote.bedroom_1_remote
               data:
                 command: "b64:JgBgAAABJ5IUERQRFBEVERMSExITEhQ1FDYUNhQ2FDYUNRQ2F\
                   DYUERQRFBEUNhQ2FBEUERQRFBEUNRQ2FBEUERQ2FDYUNhQ2EwAFGQABKUkUAA\

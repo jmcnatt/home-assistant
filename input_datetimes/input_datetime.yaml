@@ -17,10 +17,3 @@ hvac_filter_installed_date:
   icon: 'mdi:hvac'
   has_date: true
   has_time: false
-
-# Kitchen Sink Purifier
-kitchen_sink_purifier_installed_date:
-  name: 'Kitchen Sink Purifier Installed Date'
-  icon: 'mdi:cup-water'
-  has_date: true
-  has_time: false

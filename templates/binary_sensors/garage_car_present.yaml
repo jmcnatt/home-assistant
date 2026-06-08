@@ -1,0 +1,21 @@
+---
+################################################################################
+# Whether or not a car is present in the garage
+# https://www.home-assistant.io/integrations/template/#binary-sensor
+################################################################################
+- binary_sensor:
+    - name: "Garage Occupied"
+      unique_id: binary_sensor.garage_car_present
+      state: "{{ states('sensor.garage_door_distance') | int < 180 }}"
+      availability: >
+        {{ is_state('cover.garage_door', 'closed') }}
+      delay_on:
+        seconds: 5
+      delay_off:
+        seconds: 5
+      icon: >
+        {% if is_state('binary_sensor.garage_car_present', 'on') %}
+          mdi:car
+        {% else %}
+          mdi:car-arrow-right
+        {% endif %}

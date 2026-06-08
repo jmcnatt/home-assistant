@@ -1,0 +1,40 @@
+---
+################################################################################
+# Kitchen Scene Controller Button 3
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: '1776577249765'
+  alias: Kitchen Scene Controller Button 3
+  description: >
+    Controls the dining room lights
+  mode: single
+
+  triggers:
+    - trigger: event
+      event_type: zwave_js_value_notification
+      event_data:
+        device_id: 72834779f8fea30cf7d83837f2c39274
+        property: scene
+        property_key: "003"
+
+  actions:
+    # KeyPressed toggles garage lights
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed' }}
+          sequence:
+            - action: light.toggle
+              target:
+                entity_id: light.garage_lights
+
+        # KeyHoldDown toggles garage door
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyHeldDown' }}
+          sequence:
+            - action: cover.toggle
+              target:
+                entity_id: cover.garage_door
