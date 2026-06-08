@@ -63,7 +63,7 @@
                 entity_id: select.kitchen_scene_controller_button_4_indicator
               data:
                 option: Always on
-      
+
       else:
         - if:
             - condition: not
