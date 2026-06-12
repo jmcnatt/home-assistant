@@ -1,0 +1,12 @@
+---
+################################################################################
+# Tempate to represent the car_1 mileage
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    name: Car 1 MPG
+    unique_id: car_1_mpg
+    unit_of_measurement: 'mpg'
+    icon: mdi:counter
+    state: >
+      {{ state_attr('sensor.car_1', 'total_mpg') | round(2) }}
