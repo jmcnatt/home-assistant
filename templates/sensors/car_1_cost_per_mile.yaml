@@ -1,0 +1,12 @@
+---
+################################################################################
+# Tempate to represent the car_1 cost per mile
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    name: Car 1 Cost Per Mile
+    unique_id: car_1_cost_per_mile
+    unit_of_measurement: '$'
+    icon: mdi:currency-usd
+    state: >
+      {{ state_attr('sensor.car_1', 'total_cost_per_mile') | round(2) }}

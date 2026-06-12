@@ -1,0 +1,12 @@
+---
+################################################################################
+# Tempate to represent the car_1 oil life
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    name: Car 1 Oil Life
+    unique_id: car_1_oil_life
+    unit_of_measurement: '%'
+    icon: mdi:oil
+    state: >
+      {{ state_attr('sensor.car_1', 'oil_life') | round(0) }}
