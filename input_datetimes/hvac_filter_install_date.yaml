@@ -1,12 +1,10 @@
 ---
 ################################################################################
-# input_datetime.yaml
+# The date the HVAC filter was last installed
 # https://www.home-assistant.io/integrations/input_datetime/
 ################################################################################
-
-# Bedroom Air Filter
-bedroom_air_filter_installed_date:
-  name: 'Bedroom Air Filter Installed Date'
-  icon: 'mdi:air-purifier'
+hvac_filter_install_date:
+  name: 'HVAC Filter Install Date'
+  icon: 'mdi:hvac'
   has_date: true
   has_time: false

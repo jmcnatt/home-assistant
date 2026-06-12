@@ -1,23 +1,14 @@
 ---
 ################################################################################
-# input_number.yaml
+# The number of days the HVAC filter is considered usable
 # https://www.home-assistant.io/integrations/input_number/
 ################################################################################
-
-# Bedroom Air Filter Lifespan
-bedroom_air_filter_lifespan:
-  name: 'Bedroom Air Filter Lifespan'
-  initial: 90
+hvac_filter_lifespan:
+  name: 'HVAC Filter Lifespan'
+  initial: 120
   min: 0
-  max: 180
+  max: 365
   step: 1
   mode: box
   unit_of_measurement: days
   icon: mdi:history
-
-# Bedroom 1 Ceiling Fan Speeds
-bedroom_1_ceiling_fan_speed:
-  name: Bedroom 1 Ceiling Fan Speeds
-  min: 1
-  max: 6
-  step: 1
