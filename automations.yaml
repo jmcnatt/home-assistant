@@ -105,25 +105,3 @@
     target:
       entity_id: input_datetime.bedroom_air_filter_installed_date
   mode: single
-- id: '1693693512054'
-  alias: HVAC - Filter - Notify when replacement is needed
-  description: ''
-  trigger:
-  - platform: time
-    at: 09:00:00
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.hvac_filter_days_remaining
-    below: 7
-  action:
-  - service: notify.discord
-    data:
-      target:
-      - '865449623518969866'
-      message: ':window: The HVAC filter needs to be changed in **{{ states.sensor.hvac_filter_days_remaining.state
-        }} days**.  Additional filters can be purchased on [Amazon](https://www.amazon.com/gp/product/B07FQK912B).
-
-
-        Once the filter is changed, navigate to the [Hallway Tab in Home Assistant](https://assistant.home.jmcnatt.net/lovelace/hallway)
-        to reset the filter.'
-  mode: single
