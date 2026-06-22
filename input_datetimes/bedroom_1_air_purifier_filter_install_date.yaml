@@ -1,12 +1,10 @@
 ---
 ################################################################################
-# input_datetime.yaml
+# The date the bedroom 1 air purifier filter was last installed
 # https://www.home-assistant.io/integrations/input_datetime/
 ################################################################################
-
-# Bedroom Air Filter
-bedroom_air_filter_installed_date:
-  name: 'Bedroom Air Filter Installed Date'
+bedroom_1_air_purifier_filter_install_date:
+  name: 'Bedroom 1 Air Purifier Filter Install Date'
   icon: 'mdi:air-purifier'
   has_date: true
   has_time: false

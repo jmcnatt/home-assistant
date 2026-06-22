@@ -1,0 +1,14 @@
+---
+################################################################################
+# The number of days the bedroom 1 air purifier filter is considered usable
+# https://www.home-assistant.io/integrations/input_number/
+################################################################################
+bedroom_1_air_purifier_filter_lifespan:
+  name: 'Bedroom 1 Air Purifier Filter Lifespan'
+  initial: 90
+  min: 0
+  max: 180
+  step: 1
+  mode: box
+  unit_of_measurement: days
+  icon: mdi:history
