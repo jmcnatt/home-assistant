@@ -10,7 +10,7 @@
     unit_of_measurement: days
     icon: mdi:calendar-clock
     state: >
-      {% set installed = as_timestamp(states('input_datetime.bedroom_1_air_pufifier_filter_install_date')) %}
-      {% set lifespan = states('input_number.bedroom_1_air_pufifier_filter_lifespan') | int * 86400 %}
+      {% set installed = as_timestamp(states('input_datetime.bedroom_1_air_purifier_filter_install_date')) %}
+      {% set lifespan = states('input_number.bedroom_1_air_purifier_filter_lifespan') | int * 86400 %}
       {% set now = as_timestamp(states('sensor.date')) %}
       {{ (((installed + lifespan) - now) / 86400) | round(0) }}
