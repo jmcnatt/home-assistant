@@ -1,0 +1,66 @@
+---
+################################################################################
+# Bedroom 3 Light Scene Controls
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: bedroom_3_light_scene_controls
+  alias: Bedroom 3 Light Scene Controls
+  description: >
+    Handles the scene actions for the bedroom 3 light
+  mode: single
+
+  triggers:
+    - trigger: event
+      event_type: zwave_js_value_notification
+      event_data:
+        device_id: 7d6ad8df3d8ef522648c03aa083d9816
+        property: scene
+
+  actions:
+    - choose:
+        # Top paddle - Scene 001
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.property_key == '001' }}
+          sequence:
+            # KeyPressed2x
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed2x' }}
+                  sequence:
+                    - action: media_player.turn_on
+                      target:
+                        entity_id: media_player.bedroom_3_apple_tv
+
+        # Bottom paddle - Scene 002
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.property_key == '002' }}
+          sequence:
+            - choose:
+                # KeyHeldDown
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyHeldDown' }}
+                  sequence:
+                    - action: media_player.turn_off
+                      target:
+                        entity_id: media_player.bedroom_3_apple_tv
+                    - action: light.turn_off
+                      target:
+                        entity_id: light.bedroom_3_light
+
+                # KeyPressed2x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed2x' }}
+                  sequence:
+                    - action: media_player.turn_off
+                      target:
+                        entity_id: media_player.bedroom_3_apple_tv
