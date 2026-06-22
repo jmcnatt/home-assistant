@@ -1,0 +1,16 @@
+---
+################################################################################
+# Sets the bedroom 1 air purifier filter installed date to today
+# https://www.home-assistant.io/integrations/script/
+################################################################################
+bedroom_1_air_purifier_filter_install_date_reset:
+  alias: Bedroom 1 Air Purifier Filter Install Date Reset
+  description: >
+    Sets the bedroom 1 air purifier filter installed date to today
+
+  sequence:
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.bedroom_1_air_purifier_filter_install_date
+      data:
+        date: '{{ as_timestamp(now()) | timestamp_custom(''%Y-%m-%d'') }}'

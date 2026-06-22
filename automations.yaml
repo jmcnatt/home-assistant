@@ -93,15 +93,3 @@
     target:
       entity_id: switch.bedroom_air_purifier
   mode: single
-- id: '1682293249148'
-  alias: Air Purifier - Set bedroom air purifier install date to today
-  description: Set the bedroom air purifier filter installed date to today
-  trigger: []
-  condition: []
-  action:
-  - service: input_datetime.set_datetime
-    data:
-      date: '{{ as_timestamp(now())|timestamp_custom(''%Y-%m-%d'') }}'
-    target:
-      entity_id: input_datetime.bedroom_air_filter_installed_date
-  mode: single

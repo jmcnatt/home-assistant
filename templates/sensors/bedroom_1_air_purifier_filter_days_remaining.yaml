@@ -1,0 +1,16 @@
+---
+################################################################################
+# Template for the number of days remaining before the bedroom 1 air purifier
+# filter needs to be changed
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    name: Bedroom 1 Air Purifier Filter Days Remaining
+    unique_id: bedroom_1_air_pufifier_filter_days_remaining
+    unit_of_measurement: days
+    icon: mdi:calendar-clock
+    state: >
+      {% set installed = as_timestamp(states('input_datetime.bedroom_1_air_pufifier_filter_install_date')) %}
+      {% set lifespan = states('input_number.bedroom_1_air_pufifier_filter_lifespan') | int * 86400 %}
+      {% set now = as_timestamp(states('sensor.date')) %}
+      {{ (((installed + lifespan) - now) / 86400) | round(0) }}

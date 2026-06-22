@@ -27,7 +27,7 @@ http:
   use_x_forwarded_for: true
   trusted_proxies: !secret http_trusted_proxies
 input_boolean: !include_dir_merge_named input_booleans/
-input_button: !include input_button.yaml
+input_button: !include_dir_merge_named input_button.yaml
 input_datetime: !include_dir_merge_named input_datetimes/
 input_number: !include_dir_merge_named input_numbers/
 input_select: !include_dir_merge_named input_selects/
@@ -62,7 +62,6 @@ notify:
 rest: !include rest.yaml
 script: !include scripts.yaml
 script split: !include_dir_merge_named scripts/
-sensor: !include sensor.yaml
 template: !include_dir_merge_list templates/
 tts:
   - platform: google_translate
