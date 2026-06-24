@@ -1,0 +1,26 @@
+---
+################################################################################
+# Turns on the garage lights when the entry door is opened
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: garage_entry_door_turns_on_lights
+  alias: Garage Lights Turn On When Entry Door Is Opened
+  description: >
+    Turns on the garage lights when the entry door is opened
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.garage_entrance_door_sensor
+      to: "on"
+
+  condition:
+    - condition: state
+      entity_id: light.garage_lights
+      state: "off"
+
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.garage_lights
