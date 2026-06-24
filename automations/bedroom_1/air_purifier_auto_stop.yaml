@@ -1,0 +1,27 @@
+---
+################################################################################
+# Bedroom 1 air purifier auto stops at the value of
+# `input_datetime.bedroom_1_air_purifier_auto_stop_time`
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: bedroom_1_air_purifier_auto_stop
+  alias: Bedroom 1 Air Purifier Auto Stop
+  description: >
+    Automatically stops the bedroom 1 air purifier based on the value of the
+    stop time helper
+  mode: single
+
+  triggers:
+    - trigger: time
+      at: input_datetime.bedroom_1_air_purifier_auto_stop_time
+
+  conditions:
+    - condition: state
+      entity_id: switch.bedroom_1_air_purifier
+      state: 'on'
+
+  actions:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.bedroom_1_air_purifier

@@ -1,0 +1,11 @@
+---
+################################################################################
+# The time the bedroom 1 air purifier filter will automatically stop
+# https://www.home-assistant.io/integrations/input_datetime/
+################################################################################
+bedroom_1_air_purifier_auto_stop_time:
+  name: 'Bedroom 1 Air Purifier Auto Start Time'
+  icon: 'mdi:calendar-clock'
+  initial: '08:30:00'
+  has_date: false
+  has_time: true
