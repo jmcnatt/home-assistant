@@ -9,7 +9,9 @@
 ################################################################################
 - sensor:
     - name: "Floor 2 Temperature"
+      unique_id: floor_2_temperature
       unit_of_measurement: "°F"
+      icon: mdi:thermometer
       state: >
         {% set entities = expand(
           'sensor.bedroom_1_htg3_temperature',

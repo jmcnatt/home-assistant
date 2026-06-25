@@ -9,7 +9,9 @@
 ################################################################################
 - sensor:
     - name: "Floor 2 Humidity"
+      unique_id: floor_2_humidity
       unit_of_measurement: "%"
+      icon: mdi:water-percent
       state: >
         {% set entities = expand(
           'sensor.bedroom_1_htg3_humidity',
