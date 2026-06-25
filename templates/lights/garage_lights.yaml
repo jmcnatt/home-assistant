@@ -5,8 +5,8 @@
 ################################################################################
 - light:
     - name: Garage Lights
-      unique_id: "f3ccde5b-f8a9-4c32-8943-991b114a90fa"
-      icon: mdi:bal
+      unique_id: garage_lights
+      icon: mdi:car-multiple
       availability: "{{ has_value('switch.garage_lights') }}"
       state: "{{ is_state('switch.garage_lights', 'on') }}"
       turn_on:

@@ -3,6 +3,16 @@
 # Customizations for entities
 # https://www.home-assistant.io/integrations/homeassistant/
 ################################################################################
+light.bar_light:
+  icon: mdi:dome-light
+
+light.dining_room_light:
+  icon: mdi:ceiling-light
+
+light.kitchen_scene_controller:
+  friendly_name: Kitchen Lights
+  icon: mdi:light-recessed
+
 light.living_room_lamp:
   icon: mdi:floor-lamp
 
