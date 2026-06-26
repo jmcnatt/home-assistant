@@ -3,7 +3,7 @@
 # Kitchen Scene Controller Button 3 Indicator
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1772233393104'
+- id: kitchen_scene_controller_button_3_indicator
   alias: Kitchen Scene Controller Button 3 Indicator
   description: >
     Syncs the kitchen_scene_controller button 3 indicator with the garage door
