@@ -5,7 +5,7 @@
 ################################################################################
 hvac_filter_lifespan:
   name: 'HVAC Filter Lifespan'
-  initial: 120
+  initial: 365
   min: 0
   max: 365
   step: 1
