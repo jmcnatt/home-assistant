@@ -1,0 +1,10 @@
+---
+################################################################################
+# Whether or not the laundry room washer is running, updated by laundry room
+# automations
+#
+# https://www.home-assistant.io/integrations/input_boolean/
+################################################################################
+laundry_room_washer_running:
+  name: Laundry Room Washer Running
+  icon: mdi:washing-machine

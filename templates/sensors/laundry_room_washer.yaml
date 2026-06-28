@@ -1,0 +1,23 @@
+---
+################################################################################
+# Template for laundry room washer
+#
+# Used to create a representation of the state of the washer based on helpers
+# from the plug readings and door sensor
+#
+# https://www.home-assistant.io/integrations/template/#sensor
+################################################################################
+- sensor:
+    - name: Laundry Room Washer
+      unique_id: laundry_room_washer_door
+      icon: mdi:washing-machine
+      state: >
+         {% if is_state('input_boolean.laundry_room_washer_running', 'on') %}
+            Running
+          {% elif is_state('binary_sensor.laundry_room_washer_door', 'on') %}
+            Door Open
+          {% elif is_state('input_boolean.laundry_room_washer_door_opened_since_last_run', 'off') %}
+            Has Clothes
+          {% else %}
+            Idle
+          {% endif %}

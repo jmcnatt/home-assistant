@@ -1,0 +1,22 @@
+---
+################################################################################
+# Updates the last completed datetime when the `laundry_room` washer finishes
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: laundry_room_washer_door_opened_since_last_run
+  alias: Laundry Room Washer Door Opened Since Last Run
+  description: >
+    Determines if the laundry room washer door was opened since the last
+    completed run
+  mode: single
+
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.laundry_room_washer_door
+      to: "on"
+
+  actions:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.laundry_room_washer_door_opened_since_last_run

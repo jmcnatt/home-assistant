@@ -1,0 +1,13 @@
+---
+################################################################################
+# The time a notification should be sent if the laundry room washer not empty
+# notification automation is enabled
+#
+# https://www.home-assistant.io/integrations/input_datetime/
+################################################################################
+laundry_room_washer_notification_on_not_empty:
+  name: 'Laundry Room Washer Notification On Not Empty'
+  icon: 'mdi:washing-machine-alert'
+  has_date: false
+  has_time: true
+  initial: '20:00:00'
