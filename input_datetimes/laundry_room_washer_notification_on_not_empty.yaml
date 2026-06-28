@@ -6,7 +6,7 @@
 # https://www.home-assistant.io/integrations/input_datetime/
 ################################################################################
 laundry_room_washer_notification_on_not_empty:
-  name: 'Laundry Room Washer Notification On Not Empty'
+  name: Laundry Room Washer Notification On Not Empty
   icon: 'mdi:washing-machine-alert'
   has_date: false
   has_time: true

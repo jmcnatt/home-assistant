@@ -20,7 +20,7 @@
       above: 10
       for:
         minutes: 2
-  
+
   actions:
     - action: input_boolean.turn_on
       target:

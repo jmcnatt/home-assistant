@@ -18,7 +18,7 @@
   triggers:
     - trigger: time
       at: input_datetime.laundry_room_washer_notification_on_not_empty
-  
+
   actions:
     - action: notify.all_mobile_devices
       data:

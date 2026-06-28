@@ -21,7 +21,7 @@
     - condition: template
       value_template: >
         {{ states('input_boolean.laundry_room_washer_running') == 'on' }}
-  
+
   actions:
     - action: input_datetime.set_datetime
       target:

@@ -17,7 +17,7 @@
       event_type: automation_triggered
       event_data:
         entity_id: automation.laundry_room_washer_last_run_completed
-  
+
   actions:
     - action: notify.all_mobile_devices
       data:
