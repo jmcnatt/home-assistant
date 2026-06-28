@@ -1,0 +1,12 @@
+---
+################################################################################
+# The date the laundry room washer last completed a cycle, updated by the
+# laundry_room_washer_last_run_completed automation
+#
+# https://www.home-assistant.io/integrations/input_datetime/
+################################################################################
+laundry_room_washer_last_run_completed:
+  name: 'Laundry Room Washer Last Run Completed'
+  icon: 'mdi:washing-machine'
+  has_date: true
+  has_time: true

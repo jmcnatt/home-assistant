@@ -1,0 +1,31 @@
+---
+################################################################################
+# Triggers when the laundry room washer is running and sets the input_boolean
+# washer running state and turns off the input_boolean tracking the door open
+# since last run
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: laundry_room_washer_running
+  alias: Laundry Room Washer Running
+  description: >
+    Triggers when the laundry room washer is running and sets the input_boolean
+    washer running state and turns off the input_boolean tracking the door open
+    since last run
+  mode: single
+
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.washer_plug_washer_power
+      above: 10
+      for:
+        minutes: 2
+
+  actions:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.laundry_room_washer_running
+
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.laundry_room_washer_door_opened_since_last_run

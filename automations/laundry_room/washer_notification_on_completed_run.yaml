@@ -1,0 +1,25 @@
+---
+################################################################################
+# Notifies the all_mobile_devices group when the laundry room washer cycle is
+# completed
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: laundry_room_washer_notification_on_completed_run
+  alias: Laundry Room Washer Notification On Completed Run
+  description: >
+    Notifies the all_mobile_devices group when the laundry room washer cycle is
+    completed
+  mode: single
+
+  triggers:
+    - trigger: event
+      event_type: automation_triggered
+      event_data:
+        entity_id: automation.laundry_room_washer_last_run_completed
+
+  actions:
+    - action: notify.all_mobile_devices
+      data:
+        title: Washer Cycle Complete
+        message: Laundry is ready to move to the dryer
