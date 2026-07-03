@@ -6,7 +6,7 @@
 #
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1768546264236'
+- id: living_room_blinds_open_at_sunrise
   alias: Living Room Blinds Open at Sunrise
   description: >
     Opens the living room blinds at sunrise offset by 30 minutes

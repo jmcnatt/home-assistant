@@ -6,16 +6,16 @@
 #
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1770921328905'
+- id: living_room_blinds_close_at_sunset
   alias: Living Room Blinds Close at Sunset
   description: >
-    Closes the living room blinds at sunset offset by 15 minutes
+    Closes the living room blinds at sunset offset by 1 hour
   mode: single
 
   triggers:
     - trigger: sun
       event: sunset
-      offset: '0:15:00'
+      offset: '-1:00:00'
 
   conditions:
     - condition: not
