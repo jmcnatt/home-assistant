@@ -57,7 +57,7 @@ notify:
   - name: all_mobile_devices
     platform: group
     services:
-      - action: mobile_app_five_mega_pixel
+      - action: mobile_app_lightcycle
       - action: mobile_app_chirp
 rest: !include rest.yaml
 script: !include scripts.yaml
