@@ -19,6 +19,11 @@
     - trigger: time
       at: input_datetime.laundry_room_washer_notification_on_not_empty
 
+  condition:
+    - condition: state
+      entity_id: input_boolean.aundry_room_washer_door_opened_since_last_run
+      state: "off"
+
   actions:
     - action: notify.all_mobile_devices
       data:
