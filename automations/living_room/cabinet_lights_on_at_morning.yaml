@@ -1,9 +1,10 @@
 ---
 ################################################################################
 # Living Room Cabinet Lights On at Morning
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: "1763969173441"
+- id: living_room_cabinet_lights_on_at_morning
   alias: Living Room Cabinet Lights On at Morning
   description: >
     Turns on the living room cabinet lights in the morning
@@ -14,14 +15,9 @@
       at: "07:00:00"
 
   conditions:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: person.jimmy
-          state: "home"
-        - condition: state
-          entity_id: person.dana
-          state: "home"
+    - condition: numeric_state
+      entity_id: zone.home
+      above: 0
 
   actions:
     - action: light.turn_on

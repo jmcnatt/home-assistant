@@ -1,9 +1,10 @@
 ---
 ################################################################################
 # Living Room Cabinet Lights Off at Night
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: "1765353141170"
+- id: living_room_cabinet_lights_off_at_night
   alias: Living Room Cabinet Lights Off at Night
   description: >
     Turns off the living room cabinet lights at night
