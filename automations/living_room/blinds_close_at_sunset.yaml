@@ -1,7 +1,6 @@
 ---
 ################################################################################
 # Living Room Blinds Close Every Day at Sunset
-#
 # Battery level needs to be above 5% and the blinds needs to be open
 #
 # https://www.home-assistant.io/docs/automation/yaml/

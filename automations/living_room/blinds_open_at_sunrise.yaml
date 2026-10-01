@@ -1,7 +1,6 @@
 ---
 ################################################################################
 # Living Room Blinds Open Every Morning at Sunrise
-#
 # Battery level needs to be above 5% and there needs to be someone home
 #
 # https://www.home-assistant.io/docs/automation/yaml/
