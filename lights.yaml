@@ -1,19 +1,30 @@
 ---
 ################################################################################
 # lights.yaml
+#
 # https://www.home-assistant.io/integrations/light/
 # https://www.home-assistant.io/integrations/group/#yaml-configuration
 ################################################################################
 
-# Living Room Lights Group
+# Living Room Cabinet Lights Group
 - platform: group
-  name: "Living Room Cabinet Lights"
+  name: Living Room Cabinet Lights
   entities:
     - light.living_room_cabinet_left
     - light.living_room_cabinet_right
 
+# Living Room Lights Group
+- platform: group
+  name: Living Room Lights
+  entities:
+    - light.living_room_floor_lamp
+
 # All Floor 1 Lights Group
 - platform: group
-  name: "Floor 1 Lights"
+  name: Floor 1 Lights
   entities:
-    - light.living_room_lamp
+    - light.bar_light
+    - light.dining_room_light
+    - light.hallway_lower_lights
+    - light.kitchen_scene_controller
+    - light.living_room_floor_lamp
