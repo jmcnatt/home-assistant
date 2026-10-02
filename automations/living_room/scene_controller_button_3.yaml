@@ -1,13 +1,14 @@
 ---
 ################################################################################
 # Living Room Scene Controller Button 3
+# Controls the living room fireplace and fireplace fan
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1771793669130'
+- id: living_room_scene_controller_button_3
   alias: Living Room Scene Controller Button 3
   description: >
-    Syncs the living_room_scene_controller button 3 with the living_room
-    fireplace controls
+    Actions for the living room scene controller button 3
   mode: single
 
   variables:

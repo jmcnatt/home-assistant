@@ -1,47 +1,23 @@
 ---
 ################################################################################
 # Living Room Scene Controller Relay
+# Toggles the living_room_lights
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1770762427937'
+- id: living_room_scene_controller_relay
   alias: Living Room Scene Controller Relay
   description: >
-    Syncs the living_room_scene_controller relay with the smart
-    bulb light.living_room_lamp
+    Actions for the living room scene controller relay
   mode: single
 
   triggers:
     - trigger: state
-      entity_id: light.living_room_scene_controller
+      entity_id: switch.living_room_living_room_scene_controller
 
   conditions: []
 
   actions:
-    - choose:
-        - conditions:
-            - condition: template
-              value_template: >
-                {{ trigger.to_state.state == 'on' }}
-          sequence:
-            - if:
-                - condition: state
-                  entity_id: light.living_room_lamp
-                  state: "off"
-              then:
-                - service: light.turn_on
-                  target:
-                    entity_id: light.living_room_lamp
-
-        - conditions:
-            - condition: template
-              value_template: >
-                {{ trigger.to_state.state == 'off' }}
-          sequence:
-            - if:
-                - condition: state
-                  entity_id: light.living_room_lamp
-                  state: "on"
-              then:
-                - service: light.turn_off
-                  target:
-                    entity_id: light.living_room_lamp
+    - service: light.toggle
+      target:
+        entity_id: light.living_room_lights

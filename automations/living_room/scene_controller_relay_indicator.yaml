@@ -1,18 +1,19 @@
 ---
 ################################################################################
 # Living Room Scene Controller Relay Indicator
+# Indicator is on when the living room lights are on
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1772176367866'
+- id: living_room_scene_controller_relay_indicator
   alias: Living Room Scene Controller Relay Indicator
   description: >
-    Syncs the living_room_scene_controller relay indicator with the
-    living_room_lamp
+    Controls the living_room_scene_controller relay indicator
   mode: restart
 
   triggers:
     - trigger: state
-      entity_id: light.living_room_lamp
+      entity_id: light.living_room_lights
 
   conditions: []
 
@@ -23,18 +24,19 @@
               value_template: >
                 {{ trigger.to_state.state == 'on' }}
           sequence:
-            - if:
-                - condition: not
-                  conditions:
-                    - condition: state
-                      entity_id: select.living_room_scene_controller_relay_indicator_color
-                      state: White
-              then:
-                - service: select.select_option
-                  target:
-                    entity_id: select.living_room_scene_controller_relay_indicator_color
-                  data:
-                    option: White
+            - choose:
+                - conditions:
+                    - condition: not
+                      conditions:
+                        - condition: state
+                          entity_id: select.living_room_scene_controller_relay_indicator_color
+                          state: White
+                  sequence:
+                    - service: select.select_option
+                      target:
+                        entity_id: select.living_room_scene_controller_relay_indicator_color
+                      data:
+                        option: White
             - action: select.select_option
               target:
                 entity_id: select.living_room_scene_controller_relay_indicator

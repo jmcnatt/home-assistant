@@ -1,22 +1,21 @@
 ---
 ################################################################################
-# Living Room Scene Controller Button 2
+# Living Room Scene Controller Button 1
+# Controls the kitchen and dining room lights
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1771018714402'
+- id: living_room_scene_controller_button_2
   alias: Living Room Scene Controller Button 2
   description: >
-    Syncs the living_room_scene_controller button 2 with the smart light
-    group
+    Actions for the living room scene controller button 2
   mode: restart
 
   triggers:
-    - trigger: state
-      entity_id: light.living_room_cabinet_lights
     - trigger: event
       event_type: zwave_js_value_notification
       event_data:
-        device_id: 4731b628f236657a7a89933eb4a870ad
+        device_id: 59b5c0bd816769a4a1ba3eb95bb199c6
         property: scene
         property_key: "002"
 
@@ -27,75 +26,47 @@
         - conditions:
             - condition: template
               value_template: >
-                {{ trigger.platform == 'event' }}
+                {{ trigger.event.data.value == 'KeyPressed' }}
           sequence:
-            - choose:
-                - conditions:
-                    - condition: template
-                      value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed' }}
-                  sequence:
-                    - service: light.toggle
-                      target:
-                        entity_id: light.living_room_cabinet_lights
-                - conditions:
-                    - condition: template
-                      value_template: >
-                        {{ trigger.event.data.value == 'KeyPressed2x' }}
-                  sequence:
-                    - choose:
-                        - conditions:
-                            - condition: state
-                              entity_id: light.living_room_cabinet_lights
-                              state: "on"
-                          sequence:
-                            - service: light.turn_off
-                              entity_id: light.living_room_cabinet_lights
-                    - choose:
-                        - conditions:
-                            - condition: state
-                              entity_id: light.living_room_lamp
-                              state: "on"
-                          sequence:
-                            - service: light.turn_off
-                              entity_id: light.living_room_lamp
-
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: light.living_room_cabinet_lights
-              state: "off"
-          sequence:
-            - service: switch.turn_off
+            - service: light.toggle
               target:
-                entity_id: switch.living_room_scene_controller_button_3_indication
+                entity_id: light.kitchen_scene_controller
+
         - conditions:
-            - condition: state
-              entity_id: light.living_room_cabinet_lights
-              state: "on"
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyPressed2x' }}
+          sequence:
+            - service: light.toggle
+              target:
+                entity_id: light.dining_room_light
+
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.value == 'KeyHeldDown' }}
           sequence:
             - choose:
                 - conditions:
-                    - condition: not
-                      conditions:
-                        - condition: state
-                          entity_id: select.living_room_scene_controller_button_2_indicator_color
-                          state: White
+                    - condition: state
+                      entity_id: light.dining_room_light
+                      state: "on"
                   sequence:
-                    - service: select.select_option
-                      target:
-                        entity_id: select.living_room_scene_controller_button_2_indicator_color
-                      data:
-                        option: White
-
+                    - service: light.turn_off
+                      entity_id: light.dining_room_light
             - choose:
                 - conditions:
-                    - condition: not
-                      conditions:
-                        - condition: state
-                          entity_id: switch.living_room_scene_controller_button_3_indication
-                          state: "on"
+                    - condition: state
+                      entity_id: light.living_room_lights
+                      state: "on"
                   sequence:
-                    - service: switch.turn_on
-                      target:
-                        entity_id: switch.living_room_scene_controller_button_3_indication
+                    - service: light.turn_off
+                      entity_id: light.living_room_lights
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: light.kitchen_scene_controller
+                      state: "on"
+                  sequence:
+                    - service: light.turn_off
+                      entity_id: light.kitchen_scene_controller

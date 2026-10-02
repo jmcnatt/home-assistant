@@ -1,19 +1,19 @@
 ---
 ################################################################################
-# Living Room Scene Controller Button 3 Indicator
-# Indicator is on and red when the fireplace is on
+# Living Room Scene Controller Button 1 Indicator
+# Indicator is on when the living room cabinet lights are on
 #
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: living_room_scene_controller_button_3_indicator
-  alias: Living Room Scene Controller Button 3 Indicator
+- id: living_room_scene_controller_button_1_indicator
+  alias: Living Room Scene Controller Button 1 Indicator
   description: >
-    Controls the living_room_scene_controller button 3 indicator
+    Controls the living_room_scene_controller button 1 indicator
   mode: restart
 
   triggers:
     - trigger: state
-      entity_id: switch.living_room_fireplace_flame
+      entity_id: light.living_room_cabinet_lights
 
   conditions: []
 
@@ -29,17 +29,17 @@
                     - condition: not
                       conditions:
                         - condition: state
-                          entity_id: select.living_room_scene_controller_button_3_indicator_color
-                          state: Red
+                          entity_id: select.living_room_scene_controller_button_1_indicator_color
+                          state: White
                   sequence:
                     - service: select.select_option
                       target:
-                        entity_id: select.living_room_scene_controller_button_3_indicator_color
+                        entity_id: select.living_room_scene_controller_button_1_indicator_color
                       data:
-                        option: Red
+                        option: White
             - action: select.select_option
               target:
-                entity_id: select.living_room_scene_controller_button_3_indicator
+                entity_id: select.living_room_scene_controller_button_1_indicator
               data:
                 option: Always on
 
@@ -50,6 +50,6 @@
           sequence:
             - action: select.select_option
               target:
-                entity_id: select.living_room_scene_controller_button_3_indicator
+                entity_id: select.living_room_scene_controller_button_1_indicator
               data:
                 option: Always off

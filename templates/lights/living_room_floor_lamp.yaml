@@ -1,0 +1,19 @@
+---
+################################################################################
+# Template for living room lamp
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+    - name: Living Room Floor Lamp
+      unique_id: living_room_floor_lamp
+      icon: mdi:floor-lamp
+      availability: "{{ has_value('switch.living_room_floor_lamp') }}"
+      state: "{{ is_state('switch.living_room_floor_lamp', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.living_room_floor_lamp
+      turn_off:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.living_room_floor_lamp
