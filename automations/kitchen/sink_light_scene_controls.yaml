@@ -1,0 +1,119 @@
+---
+################################################################################
+# Kitchen Sink Light Scene Controls
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: kitchen_sink_light_scene_controls
+  alias: Kitchen Sink Light Scene Controls
+  description: >
+    Handles the scene actions for the kitchen sink light
+  mode: single
+
+  triggers:
+    - trigger: event
+      event_type: zwave_js_value_notification
+      event_data:
+        device_id: bcd5b507ec0dfba533341a6b70c14e61
+        property: scene
+
+  actions:
+    - choose:
+        # Top paddle - Scene 001
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.property_key == '001' }}
+          sequence:
+            # KeyPressed2x
+            - choose:
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed2x' }}
+                    - condition: numeric_state
+                      entity_id: cover.kitchen_blinds
+                      attribute: current_position
+                      below: 99
+                  sequence:
+                    - action: cover.open_cover
+                      target:
+                        entity_id: cover.kitchen_blinds
+
+                # KeyPressed3x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed3x' }}
+                    - condition: state
+                      entity_id: light.kitchen_scene_controller
+                      state: "off"
+
+                  sequence:
+                    - action: light.turn_on
+                      target:
+                        entity_id: light.kitchen_scene_controller
+
+                # KeyPressed4x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed4x' }}
+                    - condition: state
+                      entity_id: light.dining_room_light
+                      state: "off"
+
+                  sequence:
+                    - action: light.turn_on
+                      target:
+                        entity_id: light.dining_room_light
+
+        # Bottom paddle - Scene 002
+        - conditions:
+            - condition: template
+              value_template: >
+                {{ trigger.event.data.property_key == '002' }}
+          sequence:
+            - choose:
+                # KeyPressed2x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed2x' }}
+                    - condition: numeric_state
+                      entity_id: cover.kitchen_blinds
+                      attribute: current_position
+                      above: 1
+
+                  sequence:
+                    - action: cover.close_cover
+                      target:
+                        entity_id: cover.kitchen_blinds
+
+                # KeyPressed3x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed3x' }}
+                    - condition: state
+                      entity_id: light.kitchen_scene_controller
+                      state: "on"
+
+                  sequence:
+                    - action: light.turn_off
+                      target:
+                        entity_id: light.kitchen_scene_controller
+
+                # KeyPressed4x
+                - conditions:
+                    - condition: template
+                      value_template: >
+                        {{ trigger.event.data.value == 'KeyPressed4x' }}
+                    - condition: state
+                      entity_id: light.dining_room_light
+                      state: "on"
+
+                  sequence:
+                    - action: light.turn_off
+                      target:
+                        entity_id: light.dining_room_light
