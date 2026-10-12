@@ -1,36 +1,28 @@
 ---
 ################################################################################
-# Front Door Locks When No One is Home
+# Front Door Locks When Not Home
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: "1646793047500"
-  alias: Front Door Locks When No One is Home
+- id: front_door_locks_when_not_home
+  alias: Front Door Locks When Not Home
   description: >
     Locks the front door if unlocked if no one is home for 15 minutes
   mode: single
 
   triggers:
     - trigger: state
-      entity_id: person.jimmy
-      from: "home"
-      for: "00:15:00"
-    - trigger: state
-      entity_id: person.dana
-      from: "home"
-      for: "00:15:00"
+      entity_id: zone.home
+      to: "0"
+      for:
+        minutes: 15
 
   conditions:
     - condition: not
       conditions:
         - condition: state
-          entity_id: person.jimmy
-          state: "home"
-        - condition: state
-          entity_id: person.dana
-          state: "home"
-        - condition: state
           entity_id: lock.front_door
-          state: "locked"
+          state: locked
 
   actions:
     - action: lock.lock
@@ -40,8 +32,7 @@
       timeout:
         seconds: 15
       continue_on_timeout: false
-    - action: notify.discord
+    - action: notify.all_mobile_devices
       data:
         title: Front Door Locked
         message: Home Assistant has automatically locked the front door.
-        target: "1448208998255034520"
