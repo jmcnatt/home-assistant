@@ -1,9 +1,12 @@
 ---
 ################################################################################
-# Hallway Lights Turn On When Someone Arrives at Home After Dusk
+# Hallway Lights On When Someone Arrives
+#
+# Conditionally triggers after sunset
+#
 # https://www.home-assistant.io/docs/automation/yaml/
 ################################################################################
-- id: '1643675363387'
+- id: lower_hallway_lights_on_when_someone_arrives
   alias: Hallway Lights On When Someone Arrives
   description: >
     Turns on the hallway lights when noone is home and someone arrives
@@ -16,8 +19,7 @@
       from: '0'
 
   conditions:
-    - condition: template
-      value_template: "{{ state_attr('sun.sun', 'elevation') < 20 }}"
+    - condition: sun.is_set
 
   actions:
     - if:
