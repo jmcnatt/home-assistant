@@ -15,7 +15,7 @@
     - trigger: event
       event_type: zwave_js_value_notification
       event_data:
-        device_id: 4731b628f236657a7a89933eb4a870ad
+        device_id: 59b5c0bd816769a4a1ba3eb95bb199c6
         property: scene
         property_key: "004"
 
