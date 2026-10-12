@@ -14,7 +14,6 @@
   triggers:
     - trigger: sun
       event: sunset
-      offset: '00:15:00'
 
   conditions:
     - condition: not
