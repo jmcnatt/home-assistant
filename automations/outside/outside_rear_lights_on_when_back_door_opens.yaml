@@ -1,0 +1,25 @@
+---
+################################################################################
+# Outside Rear Lights On When Back Door Opens
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: outside_rear_lights_on_when_back_door_opens
+  alias: Outside Rear Lights On When Back Door Opens
+  description: >
+    Turns on the outside rear lights when the back door is opened at night
+  mode: single
+
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.back_door_window_door_is_closed
+      from: "on"
+      to: "off"
+
+  conditions:
+    - condition: sun.is_night
+
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.outside_rear_lights

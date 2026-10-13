@@ -1,0 +1,30 @@
+---
+################################################################################
+# Outside Rear Lights Off When Back Door Locks
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: outside_rear_lights_off_when_back_door_locks
+  alias: Outside Rear Lights Off When Back Door Locks
+  description: >
+    Turns off the outside rear lights when the back door is locked at night
+  mode: single
+
+  triggers:
+    - trigger: state
+      entity_id: lock.back_door
+      not_from:
+        - "unavailable"
+        - "unknown"
+      to: "locked"
+
+  conditions:
+    - condition: sun.is_night
+    - condition: state
+      entity_id: light.outside_rear_lights
+      state: "on"
+
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.outside_rear_lights
