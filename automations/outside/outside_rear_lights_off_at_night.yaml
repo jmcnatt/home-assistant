@@ -1,0 +1,25 @@
+---
+################################################################################
+# Outside Rear Lights Off At Night
+#
+# https://www.home-assistant.io/docs/automation/yaml/
+################################################################################
+- id: outside_rear_lights_off_at_night
+  alias: Outside Rear Lights Off At Night
+  description: >
+    Turns off the outside rear lights at 1:00am each day if they are on
+  mode: single
+
+  triggers:
+    - trigger: time
+      at: "01:00:00"
+
+  conditions:
+    - condition: state
+      entity_id: light.outside_rear_lights
+      state: "on"
+
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.outside_rear_lights
