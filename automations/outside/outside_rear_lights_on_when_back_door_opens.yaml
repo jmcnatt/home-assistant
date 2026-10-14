@@ -17,7 +17,7 @@
       to: "off"
 
   conditions:
-    - condition: sun.is_night
+    - condition: sun.is_set
 
   actions:
     - action: light.turn_on
