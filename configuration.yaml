@@ -4,6 +4,8 @@
 # https://www.home-assistant.io/docs/configuration/
 ################################################################################
 homeassistant:
+  auth_mfa_modules:
+    - type: totp
   country: 'US'
   currency: 'USD'
   customize: !include customizations/entities.yaml
