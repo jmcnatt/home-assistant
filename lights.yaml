@@ -18,6 +18,7 @@
   name: Living Room Lights
   entities:
     - light.living_room_floor_lamp
+    - light.living_room_shelf_lamp
 
 # All Floor 1 Lights Group
 - platform: group
@@ -28,3 +29,4 @@
     - light.hallway_lower_lights
     - light.kitchen_scene_controller
     - light.living_room_floor_lamp
+    - light.living_room_shelf_lamp

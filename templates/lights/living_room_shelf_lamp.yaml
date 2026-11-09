@@ -1,0 +1,20 @@
+---
+################################################################################
+# Template for living shelf lamp
+#
+# https://www.home-assistant.io/integrations/template/#light
+################################################################################
+- light:
+    - name: Living Room Shelf Lamp
+      unique_id: living_room_shelf_lamp
+      icon: mdi:desk-lamp
+      availability: "{{ has_value('switch.living_room_shelf_lamp') }}"
+      state: "{{ is_state('switch.living_room_shelf_lamp', 'on') }}"
+      turn_on:
+        - action: switch.turn_on
+          target:
+            entity_id: switch.living_room_shelf_lamp
+      turn_off:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.living_room_shelf_lamp
